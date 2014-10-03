@@ -76,6 +76,8 @@ package com{
 		public function ContextSocialApplication(contextView:DisplayObjectContainer=null, autoStartup:Boolean=true)
 		{
 			super(contextView, autoStartup);
+			//test Git
+			
 		}
 		
 		//--------------------------------------------------------------------------------------------------------- 
