@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://texturepacker.com-->
+<!-- $TexturePacker:SmartUpdate:38bad7a62beac3e1c13be8a1dd73a731$ -->
+<TextureAtlas imagePath="metalworks.png">
+    <SubTexture name="Background" x="2" y="2" width="640" height="960"/>
+    <SubTexture name="IntroductionBackground" x="642" y="964" width="565" height="700"/>
+    <SubTexture name="IntroductionBackgroundRutor" x="2" y="964" width="638" height="960" frameX="-1" frameY="0" frameWidth="640" frameHeight="960"/>
+    <SubTexture name="background-disabled-skin" x="1277" y="521" width="32" height="32"/>
+    <SubTexture name="background-down-skin" x="1243" y="521" width="32" height="32"/>
+    <SubTexture name="background-focused-skin" x="1329" y="2014" width="32" height="32"/>
+    <SubTexture name="background-inset-skin" x="1295" y="2014" width="32" height="32"/>
+    <SubTexture name="background-popup-skin" x="1261" y="2014" width="32" height="32"/>
+    <SubTexture name="background-skin" x="1227" y="2014" width="32" height="32"/>
+    <SubTexture name="backgroundCreatePanel" x="644" y="64" width="542" height="399"/>
+    <SubTexture name="background_info_panel_profile_list" x="1363" y="874" width="182" height="35"/>
+    <SubTexture name="background_list_menu" x="1363" y="1638" width="525" height="90"/>
+    <SubTexture name="background_list_menu_dark" x="644" y="465" width="525" height="90"/>
+    <SubTexture name="background_pop_up" x="1577" y="745" width="400" height="300"/>
+    <SubTexture name="background_profile" x="642" y="1666" width="640" height="248"/>
+    <SubTexture name="busyIndicator_00" x="2005" y="38" width="39" height="39" frameX="-3" frameY="-2" frameWidth="45" frameHeight="45"/>
+    <SubTexture name="busyIndicator_01" x="2005" y="314" width="39" height="34"/>
+    <SubTexture name="busyIndicator_010" x="2000" y="532" width="35" height="38"/>
+    <SubTexture name="busyIndicator_011" x="2005" y="390" width="38" height="38"/>
+    <SubTexture name="busyIndicator_02" x="2005" y="199" width="39" height="38"/>
+    <SubTexture name="busyIndicator_03" x="2005" y="159" width="39" height="38"/>
+    <SubTexture name="busyIndicator_04" x="2000" y="492" width="35" height="38"/>
+    <SubTexture name="busyIndicator_05" x="2005" y="350" width="38" height="38"/>
+    <SubTexture name="busyIndicator_06" x="2005" y="119" width="39" height="38"/>
+    <SubTexture name="busyIndicator_07" x="2005" y="278" width="39" height="34"/>
+    <SubTexture name="busyIndicator_08" x="2005" y="239" width="39" height="37"/>
+    <SubTexture name="busyIndicator_09" x="2005" y="79" width="39" height="38"/>
+    <SubTexture name="button-back-disabled-skin" x="1460" y="492" width="36" height="60"/>
+    <SubTexture name="button-back-down-skin" x="1422" y="492" width="36" height="60"/>
+    <SubTexture name="button-back-up-skin" x="1384" y="492" width="36" height="60"/>
+    <SubTexture name="button-call-to-action-down-skin" x="1209" y="459" width="60" height="60"/>
+    <SubTexture name="button-call-to-action-up-skin" x="1284" y="459" width="60" height="60"/>
+    <SubTexture name="button-categories-down-skin" x="1124" y="2" width="82" height="60"/>
+    <SubTexture name="button-categories-up-skin" x="1040" y="2" width="82" height="60"/>
+    <SubTexture name="button-create-down-skin" x="758" y="2" width="112" height="60"/>
+    <SubTexture name="button-create-up-skin" x="644" y="2" width="112" height="60"/>
+    <SubTexture name="button-danger-down-skin" x="1209" y="397" width="60" height="60"/>
+    <SubTexture name="button-danger-up-skin" x="1284" y="397" width="60" height="60"/>
+    <SubTexture name="button-disabled-skin" x="1209" y="335" width="60" height="60"/>
+    <SubTexture name="button-down-skin" x="1284" y="335" width="60" height="60"/>
+    <SubTexture name="button-forward-disabled-skin" x="1346" y="492" width="36" height="60"/>
+    <SubTexture name="button-forward-down-skin" x="1171" y="465" width="36" height="60"/>
+    <SubTexture name="button-forward-up-skin" x="2005" y="430" width="36" height="60"/>
+    <SubTexture name="button-grid-down-skin" x="1363" y="996" width="155" height="42"/>
+    <SubTexture name="button-grid-up-skin" x="1734" y="670" width="155" height="42"/>
+    <SubTexture name="button-list-down-skin" x="1577" y="670" width="155" height="42"/>
+    <SubTexture name="button-list-up-skin" x="1363" y="952" width="155" height="42"/>
+    <SubTexture name="button-menu-down-skin" x="956" y="2" width="82" height="60"/>
+    <SubTexture name="button-menu-up-skin" x="872" y="2" width="82" height="60"/>
+    <SubTexture name="button-register-down-skin" x="1577" y="611" width="381" height="57"/>
+    <SubTexture name="button-register-up-skin" x="1577" y="552" width="381" height="57"/>
+    <SubTexture name="button-selected-disabled-skin" x="1209" y="273" width="60" height="60"/>
+    <SubTexture name="button-selected-up-skin" x="1284" y="273" width="60" height="60"/>
+    <SubTexture name="button-up-skin" x="1209" y="211" width="60" height="60"/>
+    <SubTexture name="callout-arrow-bottom-skin" x="2005" y="20" width="40" height="16"/>
+    <SubTexture name="callout-arrow-left-skin" x="1188" y="314" width="16" height="40"/>
+    <SubTexture name="callout-arrow-right-skin" x="1188" y="272" width="16" height="40"/>
+    <SubTexture name="callout-arrow-top-skin" x="2005" y="2" width="40" height="16"/>
+    <SubTexture name="check-selected-disabled-icon" x="1193" y="2014" width="32" height="32"/>
+    <SubTexture name="check-selected-down-icon" x="1159" y="2014" width="32" height="32"/>
+    <SubTexture name="check-selected-up-icon" x="1125" y="2014" width="32" height="32"/>
+    <SubTexture name="comments" x="1171" y="527" width="23" height="18" frameX="-1" frameY="0" frameWidth="25" frameHeight="20"/>
+    <SubTexture name="footer_background" x="1363" y="2" width="640" height="210"/>
+    <SubTexture name="footer_logo" x="399" y="2024" width="256" height="19"/>
+    <SubTexture name="get-started-disabled-skin" x="1284" y="211" width="60" height="60"/>
+    <SubTexture name="get-started-down-skin" x="1208" y="2" width="60" height="60"/>
+    <SubTexture name="get-started-up-skin" x="1284" y="2" width="60" height="60"/>
+    <SubTexture name="header-background-skin" x="697" y="1916" width="256" height="128"/>
+    <SubTexture name="header_create" x="1363" y="388" width="640" height="85"/>
+    <SubTexture name="header_menu" x="1284" y="1730" width="525" height="85"/>
+    <SubTexture name="header_profile" x="1363" y="301" width="640" height="85"/>
+    <SubTexture name="header_settings" x="1363" y="214" width="640" height="85"/>
+    <SubTexture name="horizontal-scroll-bar-thumb-skin" x="941" y="946" width="26" height="10"/>
+    <SubTexture name="icon_Comment" x="347" y="2024" width="25" height="20"/>
+    <SubTexture name="icon_like" x="374" y="2024" width="23" height="20" frameX="-1" frameY="0" frameWidth="25" frameHeight="20"/>
+    <SubTexture name="idea_introduction" x="1543" y="1047" width="499" height="274" frameX="-5" frameY="-1" frameWidth="509" frameHeight="276"/>
+    <SubTexture name="introduction_buy_from_home" x="644" y="557" width="455" height="323"/>
+    <SubTexture name="introduction_contribute" x="1101" y="557" width="474" height="315"/>
+    <SubTexture name="introduction_logo_slogan" x="644" y="882" width="295" height="73" frameX="-1" frameY="-3" frameWidth="299" frameHeight="77"/>
+    <SubTexture name="introduction_share_with_you_friends" x="1209" y="1323" width="492" height="313"/>
+    <SubTexture name="label_acount" x="1363" y="911" width="173" height="39"/>
+    <SubTexture name="light_background-focused-skin" x="1091" y="2014" width="32" height="32"/>
+    <SubTexture name="light_background-skin" x="1057" y="2014" width="32" height="32"/>
+    <SubTexture name="like" x="1311" y="521" width="20" height="18" frameX="0" frameY="-1" frameWidth="20" frameHeight="20"/>
+    <SubTexture name="list-accessory-drill-down-icon" x="1188" y="244" width="18" height="26"/>
+    <SubTexture name="list-inset-item-first-selected-skin" x="1547" y="874" width="28" height="88"/>
+    <SubTexture name="list-inset-item-first-up-skin" x="1990" y="662" width="28" height="88"/>
+    <SubTexture name="list-inset-item-last-selected-skin" x="1960" y="655" width="28" height="88"/>
+    <SubTexture name="list-inset-item-last-up-skin" x="1990" y="572" width="28" height="88"/>
+    <SubTexture name="list-inset-item-single-selected-skin" x="1960" y="565" width="28" height="88"/>
+    <SubTexture name="list-inset-item-single-up-skin" x="1970" y="475" width="28" height="88"/>
+    <SubTexture name="list-item-selected-skin" x="1188" y="154" width="18" height="88"/>
+    <SubTexture name="list-item-up-skin" x="1188" y="64" width="18" height="88"/>
+    <SubTexture name="list_itemRenderer_bottom" x="1347" y="1877" width="470" height="58"/>
+    <SubTexture name="list_itemRenderer_default" x="1284" y="1817" width="470" height="58"/>
+    <SubTexture name="list_itemRenderer_top" x="1498" y="492" width="470" height="58"/>
+    <SubTexture name="logo_register" x="941" y="882" width="250" height="62"/>
+    <SubTexture name="massege_Registration" x="46" y="2024" width="299" height="20"/>
+    <SubTexture name="menu_arrow" x="2020" y="572" width="22" height="36"/>
+    <SubTexture name="page-indicator-disable-skin" x="1188" y="392" width="16" height="16"/>
+    <SubTexture name="page-indicator-normal-skin" x="1188" y="374" width="16" height="16"/>
+    <SubTexture name="page-indicator-selected-skin" x="1188" y="356" width="16" height="16"/>
+    <SubTexture name="photo" x="1209" y="964" width="134" height="134"/>
+    <SubTexture name="photo_border" x="1209" y="64" width="145" height="145"/>
+    <SubTexture name="picker-list-icon-disabled" x="24" y="2024" width="20" height="22"/>
+    <SubTexture name="picker-list-icon" x="2" y="2024" width="20" height="22"/>
+    <SubTexture name="picker-list-item-selected-icon" x="1209" y="521" width="32" height="33"/>
+    <SubTexture name="radio-selected-disabled-icon" x="1023" y="2014" width="32" height="32"/>
+    <SubTexture name="radio-selected-down-icon" x="989" y="2014" width="32" height="32"/>
+    <SubTexture name="radio-selected-up-icon" x="955" y="2014" width="32" height="32"/>
+    <SubTexture name="search-icon-disabled" x="677" y="2024" width="18" height="19"/>
+    <SubTexture name="search-icon" x="657" y="2024" width="18" height="19"/>
+    <SubTexture name="tab-down-skin" x="1453" y="1040" width="88" height="88"/>
+    <SubTexture name="tab-selected-disabled-skin" x="1363" y="1040" width="88" height="88"/>
+    <SubTexture name="tab-selected-skin" x="1193" y="874" width="88" height="88"/>
+    <SubTexture name="theme-fancy_chocolate" x="1249" y="1916" width="96" height="96"/>
+    <SubTexture name="theme-fancy_loranga_lights" x="1151" y="1916" width="96" height="96"/>
+    <SubTexture name="theme_fancy_sparkling_roses" x="1053" y="1916" width="96" height="96"/>
+    <SubTexture name="theme_gradient" x="955" y="1916" width="96" height="96"/>
+    <SubTexture name="theme_gryngy_blood_ice" x="590" y="1926" width="96" height="96"/>
+    <SubTexture name="theme_gryngy_ice_fire" x="492" y="1926" width="96" height="96"/>
+    <SubTexture name="theme_organic" x="394" y="1926" width="96" height="96"/>
+    <SubTexture name="theme_plain_digital_screen" x="296" y="1926" width="96" height="96"/>
+    <SubTexture name="theme_plain_sea_weed" x="198" y="1926" width="96" height="96"/>
+    <SubTexture name="theme_plain_whipped_iceCream" x="100" y="1926" width="96" height="96"/>
+    <SubTexture name="theme_real" x="2" y="1926" width="96" height="96"/>
+    <SubTexture name="vertical-scroll-bar-thumb-skin" x="1347" y="2" width="10" height="26"/>
+</TextureAtlas>
