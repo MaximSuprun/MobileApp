@@ -1,0 +1,102 @@
+<project name="MobileApp" basedir="." default="build">
+
+	<!-- ============================== -->
+	<!--  Configuration -->
+	<!-- ============================== -->
+
+	<!-- Configuration -->
+	<property file="${basedir}/build.properties" />
+
+	<!-- Setup Flex Ant Resources -->
+	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar" />
+	
+	<!-- ============================== -->
+	<!--  Clean and Init Targets -->
+	<!-- ============================== -->
+
+	<target name="clean" description="Removes artifacts from previous builds">
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="${BIN.DIR}" defaultexcludes="false">
+				<include name="**/*" />
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="init" description="Initializes project and destination folders">
+			<echo message="Project: ${PROJECT.NAME}" />
+			<echo message="Flex SDK: ${FLEX_HOME}" />
+
+			<!-- Create direectories -->
+			<mkdir dir="${BIN.DIR}" />
+	</target>
+	
+	<!-- ======================================= -->
+	<!--  Compile -->
+	<!-- ======================================= -->
+	
+	<target name="build" depends="build-air-swf,build-android"/>
+	
+	<target name="copyAssets">
+		<copy overwrite="true" todir="${BIN.DIR}/feathers/worksMobileTheme">
+					<fileset dir="${ASSETS}">
+						<include name="README.md"/>
+						<include name="assets/**"/>
+					</fileset>
+		</copy>
+		<copy overwrite="true" todir="${BIN.DIR}">
+					<fileset dir="${FLEX_HOME}/ant/lib">
+						<include name="flexTasks.jar"/>
+					</fileset>
+		</copy>
+	</target>
+	
+	<target name="build-air-swf" depends="init,copyAssets" description="Compiles the test runner application.">
+
+		<!--Compile TestRunner MXML as a SWF -->		
+		
+		<mxmlc 	file="${SRC.DIR}/${PROJECT.NAME}.as" 
+				output="${BIN.DIR}/${PROJECT.NAME}.swf" 
+				locale="${LOCALE}" 
+				static-rsls="false" 
+				accessible="false" 
+				configname="airmobile" 
+				debug="${debug_mode}" 
+				failonerror="true" 
+				fork="true" 
+				maxmemory="512m">
+			
+					<source-path path-element="${SRC.DIR}"/>
+					<compiler.library-path dir="${FLEX_HOME}/frameworks" append="true">
+						<include name="libs/*" />
+					</compiler.library-path>
+					<library-path file="${FLEX_HOME}/frameworks/locale/${LOCALE}" append="true"/>
+					<library-path dir="${LIBS.DIR}" includes="*.swc" append="true"/>
+					<external-library-path file="${AIR_GLOBAL}" append="true"/>
+			
+			</mxmlc>
+
+		<echo message="The ${PROJECT.NAME}.swf has been created in ${BIN.DIR}" />
+	</target> 
+	
+	<target name="build-android" depends="build-air-swf">
+			<echo message="Packaging ${PROJECT.NAME}.apk"/>
+			<java jar="${ADT}" dir="${basedir}" fork="true" failonerror="true">
+				<arg value="-package"/>
+				<arg value="-target"/>
+				<arg value="apk-captive-runtime"/>
+				<arg value="-storetype"/>
+				<arg value="pkcs12"/>
+				<arg value="-keystore"/>
+				<arg value="${android.certificate.path}"/>
+				<arg value="-storepass"/>
+				<arg value="${android.certificate.password}"/>
+				<arg value="${BIN.DIR}/${PROJECT.NAME}.apk"/>
+				<arg value="${SRC.DIR}/${PROJECT.NAME}-app.xml"/>
+				<arg value="-C"/>
+				<arg value="${BIN.DIR}"/>
+				<arg value="${PROJECT.NAME}.swf"/>
+			</java>
+		<echo message="The ${PROJECT.NAME}.apk has been created in ${BIN.DIR}" />
+	</target>
+	
+</project>
