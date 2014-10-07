@@ -36,10 +36,10 @@ package feathers.worksMobileTheme.source.feathers.themes
 	 */
 	public class MetalWorksMobileTheme extends MetalWorksMobileThemeWithAssetManager
 	{
-		[Embed(source="/../feathers/worksMobileTheme/assets/images/metalworks.xml",mimeType="application/octet-stream")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/images/metalworks.xml",mimeType="application/octet-stream")]
 		public static const metalworks_xml:Class;
 
-		[Embed(source="/../feathers/worksMobileTheme/assets/images/metalworks.png")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/images/metalworks.png")]
 		public static const metalworks:Class;
 
 		public function MetalWorksMobileTheme(container:DisplayObjectContainer = null, scaleToDPI:Boolean = true)

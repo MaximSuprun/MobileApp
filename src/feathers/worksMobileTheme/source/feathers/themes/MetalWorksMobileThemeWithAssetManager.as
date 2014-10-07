@@ -138,88 +138,88 @@ package feathers.worksMobileTheme.source.feathers.themes
 	 */
 	public class MetalWorksMobileThemeWithAssetManager extends DisplayListWatcher
 	{
-		[Embed(source="/../feathers/worksMobileTheme/assets/fonts/SourceSansPro-Regular.ttf",fontFamily="SourceSansPro",fontWeight="normal",mimeType="application/x-font",embedAsCFF="true")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/fonts/SourceSansPro-Regular.ttf",fontFamily="SourceSansPro",fontWeight="normal",mimeType="application/x-font",embedAsCFF="true")]
 		protected static const SOURCE_SANS_PRO_REGULAR:Class;
 
-		[Embed(source="/../feathers/worksMobileTheme/assets/fonts/SourceSansPro-Semibold.ttf",fontFamily="SourceSanFsPro",fontWeight="bold",mimeType="application/x-font",embedAsCFF="true")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/fonts/SourceSansPro-Semibold.ttf",fontFamily="SourceSanFsPro",fontWeight="bold",mimeType="application/x-font",embedAsCFF="true")]
 		protected static const SOURCE_SANS_PRO_SEMIBOLD:Class;
 
-		[Embed(source="/../feathers/worksMobileTheme/assets/fonts/SourceSansPro-Semibold.ttf",fontFamily="SourceSansPro",fontWeight="bold",unicodeRange="U+0030-U+0039",mimeType="application/x-font",embedAsCFF="false")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/fonts/SourceSansPro-Semibold.ttf",fontFamily="SourceSansPro",fontWeight="bold",unicodeRange="U+0030-U+0039",mimeType="application/x-font",embedAsCFF="false")]
 		protected static const SOURCE_SANS_PRO_SEMIBOLD_NUMBERS:Class;
 		
-		[Embed(source="/../feathers/worksMobileTheme/assets/fonts/cooperblackstd.ttf",fontFamily="CooperBlackStd",fontWeight="normal",mimeType="application/x-font",embedAsCFF="true")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/fonts/cooperblackstd.ttf",fontFamily="CooperBlackStd",fontWeight="normal",mimeType="application/x-font",embedAsCFF="true")]
 		protected static const SOURCE_COOPER_BLACK:Class;
 		
-		[Embed(source="/../feathers/worksMobileTheme/assets/fonts/TrajanPro-Regular.ttf",fontFamily="TrajanPro",mimeType="application/x-font",embedAsCFF="true")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/fonts/TrajanPro-Regular.ttf",fontFamily="TrajanPro",mimeType="application/x-font",embedAsCFF="true")]
 		protected static const SOURCE_TRAJAN_PRO:Class;
 				
-		[Embed(source="/../feathers/worksMobileTheme/assets/fonts/AmericanTypewriter.ttf",fontFamily="AmericanTypewriter",mimeType="application/x-font",embedAsCFF="true")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/fonts/AmericanTypewriter.ttf",fontFamily="AmericanTypewriter",mimeType="application/x-font",embedAsCFF="true")]
 		protected static const SOURCE_AMERICAN_TYPE_WRITER:Class;
 				
-		[Embed(source="/../feathers/worksMobileTheme/assets/fonts/Comic Sans MS.ttf",fontFamily="ComicSansMS",fontWeight="normal",mimeType="application/x-font",embedAsCFF="true")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/fonts/Comic Sans MS.ttf",fontFamily="ComicSansMS",fontWeight="normal",mimeType="application/x-font",embedAsCFF="true")]
 		protected static const SOURCE_COMIC_SANS_MS:Class;
 		
-		[Embed(source="/../feathers/worksMobileTheme/assets/fonts/helvetica.ttf",fontFamily="Helvetica",mimeType="application/x-font")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/fonts/helvetica.ttf",fontFamily="Helvetica",mimeType="application/x-font")]
 		protected static const SOURCE_HELVETICA:Class;
 		
-		[Embed(source="/../feathers/worksMobileTheme/assets/fonts/Calibri.ttf",fontFamily="Calibri",fontWeight="normal",mimeType="application/x-font",embedAsCFF="true")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/fonts/Calibri.ttf",fontFamily="Calibri",fontWeight="normal",mimeType="application/x-font",embedAsCFF="true")]
 		protected static const SOURCE_CALIBRI:Class;
 		
-		[Embed(source="/../feathers/worksMobileTheme/assets/fonts/Calibri Bold.ttf",fontFamily="Calibri",fontWeight="bold",mimeType="application/x-font",embedAsCFF="true")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/fonts/Calibri Bold.ttf",fontFamily="Calibri",fontWeight="bold",mimeType="application/x-font",embedAsCFF="true")]
 		protected static const SOURCE_CALIBRI_BOLD:Class;
 
-		[Embed(source="/../feathers/worksMobileTheme/assets/fonts/Calibri Italic.ttf",fontFamily="Calibri",fontStyle="italic",mimeType="application/x-font",embedAsCFF="true")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/fonts/Calibri Italic.ttf",fontFamily="Calibri",fontStyle="italic",mimeType="application/x-font",embedAsCFF="true")]
 		protected static const SOURCE_CALIBRI_ITALIC:Class;
 
-		[Embed(source="/../feathers/worksMobileTheme/assets/fonts/FranklinGothicSSiBook.ttf",fontFamily="FranklinGothic",fontWeight="bold",mimeType="application/x-font",embedAsCFF="true")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/fonts/FranklinGothicSSiBook.ttf",fontFamily="FranklinGothic",fontWeight="bold",mimeType="application/x-font",embedAsCFF="true")]
 		protected static const SOURCE_FRANKLIN_GOTHIC:Class;
 		
-		[Embed(source="/../feathers/worksMobileTheme/assets/fonts/CenturyGothic.ttf",fontFamily="CenturyGothic",fontWeight="bold",mimeType="application/x-font",embedAsCFF="true")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/fonts/CenturyGothic.ttf",fontFamily="CenturyGothic",fontWeight="bold",mimeType="application/x-font",embedAsCFF="true")]
 		protected static const SOURCE_CENTURY_GOTHIC:Class;
 		//
-		[Embed(source="/../feathers/worksMobileTheme/assets/fonts/Avenir 95 Black.ttf",fontFamily="Avenir",fontWeight="normal",mimeType="application/x-font",embedAsCFF="true")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/fonts/Avenir 95 Black.ttf",fontFamily="Avenir",fontWeight="normal",mimeType="application/x-font",embedAsCFF="true")]
 		protected static const SOURCE_AVENIR:Class;
 		
-		[Embed(source="/../feathers/worksMobileTheme/assets/fonts/Georgia.ttf",fontFamily="Georgia",fontWeight="normal",mimeType="application/x-font",embedAsCFF="true")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/fonts/Georgia.ttf",fontFamily="Georgia",fontWeight="normal",mimeType="application/x-font",embedAsCFF="true")]
 		protected static const SOURCE_GEORGIA:Class;
 		
-		[Embed(source="/../feathers/worksMobileTheme/assets/fonts/noteworthy-webfont.ttf",fontFamily="Noteworthy",fontWeight="bold",mimeType="application/x-font",embedAsCFF="true")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/fonts/noteworthy-webfont.ttf",fontFamily="Noteworthy",fontWeight="bold",mimeType="application/x-font",embedAsCFF="true")]
 		protected static const SOURCE_NOTEWORTHLY:Class;
 		
 		
 
 		
-		[Embed(source="/../feathers/worksMobileTheme/assets/images/theme_real_big.png")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/images/theme_real_big.png")]
 		protected static const THEME_REAL:Class;
 		
-		[Embed(source="/../feathers/worksMobileTheme/assets/images/theme_fancy_sparkling_roses_big.png")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/images/theme_fancy_sparkling_roses_big.png")]
 		protected static const THEME_FANCY_SPARKLING_ROSES:Class;
 		
-		[Embed(source="/../feathers/worksMobileTheme/assets/images/theme_gradient_big.png")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/images/theme_gradient_big.png")]
 		protected static const THEME_GRADIENT:Class;	
 
-		[Embed(source="/../feathers/worksMobileTheme/assets/images/theme_gryngy_ice_fire_big.png")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/images/theme_gryngy_ice_fire_big.png")]
 		protected static const THEME_GRYNGY_ICE_FIRE:Class;
 		
-		[Embed(source="/../feathers/worksMobileTheme/assets/images/theme_gryngy_blood_ice_big.png")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/images/theme_gryngy_blood_ice_big.png")]
 		protected static const THEME_GRYNGY_BLOOD_ICE:Class;
 		
-		[Embed(source="/../feathers/worksMobileTheme/assets/images/theme_organic_big.png")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/images/theme_organic_big.png")]
 		protected static const THEME_ORGANIC:Class;
 		
-		[Embed(source="/../feathers/worksMobileTheme/assets/images/theme_plain_digital_screen_big.png")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/images/theme_plain_digital_screen_big.png")]
 		protected static const THEME_PLAIN_DIGITAL_SCREEN:Class;
 		
-		[Embed(source="/../feathers/worksMobileTheme/assets/images/theme_plain_sea_weed_big.png")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/images/theme_plain_sea_weed_big.png")]
 		protected static const THEME_PLAIN_SEA_WEED:Class;
 		
-		[Embed(source="/../feathers/worksMobileTheme/assets/images/theme_plain_whipped_iceCream_big.png")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/images/theme_plain_whipped_iceCream_big.png")]
 		protected static const THEME_PLAIN_WHIPPED_ICECREAM:Class;
 		
-		[Embed(source="/../feathers/worksMobileTheme/assets/images/theme-fancy_chocolate_big.png")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/images/theme-fancy_chocolate_big.png")]
 		protected static const THEME_FANCY_CHOCOLATE:Class;
 		
-		[Embed(source="/../feathers/worksMobileTheme/assets/images/theme-fancy_loranga_lights_big.png")]
+		[Embed(source="/./feathers/worksMobileTheme/assets/images/theme-fancy_loranga_lights_big.png")]
 		protected static const THEME_FANCY_LORANGA_LIGHTS:Class;
 	
 
