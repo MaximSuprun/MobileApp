@@ -2,8 +2,10 @@ package com.socialApplication.view.main{
 	
 	
 	import com.socialApplication.common.Constants;
+	import com.socialApplication.model.vo.VOImageInfo;
 	import com.socialApplication.model.vo.VOUserData;
 	import com.socialApplication.view.createScreen.ViewCreateScreen;
+	import com.socialApplication.view.explore.ViewExplore;
 	import com.socialApplication.view.introductionPanel.ViewIntroduction;
 	import com.socialApplication.view.login.ViewLogin;
 	import com.socialApplication.view.menu.ViewMenu;
@@ -82,10 +84,17 @@ package com.socialApplication.view.main{
 			if(_screenNavigator.activeScreenID==pScreen){
 				return;
 			}
-			
+				
 			showMenu();
 			_screenNavigator.clearScreen();
 			_screenNavigator.showScreen(pScreen);
+		}
+		public function addExploreView(pScreen:String,pImageInfo:VOImageInfo):void{
+			_screenNavigator.showScreen(pScreen);
+			dispatchEvent(new EventViewMain(EventViewMain.GET_IMAGE_INFO,pImageInfo));
+		}
+		public function addProfileView():void{
+			_screenNavigator.showScreen(Constants.ID_VIEW_PROFILE);
 		}
 	
 		
@@ -114,6 +123,7 @@ package com.socialApplication.view.main{
 			_screenNavigator.addScreen(Constants.ID_VIEW_CREATE,new ScreenNavigatorItem(ViewCreateScreen));		
 			_screenNavigator.addScreen(Constants.ID_VIEW_PROFILE,new ScreenNavigatorItem(ViewProfile));		
 			_screenNavigator.addScreen(Constants.ID_VIEW_SETTINGS,new ScreenNavigatorItem(ViewSettings));		
+			_screenNavigator.addScreen(Constants.ID_VIEW_EXPLORE,new ScreenNavigatorItem(ViewExplore));		
 			
 			_transitionManager=new ScreenSlidingStackTransitionManager(_screenNavigator);
 			_transitionManager.duration=0.4;

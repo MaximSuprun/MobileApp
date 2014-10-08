@@ -137,6 +137,8 @@ package com.socialApplication.service.getImageInfo{
 						for (var i:int=0;i<pArrayLength;i++){
 							_dataImageInfo=new VOImageInfo();
 							_dataImageInfo.id =pResponseJSON.response.images[i].id;
+							_dataImageInfo.age =pResponseJSON.response.images[i].age;
+							_dataImageInfo.userName =pResponseJSON.response.images[i].username;
 							_dataImageInfo.number_of_comments = pResponseJSON.response.images[i].number_of_comments;
 							_dataImageInfo.number_of_likes = pResponseJSON.response.images[i].number_of_likes;
 							_dataImageInfo.title = pResponseJSON.response.images[i].title;

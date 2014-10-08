@@ -19,20 +19,25 @@ package com.socialApplication.common{
 		public static const ID_VIEW_MENU :String = "ID_VIEW_MENU";
 		public static const ID_VIEW_INTRODUCTION :String = "ID_VIEW_INTRODUCTION";
 		public static const ID_VIEW_LOGIN :String = "ID_VIEW_LOGIN";
+		public static const ID_VIEW_EXPLORE :String = "ID_VIEW_EXPLORE";
 		
 		public static const HEADER_PROFILE :String = "HEADER_PROFILE";
 		public static const HEADER_CREATE_PANEL :String = "HEADER_CREATE_PANEL";
 		public static const HEADER_SETTINGS :String = "HEADER_SETTINGS";
+		public static const HEADER_EXPLORE :String = "HEADER_EXPLORE";
 		
 		public static const LIST_MENU :String = "LIST_MENU";
 		public static const LIST_INTRODUCTION :String = "LIST_INTRODUCTION";
 		public static const LIST_SWIPE :String = "LIST_SWIPE";
+		public static const LIST_POP_UP :String = "LIST_POP_UP";
 		
 		public static const BUTTON_CREATE :String = "BUTTON_CREATE";
 		public static const BUTTON_MENU :String = "BUTTON_MENU";
 		public static const BUTTON_LOGIN :String = "BUTTON_LOGIN";
 		public static const BUTTON_GET_START :String = "BUTTON_GET_START";
 		public static const BUTTON_CATEGORIES :String = "BUTTON_CATEGORIES";
+		public static const BUTTON_BACK :String = "BUTTON_BACK";
+		public static const BUTTON_SHARE :String = "BUTTON_SHARE";
 		
 		public static const TOGGLE_BUTTON_LIST :String = "TOGGLE_BUTTON_LIST";
 		public static const TOGGLE_BUTTON_GRID :String = "TOGGLE_BUTTON_GRID";
@@ -78,6 +83,9 @@ package com.socialApplication.common{
 		public static const TOP_POSITION_IN_LIST :String = "top";
 		public static const DEFAULT_POSITION_IN_LIST :String = "default";
 		public static const BOTTOM_POSITION_IN_LIST :String = "bottom";
+		
+		
+		public static const TITLE_EXPLORE_POP_UP :String = "Share:";
 		
 		
 		

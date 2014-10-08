@@ -1,5 +1,6 @@
 package com.socialApplication.view.profile{
 	
+	import com.socialApplication.model.vo.VOImageInfo;
 	import com.socialApplication.model.vo.VOUserData;
 	import com.socialApplication.service.getImageInfo.EventServiceGetImageInfo;
 	import com.socialApplication.service.loadImage.EventServiceLoadImage;
@@ -50,6 +51,7 @@ package com.socialApplication.view.profile{
 			addViewListener(EventViewCreateScreen.MENU_CLICK,_handlerMenuClick);
 			addViewListener(EventViewProfile.AVATAR_LOAD,_handlerAvatarLoad);
 			addViewListener(EventViewProfile.IMAGE_LOAD,_handlerImageLoad);
+			addViewListener(EventViewProfile.IMAGE_SELECTED,_handlerImageSelected);
 			addContextListener(EventServiceLoadImage.AVATAR_IMAGE_LOADED,_handlerAvatarLoaded);
 			addContextListener(EventServiceGetImageInfo.RESULT,_handlerImageInfoLoaded);
 			dispatch(new EventViewProfile(EventViewProfile.LOAD_USER_DATA,null, _setUserData));
@@ -88,6 +90,11 @@ package com.socialApplication.view.profile{
 		private function _handlerAvatarLoad(event:EventViewProfile):void{
 			var pUrl:String=String(event.payload);
 			dispatch(new EventViewProfile(EventViewProfile.AVATAR_LOAD,pUrl));
+		}
+		
+		private function _handlerImageSelected(event:EventViewProfile):void{
+			var pVOImageInfo:VOImageInfo=VOImageInfo(event.payload);
+			dispatch(new EventViewProfile(EventViewProfile.IMAGE_SELECTED,pVOImageInfo));
 		}
 		
 		private function _handlerImageLoad(event:EventViewProfile):void{

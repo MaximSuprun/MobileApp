@@ -1,10 +1,14 @@
 package com.socialApplication.view.main{
 	
+	import com.socialApplication.common.Constants;
 	import com.socialApplication.model.EventModel;
+	import com.socialApplication.model.vo.VOImageInfo;
 	import com.socialApplication.model.vo.VOUserData;
 	import com.socialApplication.view.createScreen.EventViewCreateScreen;
+	import com.socialApplication.view.explore.EventViewExplore;
 	import com.socialApplication.view.introductionPanel.EventViewIntroduction;
 	import com.socialApplication.view.menu.EventViewMenu;
+	import com.socialApplication.view.profile.EventViewProfile;
 	import com.socialApplication.view.settings.EventViewSettings;
 	
 	import org.robotlegs.starling.mvcs.Mediator;
@@ -49,6 +53,9 @@ package com.socialApplication.view.main{
 			addContextListener(EventViewCreateScreen.MENU_SHOW,_handlerShowMenu);
 			addContextListener(EventViewMenu.CHANGE_SCREEN,_handlerChangeScreen);
 			addContextListener(EventViewSettings.LOG_OUT,_handlerLogOut);
+			addContextListener(EventViewExplore.BACK_BUTTON_CLICK,_handlerExploreBackButton);
+			addContextListener(EventViewProfile.IMAGE_SELECTED,_handlerImageSelected);
+			addViewListener(EventViewMain.GET_IMAGE_INFO,_handlerGetImageInfo);
 		}
 
 		override public function onRemove():void {
@@ -93,6 +100,17 @@ package com.socialApplication.view.main{
 		}
 		private function _handlerLogOut(event:EventViewSettings):void{
 			_view.viewLoginAdd();
+		}
+		private function _handlerExploreBackButton(event:EventViewExplore):void{
+			_view.addProfileView();
+		}
+		private function _handlerImageSelected(event:EventViewProfile):void{
+			var pVOImageInfo:VOImageInfo=VOImageInfo(event.payload);
+			_view.addExploreView(Constants.ID_VIEW_EXPLORE,pVOImageInfo);
+		}
+		private function _handlerGetImageInfo(event:EventViewMain):void{
+			var pVOImageInfo:VOImageInfo=VOImageInfo(event.payload);
+			dispatch(new EventViewMain(EventViewMain.GET_IMAGE_INFO,pVOImageInfo));
 		}
 		
 		

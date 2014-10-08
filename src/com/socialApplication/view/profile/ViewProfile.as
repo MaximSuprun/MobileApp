@@ -93,17 +93,23 @@ package com.socialApplication.view.profile{
 		//---------------------------------------------------------------------------------------------------------
 		public function get imageListCollection():ListCollection{	return _imageListCollections;}
 		public function set imageListCollection(value:ListCollection):void{
-			_imageListCollections=value;	
+			_imageListCollections=value;
+			var pLengthList:int=_imageListCollections.length;
+			for(var i:int=0;i<pLengthList;i++){
+				_imageListCollections.data[i].userName=_userData.description;
+			}
 			_list.dataProvider.addAllAt(_imageListCollections,_list.dataProvider.length);
 			_popUpDelete();
 			
 			if(!_list.hasEventListener(Event.SCROLL)){
 				_list.addEventListener(Event.SCROLL,_handlerContainerList);	
 			}
+			
 			if(!_viewContainer.hasEventListener(Event.SCROLL)){
 				_viewContainer.addEventListener(Event.SCROLL,_handlerContainerScroll);				
 			}
-			if(_imageListCollections.length<24){
+			
+			if(pLengthList<Constants.COUNT_IMAGE){
 				isLoaded=true;
 				return;
 			}
@@ -176,6 +182,7 @@ package com.socialApplication.view.profile{
 			_list=new List();
 			_list.height=Starling.current.nativeStage.stageHeight-header.height;
 			_list.dataProvider=new ListCollection();
+			_list.addEventListener(Event.CHANGE,_handlerSelectImage);
 			_list.snapScrollPositionsToPixels=true;
 			_list.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_NONE;
 			_list.verticalScrollPolicy=Scroller.SCROLL_POLICY_OFF;
@@ -422,7 +429,10 @@ package com.socialApplication.view.profile{
 			_scrollListPositionSearch();			
 		}
 		
-		
+		private function _handlerSelectImage(event:Event):void{
+			dispatchEvent(new EventViewProfile(EventViewProfile.IMAGE_SELECTED,_list.selectedItem));
+			
+		}
 		
 		
 		//--------------------------------------------------------------------------------------------------------- 

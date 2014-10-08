@@ -11,6 +11,8 @@ package com.socialApplication.model.vo{
 		private var _number_of_comments:String="";
 		private var _id:String="";
 		private var _url:String="";
+		private var _age:String="";
+		private var _userName:String="";
 		
 		//--------------------------------------------------------------------------------------------------------- 
 		//
@@ -45,7 +47,17 @@ package com.socialApplication.model.vo{
 		public function set url(value:String):void{
 			_url = value;
 		}
-
+		
+		public function get age():String{return _age;}
+		public function set age(value:String):void{
+			_age = value;
+		}
+		
+		public function get userName():String{return _userName;}
+		public function set userName(value:String):void{
+			_userName = value;
+		}
+		
 		public function get id():String{return _id;}
 		public function set id(value:String):void{
 			_id = value;

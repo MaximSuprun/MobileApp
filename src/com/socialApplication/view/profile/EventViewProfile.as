@@ -6,6 +6,7 @@ package com.socialApplication.view.profile{
 		public static const LOAD_USER_DATA:String="LOAD_USER_DATA";
 		public static const AVATAR_LOAD:String="AVATAR_LOAD";
 		public static const IMAGE_LOAD:String="IMAGE_LOAD";
+		public static const IMAGE_SELECTED:String="IMAGE_SELECTED";
 		
 		private var _payload:Object;
 		public function get payload():Object {

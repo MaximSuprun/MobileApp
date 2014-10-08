@@ -30,6 +30,8 @@ package feathers.worksMobileTheme.source.feathers.themes
 	import com.socialApplication.view.createScreen.common.CreatePopUp;
 	import com.socialApplication.view.createScreen.common.footer.ItemRendererFooterCreate;
 	import com.socialApplication.view.createScreen.common.footer.MyFooter;
+	import com.socialApplication.view.explore.ViewExplore;
+	import com.socialApplication.view.explore.common.PopUpShare;
 	import com.socialApplication.view.introductionPanel.ViewIntroduction;
 	import com.socialApplication.view.login.ViewLogin;
 	import com.socialApplication.view.menu.ViewMenu;
@@ -453,6 +455,8 @@ package feathers.worksMobileTheme.source.feathers.themes
 		protected var horizontalScrollBarThumbSkinTextures:Scale3Textures;
 		protected var searchIconTexture:Texture;
 		
+		protected var buttonBackSkin:Texture;
+		protected var buttonShareSkin:Texture;
 		protected var buttonToggleGrigUpSkin:Texture;
 		protected var buttonToggleGrigDownSkin:Texture;
 		protected var buttonTogglelistUpSkin:Texture;
@@ -721,6 +725,8 @@ package feathers.worksMobileTheme.source.feathers.themes
 			buttonCategoriesDownSkinTextures = atlas.getTexture("button-categories-down-skin");
 			buttonCreateSkinTextures = atlas.getTexture("button-create-up-skin");
 			buttonCreateDownSkinTextures = atlas.getTexture("button-create-down-skin");
+			buttonBackSkin = atlas.getTexture("button-back-skin");
+			buttonShareSkin = atlas.getTexture("button-share-skin");
 			buttonToggleGrigUpSkin = atlas.getTexture("button-grid-up-skin");
 			buttonToggleGrigDownSkin = atlas.getTexture("button-grid-down-skin");
 			buttonTogglelistUpSkin = atlas.getTexture("button-list-up-skin");
@@ -804,6 +810,8 @@ package feathers.worksMobileTheme.source.feathers.themes
 			this.setInitializerForClass(Button, categoriesButtonInitializer,  Constants.BUTTON_CATEGORIES);
 			this.setInitializerForClass(Button, gridToggleButtonInitializer,  Constants.TOGGLE_BUTTON_GRID);
 			this.setInitializerForClass(Button, listToggleButtonInitializer,  Constants.TOGGLE_BUTTON_LIST);
+			this.setInitializerForClass(Button, backExploreButtonInitializer,  Constants.BUTTON_BACK);
+			this.setInitializerForClass(Button,shareButtonInitializer,  Constants.BUTTON_SHARE);
 
 			//button group
 			this.setInitializerForClass(ButtonGroup, buttonGroupInitializer);
@@ -824,6 +832,7 @@ package feathers.worksMobileTheme.source.feathers.themes
 			this.setInitializerForClass(Header, headerCreateInitializer, Constants.HEADER_CREATE_PANEL);
 			this.setInitializerForClass(Header, headerProfileInitializer, Constants.HEADER_PROFILE);
 			this.setInitializerForClass(Header, headerSettingsInitializer, Constants.HEADER_SETTINGS);
+			this.setInitializerForClass(Header, headerExploreInitializer, Constants.HEADER_EXPLORE);
 
 			//header and footer renderers for grouped list
 			this.setInitializerForClass(DefaultGroupedListHeaderOrFooterRenderer, headerRendererInitializer);
@@ -861,6 +870,7 @@ package feathers.worksMobileTheme.source.feathers.themes
 			this.setInitializerForClass(List, listIntroductionInitializer, Constants.LIST_INTRODUCTION);
 			this.setInitializerForClass(List, listCreateInitializer, Constants.LIST_SWIPE);
 			this.setInitializerForClass(List, listMenuInitializer, Constants.LIST_MENU);
+			this.setInitializerForClass(List, listPopUpShareInitializer, Constants.LIST_POP_UP);
 			
 
 			//numeric stepper
@@ -901,6 +911,8 @@ package feathers.worksMobileTheme.source.feathers.themes
 			this.setInitializerForClass(ViewSettings, ViewSettingsInitializer);
 			this.setInitializerForClass(PopUpChangeUserData, popUpInitializer);
 			this.setInitializerForClass(CreatePopUp, CreatePopUpInitializer);
+			this.setInitializerForClass(PopUpShare, PopUpShareInitializer);
+			this.setInitializerForClass(ViewExplore, ViewExploreInitializer);
 			this.setInitializerForClass(BusyIndicator, BusyIndicatorInitializer);
 			
 			
@@ -1267,6 +1279,32 @@ package feathers.worksMobileTheme.source.feathers.themes
 			skinSelector.setValueForState(this.buttonToggleGrigDownSkin, Button.STATE_DOWN, false);
 			skinSelector.setValueForState(this.buttonToggleGrigDownSkin, Button.STATE_DISABLED, false);
 			skinSelector.setValueForState(this.buttonToggleGrigUpSkin, Button.STATE_DISABLED, true);
+			button.stateToSkinFunction = skinSelector.updateValue;	
+			button.labelFactory = labelCreate;		
+			this.baseButtonInitializer(button);
+		}
+		
+		protected function backExploreButtonInitializer(button:Button):void
+		{
+			const skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
+			skinSelector.defaultValue = this.buttonBackSkin;
+			skinSelector.defaultSelectedValue = this.buttonBackSkin;
+			skinSelector.setValueForState(this.buttonBackSkin, Button.STATE_DOWN, false);
+			skinSelector.setValueForState(this.buttonBackSkin, Button.STATE_DISABLED, false);
+			skinSelector.setValueForState(this.buttonBackSkin, Button.STATE_DISABLED, true);
+			button.stateToSkinFunction = skinSelector.updateValue;	
+			button.labelFactory = labelCreate;		
+			this.baseButtonInitializer(button);
+		}
+		
+		protected function shareButtonInitializer(button:Button):void
+		{
+			const skinSelector:SmartDisplayObjectStateValueSelector = new SmartDisplayObjectStateValueSelector();
+			skinSelector.defaultValue = this.buttonShareSkin;
+			skinSelector.defaultSelectedValue = this.buttonShareSkin;
+			skinSelector.setValueForState(this.buttonShareSkin, Button.STATE_DOWN, false);
+			skinSelector.setValueForState(this.buttonShareSkin, Button.STATE_DISABLED, false);
+			skinSelector.setValueForState(this.buttonShareSkin, Button.STATE_DISABLED, true);
 			button.stateToSkinFunction = skinSelector.updateValue;	
 			button.labelFactory = labelCreate;		
 			this.baseButtonInitializer(button);
@@ -1965,6 +2003,19 @@ package feathers.worksMobileTheme.source.feathers.themes
 			pBackgroundSkin.scaleY=scale;
 			header.backgroundSkin = pBackgroundSkin;
 		}
+		protected function headerExploreInitializer(header:Header):void	{
+			header.minWidth = 88 * this.scale;
+			header.minHeight = 88 * this.scale;
+			header.paddingTop = header.paddingRight = header.paddingBottom =
+				header.paddingLeft = 14 * this.scale;
+			header.gap = 8 * this.scale;
+			header.titleGap = 12 * this.scale;
+
+			var pBackgroundSkin:Image=new Image(atlas.getTexture("header_explore"));
+			pBackgroundSkin.scaleX=scale;
+			pBackgroundSkin.scaleY=scale;
+			header.backgroundSkin = pBackgroundSkin;
+		}
 
 		protected function headerWithoutBackgroundInitializer(header:Header):void
 		{
@@ -2090,7 +2141,10 @@ package feathers.worksMobileTheme.source.feathers.themes
 			var backgroundSkin:Quad = new Quad(88 * this.scale, 88 * this.scale, 0x262a2e);
 			list.backgroundSkin = backgroundSkin;		
 		}
-		
+		protected function listPopUpShareInitializer(list:List):void
+		{
+			list.dataProvider = shareDataProvider();
+		}
 		protected function itemRendererMenuInitializer(renderer:ItemRendererMenuList):void
 		{
 			renderer.scale=scale;
@@ -2124,7 +2178,7 @@ package feathers.worksMobileTheme.source.feathers.themes
 			if(renderer.isBigFontSize){
 				renderer.rendererText=labelHTMLBigCreate;
 			}else{
-				renderer.rendererText=labelHTMLCreate;
+				renderer.rendererText=labelStatusCreate;
 			}
 		}
 		
@@ -2152,7 +2206,7 @@ package feathers.worksMobileTheme.source.feathers.themes
 			renderer.minWidth = renderer.minHeight = 88 * this.scale;
 			renderer.minTouchWidth = renderer.minTouchHeight = 88 * this.scale;
 			renderer.rendererText = labelLisrRendererCreate;
-			renderer.rendererAccessoryText=labelHTMLCreate;
+			renderer.rendererAccessoryText=labelStatusCreate;
 			
 		}
 
@@ -2274,6 +2328,31 @@ package feathers.worksMobileTheme.source.feathers.themes
 			pViewSettings.logoListName = pLogoSkin;		
 			
 		}
+		protected function ViewExploreInitializer(pViewExplore:ViewExplore):void{
+			pViewExplore.scale=scale;
+		
+			
+			var pBackgroundSkin:Image=new Image(atlas.getTexture("Background"));
+			pBackgroundSkin.width = Starling.current.nativeStage.stageWidth;	
+			pBackgroundSkin.scaleY = scale;
+			pViewExplore.backgroundSkin=pBackgroundSkin;			
+			
+			var pBackground:Quad=new Quad(540*scale,600*scale,0xFFFFFF);
+			pViewExplore.background=pBackground;	
+			
+			var pIconLike:Image=new Image(atlas.getTexture("icon_blue_like"));
+			pIconLike.scaleX = scale;	
+			pIconLike.scaleY = scale;
+			pViewExplore.iconLike=pIconLike;			
+			
+			var pIconClock:Image=new Image(atlas.getTexture("icon_clock"));
+			pIconClock.scaleX = scale;	
+			pIconClock.scaleY = scale;
+			pViewExplore.iconClock=pIconClock;		
+			
+			pViewExplore.rendererText=labelViewShare;
+
+		}
 		protected function popUpInitializer(pPopUp:PopUpChangeUserData):void{
 			pPopUp.scale=scale;
 		
@@ -2295,6 +2374,9 @@ package feathers.worksMobileTheme.source.feathers.themes
 			
 			var pBackground:Image=new Image(atlas.getTexture("background_pop_up"));
 			pPopUp.background=pBackground;		
+		}
+		protected function PopUpShareInitializer(pPopUp:PopUpShare):void{
+			pPopUp.scale=scale;
 		}
 
 		protected function ViewProfileInitializer(pViewProfile:ViewProfile):void{			
@@ -2356,6 +2438,22 @@ package feathers.worksMobileTheme.source.feathers.themes
 															{ label:"", texture: pFriends },
 															{ label:"", texture: pContribute},
 															{ label:"", texture: pBuyHome} ])
+				
+			return pCollection;	
+		}
+		protected function shareDataProvider():ListCollection	{
+			var pFacebook:Texture = atlas.getTexture("facebook");
+			var pTwitter:Texture = atlas.getTexture("twitter");
+			var pPinterest:Texture = atlas.getTexture("pinterest");
+			var pMailRu:Texture = atlas.getTexture("mail");
+			var pThumblr:Texture = atlas.getTexture("thumblr");
+				
+			var pCollection:ListCollection=new ListCollection(
+														[  	{ label:"Facebook", texture:pFacebook },
+															{ label:"Twitter", texture: pTwitter },
+															{ label:"Pinterest", texture: pPinterest},
+															{ label:"Mail.ru", texture: pMailRu} ,
+															{ label:"Thumblr", texture: pThumblr} ])
 				
 			return pCollection;	
 		}
@@ -2437,11 +2535,19 @@ package feathers.worksMobileTheme.source.feathers.themes
 			pTextRenderer.embedFonts = true;
 			return pTextRenderer;
 		}
-		protected function labelHTMLCreate():ITextRenderer{
+		protected function labelStatusCreate():ITextRenderer{
 			
 			var pTextRenderer:TextFieldTextRenderer = new TextFieldTextRenderer();
 			pTextRenderer.isHTML=true
 			pTextRenderer.textFormat = new TextFormat("Calibri" ,20*scale, 0xFFFFFF,null,null,null,null,null,TextAlign.CENTER );
+			pTextRenderer.embedFonts = true;
+			return pTextRenderer;
+		}
+		protected function labelViewShare():ITextRenderer{
+			
+			var pTextRenderer:TextFieldTextRenderer = new TextFieldTextRenderer();
+			pTextRenderer.isHTML=true
+			pTextRenderer.textFormat = new TextFormat("Calibri" ,20*scale, 0x4a90da,null,null,null,null,null,TextAlign.LEFT );
 			pTextRenderer.embedFonts = true;
 			return pTextRenderer;
 		}

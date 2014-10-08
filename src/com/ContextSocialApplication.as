@@ -31,6 +31,8 @@ package com{
 	import com.socialApplication.view.createScreen.EventViewCreateScreen;
 	import com.socialApplication.view.createScreen.MediatorViewCreateScreen;
 	import com.socialApplication.view.createScreen.ViewCreateScreen;
+	import com.socialApplication.view.explore.MediatorViewExplore;
+	import com.socialApplication.view.explore.ViewExplore;
 	import com.socialApplication.view.introductionPanel.MediatorViewIntroduction;
 	import com.socialApplication.view.introductionPanel.ViewIntroduction;
 	import com.socialApplication.view.login.EventViewLogin;
@@ -98,6 +100,7 @@ package com{
 			mediatorMap.mapView(ViewProfile, MediatorViewProfile);
 			mediatorMap.mapView(ViewMenu, MediatorViewMenu);
 			mediatorMap.mapView(ViewSettings, MediatorViewSettings);
+			mediatorMap.mapView(ViewExplore, MediatorViewExplore);
 						
 			// Command
 			commandMap.mapEvent(ContextEventType.STARTUP_COMPLETE,CommandStartup);
