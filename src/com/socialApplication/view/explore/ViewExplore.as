@@ -47,6 +47,7 @@ package com.socialApplication.view.explore{
 		
 		private var _imageInfo:VOImageInfo;
 		private var _rendererText:Function;
+		private var _popUpShare:PopUpShare;
 		//--------------------------------------------------------------------------------------------------------- 
 		//
 		//  CONSTRUCTOR 
@@ -137,6 +138,10 @@ package com.socialApplication.view.explore{
 			_labelNumberOfLike=new Label();
 			_labelTime=new Label();
 			
+			_popUpShare=new PopUpShare();
+			_popUpShare.addEventListener(EventViewExplore.CLICK_CANCEL,_handlerClickPopUpCancel);
+			_popUpShare.addEventListener(EventViewExplore.SHARE,_handlerShare);
+			
 			if(rendererText != null){
 				_labelName.textRendererFactory=rendererText;
 				_labelNumberOfLike.textRendererFactory=rendererText;
@@ -146,14 +151,8 @@ package com.socialApplication.view.explore{
 		}
 		
 		override protected function draw():void{
-			super.draw();		
-			
+			super.draw();					
 								
-		}
-		
-
-		private function _removePopUp():void{
-			//PopUpManager.removePopUp();
 		}
 		
 		private function _setData():void{
@@ -202,7 +201,7 @@ package com.socialApplication.view.explore{
 			addChild(_buttonShare);
 		}
 		private function _popUpCreate():void{
-			
+			PopUpManager.addPopUp(_popUpShare,true,false);
 		}
 		
 		//--------------------------------------------------------------------------------------------------------- 
@@ -221,9 +220,37 @@ package com.socialApplication.view.explore{
 					break;
 			}
 		}
+		private function _handlerShare(event:EventViewExplore):void{
+			var pShareTo:String=event.payload.label;
+			switch(pShareTo){
+				case Constants.FACEBOOK:
+					trace("Facebook");
+					dispatchEvent(new EventViewExplore(EventViewExplore.SHARE_TO_FACEBOOK,imageInfo));
+					break;
+				case Constants.TWITTER:
+					trace("Twitter");
+					dispatchEvent(new EventViewExplore(EventViewExplore.SHARE_TO_TWITTER,imageInfo));
+					break;
+				case Constants.PINTEREST:
+					trace("Pinterest");
+					dispatchEvent(new EventViewExplore(EventViewExplore.SHARE_TO_PINTEREST,imageInfo));
+					break;
+				case Constants.MAILRU:
+					trace("Mail.ru");
+					dispatchEvent(new EventViewExplore(EventViewExplore.SHARE_TO_MAILRU,imageInfo));
+					break;
+				case Constants.TUMBLR:
+					trace("Tumblr");
+					dispatchEvent(new EventViewExplore(EventViewExplore.SHARE_TO_TUMBLR,imageInfo));
+					break;
+			}
+		}
 		
 		private function _handlerImageLoadCompete(event:Event):void{
 			_layout();
+		}
+		private function _handlerClickPopUpCancel(event:EventViewExplore):void{
+			PopUpManager.removePopUp(_popUpShare);
 		}
 				
 		//--------------------------------------------------------------------------------------------------------- 

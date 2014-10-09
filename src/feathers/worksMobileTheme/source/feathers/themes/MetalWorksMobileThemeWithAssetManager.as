@@ -1468,12 +1468,17 @@ package feathers.worksMobileTheme.source.feathers.themes
 		}
 		protected function itemRendererIntroductionInitializer(renderer:BaseDefaultItemRenderer):void
 		{
+			renderer.defaultLabelProperties.elementFormat = this.largeLightElementFormat;
+			renderer.downLabelProperties.elementFormat = this.largeLightElementFormat;
+			renderer.defaultSelectedLabelProperties.elementFormat = this.largeLightElementFormat;
+			renderer.disabledLabelProperties.elementFormat = this.largeLightElementFormat;
+			
 			renderer.horizontalAlign = Button.HORIZONTAL_ALIGN_CENTER;
 			renderer.paddingTop = renderer.paddingBottom = 8 * this.scale;
 			renderer.paddingLeft = 32 * this.scale;
 			renderer.paddingRight = 24 * this.scale;
 			renderer.gap = 20 * this.scale;
-			renderer.iconPosition = Button.ICON_POSITION_BOTTOM;
+			renderer.iconPosition = Button.ICON_POSITION_TOP;
 			renderer.accessoryGap = Number.POSITIVE_INFINITY;
 			renderer.accessoryPosition = BaseDefaultItemRenderer.ACCESSORY_POSITION_MANUAL;
 			renderer.minWidth = renderer.minHeight = 88 * this.scale;
@@ -2446,14 +2451,14 @@ package feathers.worksMobileTheme.source.feathers.themes
 			var pTwitter:Texture = atlas.getTexture("twitter");
 			var pPinterest:Texture = atlas.getTexture("pinterest");
 			var pMailRu:Texture = atlas.getTexture("mail");
-			var pThumblr:Texture = atlas.getTexture("thumblr");
+			var pTumblr:Texture = atlas.getTexture("tumblr");
 				
 			var pCollection:ListCollection=new ListCollection(
 														[  	{ label:"Facebook", texture:pFacebook },
 															{ label:"Twitter", texture: pTwitter },
 															{ label:"Pinterest", texture: pPinterest},
 															{ label:"Mail.ru", texture: pMailRu} ,
-															{ label:"Thumblr", texture: pThumblr} ])
+															{ label:"Tumblr", texture: pTumblr} ])
 				
 			return pCollection;	
 		}

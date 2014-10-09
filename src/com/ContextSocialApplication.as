@@ -7,6 +7,7 @@ package com{
 	import com.socialApplication.controller.CommandLoadAvatar;
 	import com.socialApplication.controller.CommandLoadGalleryDevice;
 	import com.socialApplication.controller.CommandLogOut;
+	import com.socialApplication.controller.CommandPublishFacebook;
 	import com.socialApplication.controller.CommandReplaceAutorizationData;
 	import com.socialApplication.controller.CommandSetAutorizationData;
 	import com.socialApplication.controller.CommandSetUserData;
@@ -31,6 +32,7 @@ package com{
 	import com.socialApplication.view.createScreen.EventViewCreateScreen;
 	import com.socialApplication.view.createScreen.MediatorViewCreateScreen;
 	import com.socialApplication.view.createScreen.ViewCreateScreen;
+	import com.socialApplication.view.explore.EventViewExplore;
 	import com.socialApplication.view.explore.MediatorViewExplore;
 	import com.socialApplication.view.explore.ViewExplore;
 	import com.socialApplication.view.introductionPanel.MediatorViewIntroduction;
@@ -123,6 +125,8 @@ package com{
 			commandMap.mapEvent(EventViewSettings.REPLACE_DATA_LOGIN,CommandSetAutorizationData,EventViewSettings);
 			commandMap.mapEvent(EventViewSettings.REPLACE_DATA_PASSWORD,CommandSetAutorizationData,EventViewSettings);
 			commandMap.mapEvent(EventViewSettings.LOG_OUT,CommandLogOut,EventViewSettings);
+			
+			commandMap.mapEvent(EventViewExplore.SHARE_TO_FACEBOOK,CommandPublishFacebook,EventViewExplore);
 			
 			// Command service
 			

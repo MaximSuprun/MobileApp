@@ -84,8 +84,13 @@ package com.socialApplication.common{
 		public static const DEFAULT_POSITION_IN_LIST :String = "default";
 		public static const BOTTOM_POSITION_IN_LIST :String = "bottom";
 		
-		
-		public static const TITLE_EXPLORE_POP_UP :String = "Share:";
+		public static const TWITTER :String = "Twitter";
+		public static const FACEBOOK :String = "Facebook";
+		public static const FACEBOOK_API_ID :String = "149187415251866";
+		public static const FACEBOOK_SECRET_KEY :String = "1922b4914eb37250a9f09d9ed7899a67";
+		public static const PINTEREST :String = "Pinterest";
+		public static const MAILRU :String = "Mail.ru";
+		public static const TUMBLR :String = "Tumblr";
 		
 		
 		
