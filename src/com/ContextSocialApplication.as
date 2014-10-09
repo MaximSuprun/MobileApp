@@ -16,6 +16,8 @@ package com{
 	import com.socialApplication.model.EventModel;
 	import com.socialApplication.model.IModel;
 	import com.socialApplication.model.Model;
+	import com.socialApplication.service.api.IServiceFacebookPostImage;
+	import com.socialApplication.service.api.ServiceFacebook;
 	import com.socialApplication.service.getImageInfo.IServiceGetImageInfo;
 	import com.socialApplication.service.getImageInfo.ServiceGetImageInfo;
 	import com.socialApplication.service.loadImage.avatar.IServiceLoadAvatar;
@@ -143,6 +145,7 @@ package com{
 			injector.mapSingletonOf(IServiceLogOut, ServiceLogOut);
 			injector.mapSingletonOf(IServiceLoadFromDeviceAndCamera, ServiceLoadFromDeviceAndCamera);
 			injector.mapSingletonOf(IServiceSingin, ServiceSingin);
+			injector.mapSingletonOf(IServiceFacebookPostImage, ServiceFacebook);
 			injector.mapSingletonOf(IServiceGetImageInfo, ServiceGetImageInfo);
 			
 			super.startup();

@@ -1,10 +1,6 @@
 package com.socialApplication.controller{
 	
-	import com.facebook.graph.Facebook;
-	import com.facebook.graph.FacebookMobile;
-	import com.facebook.graph.data.FacebookSession;
-	import com.facebook.graph.utils.FacebookDataUtils;
-	import com.socialApplication.common.Constants;
+	import com.socialApplication.service.api.IServiceFacebookPostImage;
 	import com.socialApplication.view.explore.EventViewExplore;
 	
 	import org.robotlegs.starling.mvcs.Command;
@@ -19,7 +15,7 @@ package com.socialApplication.controller{
 		public var event:EventViewExplore;
 		
 		[Inject]
-	//	public var service:IServicePublishImage;
+		public var service:IServiceFacebookPostImage;
 		
 		//--------------------------------------------------------------------------------------------------------- 
 		//
@@ -45,7 +41,7 @@ package com.socialApplication.controller{
 		// 
 		//---------------------------------------------------------------------------------------------------------
 		override public function execute():void{
-			_init();
+			service.postImage();
 		}
 		
 		//--------------------------------------------------------------------------------------------------------- 
@@ -60,17 +56,7 @@ package com.socialApplication.controller{
 		// PRIVATE & PROTECTED METHODS 
 		//
 		//---------------------------------------------------------------------------------------------------------
-		private function _init():void{
-			FacebookMobile.login;
-			FacebookMobile.init(Constants.FACEBOOK_API_ID,onInit);
-		}
-		protected function onInit(response:Object, fail:Object):void {
-			if (response) {
-				trace("Logged In\n");
-			} else {
-				trace("Click to Login\n");
-			}
-		}
+		
 		
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
