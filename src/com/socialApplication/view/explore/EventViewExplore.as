@@ -4,7 +4,8 @@ package com.socialApplication.view.explore{
 	public class EventViewExplore extends Event {
 		
 		public static const BACK_BUTTON_CLICK:String="BACK_BUTTON_CLICK";
-		public static const CLICK_CANCEL:String="CLICK_CANCEL";
+		public static const CANCEL_POP_UP_SHARE:String="CANCEL_POP_UP_SHARE";
+		public static const CANCEL_POP_UP_WEB_VIEW:String="CANCEL_POP_UP_WEB_VIEW";
 		public static const SHARE:String="SHARE";
 		public static const SHARE_TO_FACEBOOK:String="SHARE_TO_FACEBOOK";
 		public static const SHARE_TO_TWITTER:String="SHARE_TO_TWITTER";

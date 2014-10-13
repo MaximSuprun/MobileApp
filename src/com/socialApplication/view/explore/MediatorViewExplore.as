@@ -82,26 +82,22 @@ package com.socialApplication.view.explore{
 			_view.imageInfo=pVOImageInfo;
 		}
 		private function _handlerPublish(event:EventViewExplore):void{
+			var pImageInfo:VOImageInfo=VOImageInfo(event.payload);
 			switch(event.type){
 				case EventViewExplore.SHARE_TO_FACEBOOK:
-					trace("Facebook");
-					dispatch(new EventViewExplore(EventViewExplore.SHARE_TO_FACEBOOK));
+					dispatch(new EventViewExplore(EventViewExplore.SHARE_TO_FACEBOOK,pImageInfo));
 					break;
 				case EventViewExplore.SHARE_TO_TWITTER:
-					trace("Twitter");
-					dispatch(new EventViewExplore(EventViewExplore.SHARE_TO_TWITTER));
+					dispatch(new EventViewExplore(EventViewExplore.SHARE_TO_TWITTER,pImageInfo));
 					break;
 				case EventViewExplore.SHARE_TO_PINTEREST:
-					trace("Pinterest");
-					dispatch(new EventViewExplore(EventViewExplore.SHARE_TO_PINTEREST));
+					dispatch(new EventViewExplore(EventViewExplore.SHARE_TO_PINTEREST,pImageInfo));
 					break;
 				case EventViewExplore.SHARE_TO_MAILRU:
-					trace("Mail.ru");
-					dispatch(new EventViewExplore(EventViewExplore.SHARE_TO_MAILRU));
+					dispatch(new EventViewExplore(EventViewExplore.SHARE_TO_MAILRU,pImageInfo));
 					break;
 				case EventViewExplore.SHARE_TO_TUMBLR:
-					trace("Tumblr");
-					dispatch(new EventViewExplore(EventViewExplore.SHARE_TO_TUMBLR));
+					dispatch(new EventViewExplore(EventViewExplore.SHARE_TO_TUMBLR,pImageInfo));
 					break;
 			}
 		}

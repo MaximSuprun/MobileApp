@@ -1,13 +1,21 @@
-package com.socialApplication.service.api{
-	import com.facebook.graph.FacebookMobile;
+package com.socialApplication.view.explore.common{
+	
 	import com.socialApplication.common.Constants;
+	import com.socialApplication.view.abstract.ViewAbstract;
+	import com.socialApplication.view.explore.EventViewExplore;
+	
+	import feathers.controls.Button;
+	import feathers.controls.Label;
+	import feathers.controls.TextInput;
+	import feathers.core.PopUpManager;
 	
 	import flash.geom.Rectangle;
 	import flash.media.StageWebView;
 	
 	import starling.core.Starling;
+	import starling.events.Event;
 	
-	public class ServiceFacebook implements IServiceFacebookPostImage{
+	public class PopUpWebView extends ViewAbstract{
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  PUBLIC & INTERNAL VARIABLES 
@@ -20,7 +28,12 @@ package com.socialApplication.service.api{
 		// PRIVATE & PROTECTED VARIABLES
 		//
 		//---------------------------------------------------------------------------------------------------------
+		private var _stageWebView:StageWebView;
+		private var _buttonCancel:Button;
+		private var _labelErrorMessage:Label;
+		private var _inputFieldForPin:TextInput;
 		
+		private var _urlForStageWebView:String="";
 		
 		//--------------------------------------------------------------------------------------------------------- 
 		//
@@ -28,8 +41,8 @@ package com.socialApplication.service.api{
 		// 
 		//---------------------------------------------------------------------------------------------------------
 		
-		public function ServiceFacebook()
-		{
+		public function PopUpWebView(){
+			super();
 		}
 		
 		//--------------------------------------------------------------------------------------------------------- 
@@ -37,57 +50,58 @@ package com.socialApplication.service.api{
 		//  PUBLIC & INTERNAL METHODS 
 		// 
 		//---------------------------------------------------------------------------------------------------------
-		public function postImage():void{
-			_init();
-		}
+		
+		
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  GETTERS & SETTERS   
 		// 
 		//---------------------------------------------------------------------------------------------------------
 		
-		
+		public function get stageWebView():StageWebView{return _stageWebView;}
+		public function set loadUrl(pUrl:String):void{
+			if(pUrl && pUrl != _urlForStageWebView){
+				_urlForStageWebView=pUrl;
+				_stageWebView.loadURL(_urlForStageWebView);
+			}
+		}
+		public function stageWebViewDispose():void{
+			_stageWebView.dispose();
+			_stageWebView=null;
+			
+		}
 		//--------------------------------------------------------------------------------------------------------- 
 		//
 		// PRIVATE & PROTECTED METHODS 
 		//
 		//---------------------------------------------------------------------------------------------------------
-		private function _init():void{
-			FacebookMobile.init(Constants.FACEBOOK_API_ID,_initCallBack);
-		}
-		protected function _initCallBack(response:Object, fail:Object):void {
-			if (response) {
-				trace("Logged In");
-			} else {
-				trace("Show login window");
-				_login();				
-			}
-		}
-		
-		private function _loginCallBack(success:Object, fail:Object):void{
-			if (success){
-				trace("Logged In");
-			}else{
-				trace("Login Failed");
-			}
-		}
-		
-		private function _login():void{
-			var pWindiwLoginFacebook:StageWebView=new StageWebView();
+		override protected function initialize():void{
+			_stageWebView=new StageWebView();
+			_stageWebView.stage = Starling.current.nativeStage;
+			_stageWebView.viewPort = new Rectangle(0, 85*scale, Starling.current.nativeStage.stageWidth, Starling.current.nativeStage.stageHeight*.75);
 			
-			if(pWindiwLoginFacebook==null){
-				pWindiwLoginFacebook = new StageWebView();
-				pWindiwLoginFacebook.stage = Starling.current.nativeStage;
-			}
-			pWindiwLoginFacebook.viewPort = new Rectangle(0, 50, Starling.current.nativeStage.stageWidth, Starling.current.nativeStage.stageHeight/2);//for cancel fblogin button
-			FacebookMobile.login(_loginCallBack, Starling.current.nativeStage, ["publish_stream"],pWindiwLoginFacebook);
+			_buttonCancel=new Button();
+			_buttonCancel.nameList.add(Constants.BUTTON_LOGIN);
+			_buttonCancel.addEventListener(Event.TRIGGERED,_handlerCancelButton)
+			_buttonCancel.setSize(150,50);
+			_buttonCancel.label=Constants.LABEL_CANCEL;
+			addChild(_buttonCancel);
 		}
+		
+		override protected function draw():void{
+			_buttonCancel.x=(Starling.current.nativeStage.stageWidth-_buttonCancel.width)/2;
+			_buttonCancel.y=Starling.current.nativeStage.stageHeight*.75+150*scale;
+		}
+		
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  EVENT HANDLERS  
 		// 
 		//---------------------------------------------------------------------------------------------------------
-		
+		private function _handlerCancelButton(event:Event):void{
+			stageWebViewDispose();
+			PopUpManager.removePopUp(this);
+		}
 		
 		//--------------------------------------------------------------------------------------------------------- 
 		// 

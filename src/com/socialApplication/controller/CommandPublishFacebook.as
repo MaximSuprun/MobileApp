@@ -1,6 +1,7 @@
 package com.socialApplication.controller{
 	
-	import com.socialApplication.service.api.IServiceFacebookPostImage;
+	import com.socialApplication.model.vo.VOImageInfo;
+	import com.socialApplication.service.api.facebook.IServiceFacebookPostImage;
 	import com.socialApplication.view.explore.EventViewExplore;
 	
 	import org.robotlegs.starling.mvcs.Command;
@@ -41,7 +42,8 @@ package com.socialApplication.controller{
 		// 
 		//---------------------------------------------------------------------------------------------------------
 		override public function execute():void{
-			service.postImage();
+			var pImageInfo:VOImageInfo=VOImageInfo(event.payload);
+			service.postImage(pImageInfo);
 		}
 		
 		//--------------------------------------------------------------------------------------------------------- 

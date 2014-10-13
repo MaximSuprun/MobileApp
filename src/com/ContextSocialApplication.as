@@ -8,6 +8,7 @@ package com{
 	import com.socialApplication.controller.CommandLoadGalleryDevice;
 	import com.socialApplication.controller.CommandLogOut;
 	import com.socialApplication.controller.CommandPublishFacebook;
+	import com.socialApplication.controller.CommandPublishTwitter;
 	import com.socialApplication.controller.CommandReplaceAutorizationData;
 	import com.socialApplication.controller.CommandSetAutorizationData;
 	import com.socialApplication.controller.CommandSetUserData;
@@ -16,8 +17,10 @@ package com{
 	import com.socialApplication.model.EventModel;
 	import com.socialApplication.model.IModel;
 	import com.socialApplication.model.Model;
-	import com.socialApplication.service.api.IServiceFacebookPostImage;
-	import com.socialApplication.service.api.ServiceFacebook;
+	import com.socialApplication.service.api.facebook.IServiceFacebookPostImage;
+	import com.socialApplication.service.api.facebook.ServiceFacebook;
+	import com.socialApplication.service.api.twitter.IServiceTwitterPostImage;
+	import com.socialApplication.service.api.twitter.ServiceTwitter;
 	import com.socialApplication.service.getImageInfo.IServiceGetImageInfo;
 	import com.socialApplication.service.getImageInfo.ServiceGetImageInfo;
 	import com.socialApplication.service.loadImage.avatar.IServiceLoadAvatar;
@@ -129,6 +132,7 @@ package com{
 			commandMap.mapEvent(EventViewSettings.LOG_OUT,CommandLogOut,EventViewSettings);
 			
 			commandMap.mapEvent(EventViewExplore.SHARE_TO_FACEBOOK,CommandPublishFacebook,EventViewExplore);
+			commandMap.mapEvent(EventViewExplore.SHARE_TO_TWITTER,CommandPublishTwitter,EventViewExplore);
 			
 			// Command service
 			
@@ -146,6 +150,7 @@ package com{
 			injector.mapSingletonOf(IServiceLoadFromDeviceAndCamera, ServiceLoadFromDeviceAndCamera);
 			injector.mapSingletonOf(IServiceSingin, ServiceSingin);
 			injector.mapSingletonOf(IServiceFacebookPostImage, ServiceFacebook);
+			injector.mapSingletonOf(IServiceTwitterPostImage, ServiceTwitter);
 			injector.mapSingletonOf(IServiceGetImageInfo, ServiceGetImageInfo);
 			
 			super.startup();

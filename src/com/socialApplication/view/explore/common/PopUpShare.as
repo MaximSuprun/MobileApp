@@ -119,7 +119,7 @@ package com.socialApplication.view.explore.common{
 		//---------------------------------------------------------------------------------------------------------
 
 		private function _handlerButtonTriggered(event:Event):void{
-			dispatchEvent(new EventViewExplore(EventViewExplore.CLICK_CANCEL));	
+			dispatchEvent(new EventViewExplore(EventViewExplore.CANCEL_POP_UP_SHARE));	
 		}
 		private function _handlerSelectedSocialNetwork(event:Event):void{
 			dispatchEvent(new EventViewExplore(EventViewExplore.SHARE,_list.selectedItem));	

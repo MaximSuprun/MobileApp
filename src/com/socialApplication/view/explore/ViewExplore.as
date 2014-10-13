@@ -5,6 +5,7 @@ package com.socialApplication.view.explore{
 	import com.socialApplication.model.vo.VOImageInfo;
 	import com.socialApplication.view.abstract.ViewAbstract;
 	import com.socialApplication.view.explore.common.PopUpShare;
+	import com.socialApplication.view.explore.common.PopUpWebView;
 	
 	import feathers.controls.Button;
 	import feathers.controls.ImageLoader;
@@ -64,8 +65,7 @@ package com.socialApplication.view.explore{
 		//  PUBLIC & INTERNAL METHODS 
 		// 
 		//---------------------------------------------------------------------------------------------------------		
-		
-
+		 
 		
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
@@ -139,7 +139,7 @@ package com.socialApplication.view.explore{
 			_labelTime=new Label();
 			
 			_popUpShare=new PopUpShare();
-			_popUpShare.addEventListener(EventViewExplore.CLICK_CANCEL,_handlerClickPopUpCancel);
+			_popUpShare.addEventListener(EventViewExplore.CANCEL_POP_UP_SHARE,_handlerClickPopUpCancel);
 			_popUpShare.addEventListener(EventViewExplore.SHARE,_handlerShare);
 			
 			if(rendererText != null){
@@ -204,6 +204,10 @@ package com.socialApplication.view.explore{
 			PopUpManager.addPopUp(_popUpShare,true,false);
 		}
 		
+		private function _removePopUp():void{
+			PopUpManager.removePopUp(_popUpShare);		
+		}
+		
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  EVENT HANDLERS  
@@ -224,33 +228,29 @@ package com.socialApplication.view.explore{
 			var pShareTo:String=event.payload.label;
 			switch(pShareTo){
 				case Constants.FACEBOOK:
-					trace("Facebook");
 					dispatchEvent(new EventViewExplore(EventViewExplore.SHARE_TO_FACEBOOK,imageInfo));
 					break;
 				case Constants.TWITTER:
-					trace("Twitter");
 					dispatchEvent(new EventViewExplore(EventViewExplore.SHARE_TO_TWITTER,imageInfo));
 					break;
 				case Constants.PINTEREST:
-					trace("Pinterest");
 					dispatchEvent(new EventViewExplore(EventViewExplore.SHARE_TO_PINTEREST,imageInfo));
 					break;
 				case Constants.MAILRU:
-					trace("Mail.ru");
 					dispatchEvent(new EventViewExplore(EventViewExplore.SHARE_TO_MAILRU,imageInfo));
 					break;
 				case Constants.TUMBLR:
-					trace("Tumblr");
 					dispatchEvent(new EventViewExplore(EventViewExplore.SHARE_TO_TUMBLR,imageInfo));
 					break;
 			}
+			_removePopUp();
 		}
 		
 		private function _handlerImageLoadCompete(event:Event):void{
 			_layout();
 		}
 		private function _handlerClickPopUpCancel(event:EventViewExplore):void{
-			PopUpManager.removePopUp(_popUpShare);
+			_removePopUp();
 		}
 				
 		//--------------------------------------------------------------------------------------------------------- 
