@@ -97,25 +97,17 @@ package com.socialApplication.service.api.twitter{
 		}
 		
 		private function _handlerAccessToken(event:TwitterRequestEvent):void{
-			var pMedia:Object={"media_url":"http://"+_imageInfo.url}
-			var pByteArray:ByteArray=new ByteArray();
-			pByteArray.writeObject(pMedia);
-			pByteArray.position=0;
-			pByteArray.compress();
-			var request:TwitterRequest = _twitter.statuses_updateWithMedia(_imageInfo.title,pByteArray);
+/*			var pMedia:Object={};
+			pMedia.url=_imageInfo.url;			
 			
-			request.addEventListener(TwitterErrorEvent.SERVER_ERROR,
-			function(event:TwitterErrorEvent):void
-			{
-				trace(event.message);
-				event.preventDefault();
-			});
-			request.addEventListener(TwitterErrorEvent.CLIENT_ERROR,
-				function(event:TwitterErrorEvent):void
-				{
-					trace(event.message);
-					event.preventDefault();
-				});
+			var pByteArray:ByteArray=new ByteArray();
+			pByteArray.writeObject(pMedia)
+			pByteArray.position=0;
+			pByteArray.compress();*/
+			
+			var pRequest:TwitterRequest = _twitter.statuses_update(_imageInfo.url);			
+			pRequest.addEventListener(TwitterErrorEvent.SERVER_ERROR,function(event:TwitterErrorEvent):void{trace(event.type);});
+			pRequest.addEventListener(TwitterErrorEvent.CLIENT_ERROR,function(event:TwitterErrorEvent):void{trace(event.type);});
 		}
 		
 		private function _handlerOkButton(event:EventViewExplore):void{
