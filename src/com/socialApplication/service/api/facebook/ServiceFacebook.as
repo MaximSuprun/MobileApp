@@ -25,6 +25,8 @@ package com.socialApplication.service.api.facebook{
 		//
 		//---------------------------------------------------------------------------------------------------------
 		private var _popUpWebView:PopUpWebView;
+		private var _accessToken:String=""
+		private var _imageInfo:VOImageInfo;
 		
 		//--------------------------------------------------------------------------------------------------------- 
 		//
@@ -42,6 +44,7 @@ package com.socialApplication.service.api.facebook{
 		// 
 		//---------------------------------------------------------------------------------------------------------
 		public function postImage(pImageInfo:VOImageInfo):void{
+			_imageInfo=pImageInfo;
 			_init();
 		}
 		//--------------------------------------------------------------------------------------------------------- 
@@ -61,16 +64,16 @@ package com.socialApplication.service.api.facebook{
 		}
 		protected function _initCallBack(response:Object, fail:Object):void {
 			if (response) {
-				trace("Logged In");
+				_accessToken=response.accessToken;
+				_postToWall()
+				
 			} else {
-				trace("Show login window");
 				_login();				
 			}
 		}
 		
 		private function _loginCallBack(success:Object, fail:Object):void{
 			if (success){
-				trace("Logged In");
 				if(_popUpWebView != null){
 					PopUpManager.removePopUp(_popUpWebView);
 					_popUpWebView = null;
@@ -84,7 +87,25 @@ package com.socialApplication.service.api.facebook{
 			
 			_popUpWebView=new PopUpWebView();
 			PopUpManager.addPopUp(_popUpWebView,true,false);
-			FacebookMobile.login(_loginCallBack, Starling.current.nativeStage, ["publish_stream"],_popUpWebView.stageWebView);
+			FacebookMobile.login(_loginCallBack, Starling.current.nativeStage, ["email","read_stream","publish_stream","publish_actions"],_popUpWebView.stageWebView);
+		}
+		
+		private function _postToWall():void{
+			var params:Object = {};
+			
+			params.message = _imageInfo.title;		
+			params.picture = _imageInfo.url;		
+			params.access_token = _accessToken;
+			
+			FacebookMobile.api("/me/feed", _postCallback, params, "POST");
+		}
+		
+		private function _postCallback(success:Object, fail:Object):void{
+			if (success){
+				trace("post succes");
+			}else{
+				trace("post Failed");
+			}
 		}
 		
 		

@@ -226,6 +226,7 @@ package com.socialApplication.view.explore{
 		}
 		private function _handlerShare(event:EventViewExplore):void{
 			var pShareTo:String=event.payload.label;
+			
 			switch(pShareTo){
 				case Constants.FACEBOOK:
 					dispatchEvent(new EventViewExplore(EventViewExplore.SHARE_TO_FACEBOOK,imageInfo));
