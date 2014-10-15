@@ -8,6 +8,7 @@ package com{
 	import com.socialApplication.controller.CommandLoadGalleryDevice;
 	import com.socialApplication.controller.CommandLogOut;
 	import com.socialApplication.controller.CommandPublishFacebook;
+	import com.socialApplication.controller.CommandPublishMail;
 	import com.socialApplication.controller.CommandPublishTwitter;
 	import com.socialApplication.controller.CommandReplaceAutorizationData;
 	import com.socialApplication.controller.CommandSetAutorizationData;
@@ -19,6 +20,8 @@ package com{
 	import com.socialApplication.model.Model;
 	import com.socialApplication.service.api.facebook.IServiceFacebookPostImage;
 	import com.socialApplication.service.api.facebook.ServiceFacebook;
+	import com.socialApplication.service.api.mailRu.IServiceMailPostImage;
+	import com.socialApplication.service.api.mailRu.ServiceMail;
 	import com.socialApplication.service.api.twitter.IServiceTwitterPostImage;
 	import com.socialApplication.service.api.twitter.ServiceTwitter;
 	import com.socialApplication.service.getImageInfo.IServiceGetImageInfo;
@@ -133,6 +136,7 @@ package com{
 			
 			commandMap.mapEvent(EventViewExplore.SHARE_TO_FACEBOOK,CommandPublishFacebook,EventViewExplore);
 			commandMap.mapEvent(EventViewExplore.SHARE_TO_TWITTER,CommandPublishTwitter,EventViewExplore);
+			commandMap.mapEvent(EventViewExplore.SHARE_TO_MAILRU,CommandPublishMail,EventViewExplore);
 			
 			// Command service
 			
@@ -151,6 +155,7 @@ package com{
 			injector.mapSingletonOf(IServiceSingin, ServiceSingin);
 			injector.mapSingletonOf(IServiceFacebookPostImage, ServiceFacebook);
 			injector.mapSingletonOf(IServiceTwitterPostImage, ServiceTwitter);
+			injector.mapSingletonOf(IServiceMailPostImage, ServiceMail);
 			injector.mapSingletonOf(IServiceGetImageInfo, ServiceGetImageInfo);
 			
 			super.startup();

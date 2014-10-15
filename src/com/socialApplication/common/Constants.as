@@ -92,6 +92,9 @@ package com.socialApplication.common{
 		public static const FACEBOOK_SECRET_KEY :String = "1922b4914eb37250a9f09d9ed7899a67";
 		public static const PINTEREST :String = "Pinterest";
 		public static const MAILRU :String = "Mail.ru";
+		public static const MAILRU_ID :Number = 725803;
+		public static const MAILRU_PRIVATE_KEY :String = "447d5e829ce9f4d8e17ce68c4e8cf1f9";
+		public static const MAILRU_SECRET_KEY :String = "ee5b3f10f67fc126262a88825be7536b";
 		public static const TUMBLR :String = "Tumblr";
 		
 		

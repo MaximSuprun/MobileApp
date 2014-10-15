@@ -2,6 +2,7 @@ package{
 	
 	import com.socialApplication.view.ViewSocialApplication;
 	
+	import flash.display.LoaderInfo;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
