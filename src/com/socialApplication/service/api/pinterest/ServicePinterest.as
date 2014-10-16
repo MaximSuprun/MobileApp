@@ -73,7 +73,7 @@ package com.socialApplication.service.api.pinterest{
 			
 		}
 		
-		public function doPost(token:OAuthToken,screenName:String, txt:String):void{
+		/*public function doPost(token:OAuthToken,screenName:String, txt:String):void{
 			var paramsO:Object = new Object();
 			paramsO['type'] = 'photo';
 			paramsO['source'] = _imageInfo.url;
@@ -93,9 +93,8 @@ package com.socialApplication.service.api.pinterest{
 			
 			loader.addEventListener( Event.COMPLETE, postHandler);
 			loader.addEventListener( IOErrorEvent.IO_ERROR, postError);
-			loader.load(request);
-		}
-		
+			loader.load(request);*/
+				
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  EVENT HANDLERS  

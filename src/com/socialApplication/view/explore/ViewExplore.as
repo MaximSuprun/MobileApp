@@ -243,6 +243,9 @@ package com.socialApplication.view.explore{
 				case Constants.TUMBLR:
 					dispatchEvent(new EventViewExplore(EventViewExplore.SHARE_TO_TUMBLR,imageInfo));
 					break;
+				case Constants.VK:
+					dispatchEvent(new EventViewExplore(EventViewExplore.SHARE_TO_VK,imageInfo));
+					break;
 			}
 			_removePopUp();
 		}

@@ -119,18 +119,18 @@ package com.socialApplication.service.api.mailRu.my{
 		}		
 		
 		/* Stream */
-		public function streamPublish(text: String, post: String, img: Number = -1):String {
+		public function streamPublish(title: String, text: String, img: String = "-1"):String {
 			var api: MyApi = new MyApi(vid,
 									   app_id,
-									   'stream.publish',
+									   'stream.post',
 									   private_key,
 									   session_key,
 									   format,
 									   server_url);
+			api.addParameter('title', title);
 			api.addParameter('text', text);
-			api.addParameter('post', post);
-			if (img!=-1) {
-				api.addParameter('img', img.toString());
+			if (img!="-1") {
+				api.addParameter('img_url', img.toString());
 			}
 			return api.getQuery();
 		}				
@@ -164,6 +164,30 @@ package com.socialApplication.service.api.mailRu.my{
 			}
 			return api.getQuery();
 		}		
+		public function photosUpload(aid: String = null, img_url: String = null,name_photo: String = null,description: String = null,tags: String = null):String {
+			var api: MyApi = new MyApi(vid,
+									   app_id,
+									   'photos.upload',
+									   private_key,
+									   session_key,
+									   format,
+									   server_url);
+			api.addParameter('aid', aid);
+			if (img_url) {
+				api.addParameter('img_url', img_url);
+			}
+			if (name_photo) {
+				api.addParameter('name_photo', name_photo);
+			}
+			if (description) {
+				api.addParameter('description', description);
+			}
+			if (tags) {
+				api.addParameter('tags', tags);
+			}
+			return api.getQuery();
+		}		
+		
 		
 		/* Audios */
 		public function audiosGet(mids: String = null):String {

@@ -48,6 +48,7 @@ package com.socialApplication.view.explore{
 			addViewListener(EventViewExplore.SHARE_TO_TUMBLR,_handlerPublish)
 			addViewListener(EventViewExplore.SHARE_TO_PINTEREST,_handlerPublish)
 			addViewListener(EventViewExplore.SHARE_TO_MAILRU,_handlerPublish)
+			addViewListener(EventViewExplore.SHARE_TO_VK,_handlerPublish)
 		}
 
 		override public function onRemove():void {
@@ -98,6 +99,9 @@ package com.socialApplication.view.explore{
 					break;
 				case EventViewExplore.SHARE_TO_TUMBLR:
 					dispatch(new EventViewExplore(EventViewExplore.SHARE_TO_TUMBLR,pImageInfo));
+					break;
+				case EventViewExplore.SHARE_TO_VK:
+					dispatch(new EventViewExplore(EventViewExplore.SHARE_TO_VK,pImageInfo));
 					break;
 			}
 		}

@@ -97,11 +97,11 @@ package com.socialApplication.service.api.twitter{
 		}
 		
 		private function _handlerAccessToken(event:TwitterRequestEvent):void{
-/*			var pMedia:Object={};
-			pMedia.url=_imageInfo.url;			
+		/*	var pMedia:Array=[{"source":_imageInfo.url}];
+					
 			
 			var pByteArray:ByteArray=new ByteArray();
-			pByteArray.writeObject(pMedia)
+			pByteArray.writeObject(pMedia);
 			pByteArray.position=0;
 			pByteArray.compress();*/
 			

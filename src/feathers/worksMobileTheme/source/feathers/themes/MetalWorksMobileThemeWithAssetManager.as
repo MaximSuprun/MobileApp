@@ -2452,12 +2452,14 @@ package feathers.worksMobileTheme.source.feathers.themes
 			var pPinterest:Texture = atlas.getTexture("pinterest");
 			var pMailRu:Texture = atlas.getTexture("mail");
 			var pTumblr:Texture = atlas.getTexture("tumblr");
+			var pVk:Texture = atlas.getTexture("vk");
 				
 			var pCollection:ListCollection=new ListCollection(
 														[  	{ label:"Facebook", texture:pFacebook },
 															{ label:"Twitter", texture: pTwitter },
 															{ label:"Pinterest", texture: pPinterest},
 															{ label:"Mail.ru", texture: pMailRu} ,
+															{ label:"Vkontakte", texture: pVk} ,
 															{ label:"Tumblr", texture: pTumblr} ])
 				
 			return pCollection;	

@@ -12,6 +12,7 @@ package com.socialApplication.view.explore{
 		public static const SHARE_TO_PINTEREST:String="SHARE_TO_PINTEREST";
 		public static const SHARE_TO_MAILRU:String="SHARE_TO_MAILRU";
 		public static const SHARE_TO_TUMBLR:String="SHARE_TO_TUMBLR";
+		public static const SHARE_TO_VK:String="SHARE_TO_VK";
 				
 		
 		private var _payload:Object;

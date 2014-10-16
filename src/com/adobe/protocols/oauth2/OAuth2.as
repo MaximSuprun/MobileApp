@@ -294,7 +294,7 @@ package com.adobe.protocols.oauth2
 				
 				// define POST parameters
 				var urlVariables : URLVariables = new URLVariables();  
-				urlVariables.grant_type = OAuth2Const.GRANT_TYPE_AUTHORIZATION_CODE; 
+				urlVariables.grant_type = OAuth2Const.RESPONSE_TYPE_IMPLICIT; 
 				urlVariables.code = code;
 				urlVariables.redirect_uri = authorizationCodeGrant.redirectUri;
 				urlVariables.client_id = authorizationCodeGrant.clientId;

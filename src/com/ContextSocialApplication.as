@@ -9,7 +9,10 @@ package com{
 	import com.socialApplication.controller.CommandLogOut;
 	import com.socialApplication.controller.CommandPublishFacebook;
 	import com.socialApplication.controller.CommandPublishMail;
+	import com.socialApplication.controller.CommandPublishPinterest;
+	import com.socialApplication.controller.CommandPublishTumblr;
 	import com.socialApplication.controller.CommandPublishTwitter;
+	import com.socialApplication.controller.CommandPublishVK;
 	import com.socialApplication.controller.CommandReplaceAutorizationData;
 	import com.socialApplication.controller.CommandSetAutorizationData;
 	import com.socialApplication.controller.CommandSetUserData;
@@ -22,8 +25,14 @@ package com{
 	import com.socialApplication.service.api.facebook.ServiceFacebook;
 	import com.socialApplication.service.api.mailRu.IServiceMailPostImage;
 	import com.socialApplication.service.api.mailRu.ServiceMail;
+	import com.socialApplication.service.api.pinterest.IServicePinterestPostImage;
+	import com.socialApplication.service.api.pinterest.ServicePinterest;
+	import com.socialApplication.service.api.tumbrl.IServiceTumblrPostImage;
+	import com.socialApplication.service.api.tumbrl.ServiceTumblr;
 	import com.socialApplication.service.api.twitter.IServiceTwitterPostImage;
 	import com.socialApplication.service.api.twitter.ServiceTwitter;
+	import com.socialApplication.service.api.vk.IServiceVKPostImage;
+	import com.socialApplication.service.api.vk.ServiceVK;
 	import com.socialApplication.service.getImageInfo.IServiceGetImageInfo;
 	import com.socialApplication.service.getImageInfo.ServiceGetImageInfo;
 	import com.socialApplication.service.loadImage.avatar.IServiceLoadAvatar;
@@ -137,6 +146,9 @@ package com{
 			commandMap.mapEvent(EventViewExplore.SHARE_TO_FACEBOOK,CommandPublishFacebook,EventViewExplore);
 			commandMap.mapEvent(EventViewExplore.SHARE_TO_TWITTER,CommandPublishTwitter,EventViewExplore);
 			commandMap.mapEvent(EventViewExplore.SHARE_TO_MAILRU,CommandPublishMail,EventViewExplore);
+			commandMap.mapEvent(EventViewExplore.SHARE_TO_VK,CommandPublishVK,EventViewExplore);
+			commandMap.mapEvent(EventViewExplore.SHARE_TO_TUMBLR,CommandPublishTumblr,EventViewExplore);
+			commandMap.mapEvent(EventViewExplore.SHARE_TO_PINTEREST,CommandPublishPinterest,EventViewExplore);
 			
 			// Command service
 			
@@ -155,7 +167,10 @@ package com{
 			injector.mapSingletonOf(IServiceSingin, ServiceSingin);
 			injector.mapSingletonOf(IServiceFacebookPostImage, ServiceFacebook);
 			injector.mapSingletonOf(IServiceTwitterPostImage, ServiceTwitter);
+			injector.mapSingletonOf(IServiceTumblrPostImage, ServiceTumblr);
+			injector.mapSingletonOf(IServicePinterestPostImage, ServicePinterest);
 			injector.mapSingletonOf(IServiceMailPostImage, ServiceMail);
+			injector.mapSingletonOf(IServiceVKPostImage, ServiceVK);
 			injector.mapSingletonOf(IServiceGetImageInfo, ServiceGetImageInfo);
 			
 			super.startup();
