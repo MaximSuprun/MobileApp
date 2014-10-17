@@ -6,9 +6,6 @@ package com.socialApplication.service.api.facebook{
 	
 	import feathers.core.PopUpManager;
 	
-	import flash.geom.Rectangle;
-	import flash.media.StageWebView;
-	
 	import starling.core.Starling;
 	
 	public class ServiceFacebook implements IServiceFacebookPostImage{

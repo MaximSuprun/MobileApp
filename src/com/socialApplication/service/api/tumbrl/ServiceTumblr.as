@@ -1,30 +1,19 @@
 package com.socialApplication.service.api.tumbrl{
-	import com.adobe.protocols.oauth2.OAuth2;
-	import com.adobe.protocols.oauth2.event.GetAccessTokenEvent;
-	import com.adobe.protocols.oauth2.grant.IGrantType;
-	import com.adobe.protocols.oauth2.grant.ImplicitGrant;
 	import com.socialApplication.common.Constants;
 	import com.socialApplication.model.vo.VOImageInfo;
-	import com.socialApplication.view.explore.EventViewExplore;
 	import com.socialApplication.view.explore.common.PopUpWebView;
 	
 	import feathers.core.PopUpManager;
 	
-	import flash.events.IOErrorEvent;
+	import flash.events.Event;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
-	import flash.net.URLVariables;
-	import flash.utils.ByteArray;
 	
-	import isle.susisu.twitter.Twitter;
-	import isle.susisu.twitter.TwitterRequest;
-	import isle.susisu.twitter.events.TwitterErrorEvent;
-	import isle.susisu.twitter.events.TwitterRequestEvent;
-	
-	import org.as3commons.logging.setup.LogSetupLevel;
-	
-	import starling.events.Event;
-	
+	import org.flaircode.oauth.IOAuth;
+	import org.flaircode.oauth.OAuth;
+	import org.flaircode.oauth.OAuthLoader;
+	import org.iotashan.oauth.OAuthToken;
+	import org.iotashan.utils.OAuthUtil;
 	
 	public class ServiceTumblr implements IServiceTumblrPostImage{
 		//--------------------------------------------------------------------------------------------------------- 
@@ -41,6 +30,7 @@ package com.socialApplication.service.api.tumbrl{
 		//---------------------------------------------------------------------------------------------------------
 		private var _imageInfo:VOImageInfo;
 		private var _popUpWebView:PopUpWebView;
+		private var _aPhotoUploader:URLLoader;
 		
 		//--------------------------------------------------------------------------------------------------------- 
 		//
@@ -75,58 +65,48 @@ package com.socialApplication.service.api.tumbrl{
 		// PRIVATE & PROTECTED METHODS 
 		//
 		//---------------------------------------------------------------------------------------------------------
-		private function _init():void{
-			_popUpWebView=new PopUpWebView();
-			PopUpManager.addPopUp(_popUpWebView,true,false);
-			var pOauth:OAuth2=new OAuth2("http://www.tumblr.com/oauth/authorize","https://http://www.tumblr.com/oauth/access_token",LogSetupLevel.ALL);
-			var pGrant:IGrantType = new ImplicitGrant(_popUpWebView.stageWebView,"RFeLGlS6VYXXkHj2X4oUDZp4Rscd0OgTd6OzFTSgfQljIL7f0s","https://oauth.vk.com/blank");
-			pOauth.addEventListener(GetAccessTokenEvent.TYPE, onGetAccessToken);
-			pOauth.getAccessToken(pGrant);
-		}
-		private function _removePopUp():void{
-			if(_popUpWebView != null){
-				_popUpWebView.stageWebViewDispose();
-				PopUpManager.removePopUp(_popUpWebView);
-				_popUpWebView = null;
-			}			
-		}
-		
-		
-		private function onGetAccessToken(getAccessTokenEvent:GetAccessTokenEvent):void	{
+		private function _init():void{			
+			var oauth:IOAuth = new OAuth(Constants.TUMBLR_KEY, Constants.TUMBLR_SECRET_KEY);
 			
-			_removePopUp();
+			// get request token
+			var loader:URLLoader = oauth.getRequestToken("http://www.tumblr.com/oauth/request_token");
+			loader.addEventListener(Event.COMPLETE, requestTokenHandler);
+			var requestToken:OAuthToken;
+			var accessToken:OAuthToken;
 			
-			if (getAccessTokenEvent.errorCode == null && getAccessTokenEvent.errorMessage == null){
-				// success!
-				trace("Your access token value is: " + getAccessTokenEvent.accessToken);
-				/*_vid=getAccessTokenEvent.response.x_mailru_vid;
-				_accessToken = getAccessTokenEvent.accessToken;*/
-				//_postToMail();
-			}else{
-				// fail :(
-				trace("looser ");
+			function requestTokenHandler(e:Event):void
+			{
+				requestToken = OAuthUtil.getTokenFromResponse(e.currentTarget.data as String);
+				var request:URLRequest = oauth.getAuthorizeRequest("http://www.tumblr.com/oauth/authorize", requestToken.key);
+				// opens website where user has to login on Twitter and gets 6 digit pin code
+				_popUpWebView=new PopUpWebView();
+				PopUpManager.addPopUp(_popUpWebView,true,false);
+				_popUpWebView.loadUrl=request.url;
+
 			}
-		} 
-		
-		/*private function _postToMail():void{
-			var pApi:MyApiNode=new MyApiNode(_vid,Constants.MAILRU_ID,Constants.MAILRU_PRIVATE_KEY,_accessToken);
-			_query=pApi.photosUpload("_myphoto",_imageInfo.url,_imageInfo.title);
-			_urlRequest=new URLRequest(_query);
-			_urlLoader=new URLLoader  ;
-			_urlLoader.addEventListener(Event.COMPLETE,_handlerCompleteUploaded);
-			_urlLoader.load(_urlRequest);
-		}*/
-		
-		private function _handlerCompleteUploaded(event:Event):void{
-			trace("complete upload to Mail.ru");
+			
+			function getAccessToken(pin:int):void
+			{
+				var loader:URLLoader = oauth.getAccessToken("http://www.tumblr.com/oauth/access_token", requestToken,null);
+				loader.addEventListener(Event.COMPLETE, accessTokenHandler);
+			}
+			
+			function accessTokenHandler(e:Event):void
+			{
+				accessToken = OAuthUtil.getTokenFromResponse(e.currentTarget.data as String);
+				// TODO store accessToken.key and accessToken.secret in EncryptedLocalStorage for all further requests
+			
+			}
 		}
-		
+
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  EVENT HANDLERS  
 		// 
 		//---------------------------------------------------------------------------------------------------------
-
+		private function _handlerCompleteUploaded(event:Event):void{
+			trace("complete");
+		}
 		
 	
 		//--------------------------------------------------------------------------------------------------------- 
@@ -141,8 +121,8 @@ package com.socialApplication.service.api.tumbrl{
 		//  END CLASS  
 		// 
 		//---------------------------------------------------------------------------------------------------------
-		
-		
-		
+			
 	}
 }
+		
+		

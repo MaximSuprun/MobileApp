@@ -6,8 +6,6 @@ package com.socialApplication.service.api.twitter{
 	
 	import feathers.core.PopUpManager;
 	
-	import flash.utils.ByteArray;
-	
 	import isle.susisu.twitter.Twitter;
 	import isle.susisu.twitter.TwitterRequest;
 	import isle.susisu.twitter.events.TwitterErrorEvent;
