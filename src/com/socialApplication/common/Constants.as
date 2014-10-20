@@ -98,8 +98,8 @@ package com.socialApplication.common{
 		public static const MAILRU_PRIVATE_KEY :String = "447d5e829ce9f4d8e17ce68c4e8cf1f9";
 		public static const MAILRU_SECRET_KEY :String = "ee5b3f10f67fc126262a88825be7536b";
 		public static const TUMBLR :String = "Tumblr";
-		public static const TUMBLR_KEY :String = "RFeLGlS6VYXXkHj2X4oUDZp4Rscd0OgTd6OzFTSgfQljIL7f0s";
-		public static const TUMBLR_SECRET_KEY :String = "4zUpYZZKTIyAIzLSZ0BVHRlWWCkUsQhxgurW6dASXBIPn2wXp5";
+		public static const TUMBLR_KEY :String = "GGMZBkyxedvk3U6sceVHi9pMqE0rvnMULv6aBKJhHFXBU6I5Gb";
+		public static const TUMBLR_SECRET_KEY :String = "M1Tq1hkW0HV6IwkzXtojJS2Q8UUfCsjqnSmgOvmw4GP6s2Ywev";
 		
 		
 		

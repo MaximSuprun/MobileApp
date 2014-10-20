@@ -1,5 +1,6 @@
 package com.socialApplication.view.explore.common{
 	
+	import com.adobe.protocols.dict.events.ErrorEvent;
 	import com.socialApplication.common.Constants;
 	import com.socialApplication.view.abstract.ViewAbstract;
 	import com.socialApplication.view.explore.EventViewExplore;
@@ -9,6 +10,7 @@ package com.socialApplication.view.explore.common{
 	import feathers.controls.TextInput;
 	import feathers.core.PopUpManager;
 	
+	import flash.events.LocationChangeEvent;
 	import flash.geom.Rectangle;
 	import flash.media.StageWebView;
 	
@@ -88,6 +90,10 @@ package com.socialApplication.view.explore.common{
 			_stageWebView=new StageWebView();
 			_stageWebView.stage = Starling.current.nativeStage;
 			_stageWebView.viewPort = new Rectangle(0, 85*scale, Starling.current.nativeStage.stageWidth, Starling.current.nativeStage.stageHeight*.7);
+			_stageWebView.addEventListener(Event.COMPLETE, _handlerCompleteLoad);
+			_stageWebView.addEventListener(ErrorEvent.ERROR, _handlerloadError);
+			_stageWebView.addEventListener(LocationChangeEvent.LOCATION_CHANGING, _handlerLocationChanging);
+			_stageWebView.addEventListener(LocationChangeEvent.LOCATION_CHANGE, _handlerLocationChange);
 			
 			_buttonCancel=new Button();
 			_buttonCancel.nameList.add(Constants.BUTTON_LOGIN);
@@ -138,6 +144,19 @@ package com.socialApplication.view.explore.common{
 			}else{
 				return;
 			}
+		}
+		
+		private function _handlerCompleteLoad(event:flash.events.Event):void{
+			dispatchEvent(new EventViewExplore(EventViewExplore.STAGE_WEB_VIEW_COMPLETE,event));
+		}
+		private function _handlerloadError(event:ErrorEvent):void{
+			dispatchEvent(new EventViewExplore(EventViewExplore.STAGE_WEB_VIEW_ERROR,event));
+		}
+		private function _handlerLocationChanging(event:LocationChangeEvent):void{
+			dispatchEvent(new EventViewExplore(EventViewExplore.STAGE_WEB_VIEW_LOCATION_CHANGING,event));
+		}
+		private function _handlerLocationChange(event:LocationChangeEvent):void{
+			dispatchEvent(new EventViewExplore(EventViewExplore.STAGE_WEB_VIEW_LOCATION_CHANGE,event));
 		}
 		
 		//--------------------------------------------------------------------------------------------------------- 

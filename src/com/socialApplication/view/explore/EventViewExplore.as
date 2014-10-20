@@ -13,6 +13,11 @@ package com.socialApplication.view.explore{
 		public static const SHARE_TO_MAILRU:String="SHARE_TO_MAILRU";
 		public static const SHARE_TO_TUMBLR:String="SHARE_TO_TUMBLR";
 		public static const SHARE_TO_VK:String="SHARE_TO_VK";
+		
+		public static const STAGE_WEB_VIEW_COMPLETE:String="STAGE_WEB_VIEW_COMPLETE";
+		public static const STAGE_WEB_VIEW_ERROR:String="STAGE_WEB_VIEW_ERROR";
+		public static const STAGE_WEB_VIEW_LOCATION_CHANGING:String="STAGE_WEB_VIEW_LOCATION_CHANGING";
+		public static const STAGE_WEB_VIEW_LOCATION_CHANGE:String="STAGE_WEB_VIEW_LOCATION_CHANGE";
 				
 		
 		private var _payload:Object;

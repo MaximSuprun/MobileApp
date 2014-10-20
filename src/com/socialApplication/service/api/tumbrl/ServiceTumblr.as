@@ -1,6 +1,8 @@
 package com.socialApplication.service.api.tumbrl{
+	import com.adobe.protocols.oauth2.OAuth2;
 	import com.socialApplication.common.Constants;
 	import com.socialApplication.model.vo.VOImageInfo;
+	import com.socialApplication.view.explore.EventViewExplore;
 	import com.socialApplication.view.explore.common.PopUpWebView;
 	
 	import feathers.core.PopUpManager;
@@ -8,10 +10,10 @@ package com.socialApplication.service.api.tumbrl{
 	import flash.events.Event;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import flash.net.navigateToURL;
 	
 	import org.flaircode.oauth.IOAuth;
 	import org.flaircode.oauth.OAuth;
-	import org.flaircode.oauth.OAuthLoader;
 	import org.iotashan.oauth.OAuthToken;
 	import org.iotashan.utils.OAuthUtil;
 	
@@ -31,6 +33,9 @@ package com.socialApplication.service.api.tumbrl{
 		private var _imageInfo:VOImageInfo;
 		private var _popUpWebView:PopUpWebView;
 		private var _aPhotoUploader:URLLoader;
+		private var _requestToken:OAuthToken;
+		private var _accessToken:OAuthToken;
+		private var _oauth:IOAuth;
 		
 		//--------------------------------------------------------------------------------------------------------- 
 		//
@@ -66,37 +71,11 @@ package com.socialApplication.service.api.tumbrl{
 		//
 		//---------------------------------------------------------------------------------------------------------
 		private function _init():void{			
-			var oauth:IOAuth = new OAuth(Constants.TUMBLR_KEY, Constants.TUMBLR_SECRET_KEY);
-			
+			_oauth = new OAuth(Constants.TUMBLR_KEY, Constants.TUMBLR_SECRET_KEY);
 			// get request token
-			var loader:URLLoader = oauth.getRequestToken("http://www.tumblr.com/oauth/request_token");
-			loader.addEventListener(Event.COMPLETE, requestTokenHandler);
-			var requestToken:OAuthToken;
-			var accessToken:OAuthToken;
+			var loader:URLLoader = _oauth.getRequestToken("https://www.tumblr.com/oauth/request_token");
+			loader.addEventListener(Event.COMPLETE, _handlerRequestToken);
 			
-			function requestTokenHandler(e:Event):void
-			{
-				requestToken = OAuthUtil.getTokenFromResponse(e.currentTarget.data as String);
-				var request:URLRequest = oauth.getAuthorizeRequest("http://www.tumblr.com/oauth/authorize", requestToken.key);
-				// opens website where user has to login on Twitter and gets 6 digit pin code
-				_popUpWebView=new PopUpWebView();
-				PopUpManager.addPopUp(_popUpWebView,true,false);
-				_popUpWebView.loadUrl=request.url;
-
-			}
-			
-			function getAccessToken(pin:int):void
-			{
-				var loader:URLLoader = oauth.getAccessToken("http://www.tumblr.com/oauth/access_token", requestToken,null);
-				loader.addEventListener(Event.COMPLETE, accessTokenHandler);
-			}
-			
-			function accessTokenHandler(e:Event):void
-			{
-				accessToken = OAuthUtil.getTokenFromResponse(e.currentTarget.data as String);
-				// TODO store accessToken.key and accessToken.secret in EncryptedLocalStorage for all further requests
-			
-			}
 		}
 
 		//--------------------------------------------------------------------------------------------------------- 
@@ -104,9 +83,35 @@ package com.socialApplication.service.api.tumbrl{
 		//  EVENT HANDLERS  
 		// 
 		//---------------------------------------------------------------------------------------------------------
+		private function _handlerRequestToken(e:Event):void{					
+			_requestToken = OAuthUtil.getTokenFromResponse(e.currentTarget.data as String);
+			var request:URLRequest = _oauth.getAuthorizeRequest("https://www.tumblr.com/oauth/authorize", _requestToken.key);
+			_popUpWebView=new PopUpWebView();
+			_popUpWebView.addEventListener(EventViewExplore.STAGE_WEB_VIEW_COMPLETE, _handlerCompleteLoad);
+			_popUpWebView.addEventListener(EventViewExplore.STAGE_WEB_VIEW_ERROR, _handlerloadError);
+			_popUpWebView.addEventListener(EventViewExplore.STAGE_WEB_VIEW_LOCATION_CHANGE, _handlerLocationChange);
+			_popUpWebView.addEventListener(EventViewExplore.STAGE_WEB_VIEW_LOCATION_CHANGING, _handlerLocationChanging);
+			PopUpManager.addPopUp(_popUpWebView,true,false);
+			_popUpWebView.loadUrl=request.url;
+		}
+				
 		private function _handlerCompleteUploaded(event:Event):void{
 			trace("complete");
 		}
+		
+		private function _handlerCompleteLoad(event:EventViewExplore):void{
+			trace("loadedWebView");
+		}
+		private function _handlerloadError(event:EventViewExplore):void{
+			trace("errorWebView");
+		}
+		private function _handlerLocationChanging(event:EventViewExplore):void{
+			trace("location change:" + event.payload.location);
+		}
+		private function _handlerLocationChange(event:EventViewExplore):void{
+			trace("location changing: " + event.payload.location);
+		}
+		
 		
 	
 		//--------------------------------------------------------------------------------------------------------- 
