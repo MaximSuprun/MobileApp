@@ -176,6 +176,8 @@ package com.socialApplication.view.explore{
 			image.x=(Starling.current.nativeStage.stageWidth-image.width)/2;
 			image.y=(Starling.current.nativeStage.stageHeight-image.height)/2;
 			
+			var pPadigRight:Number = image.width + image.x - 10*scale
+			
 			iconLike.x=image.x+iconLike.width/2;
 			iconLike.y=image.y+image.height+5*scale;
 			addChild(iconLike);
@@ -187,16 +189,17 @@ package com.socialApplication.view.explore{
 			_labelName.y=200*scale;
 			addChild(_labelName);
 			
-			iconClock.x=image.x+image.width-60*scale;
+			_labelTime.x=pPadigRight - _labelTime.width -30;
+			_labelTime.y=_labelName.y	
+			addChild(_labelTime);
+			
+			iconClock.x=_labelTime.x-iconClock.width;
 			iconClock.y=_labelName.y;
 			addChild(iconClock);
-			_labelTime.x=iconClock.x+iconClock.width+5*scale;;
-			_labelTime.y=iconClock.y;	
-			addChild(_labelTime);
 			
 			_buttonShare.width=50*scale;		
 			_buttonShare.height=25*scale;		
-			_buttonShare.x=515*scale;
+			_buttonShare.x=pPadigRight-_buttonShare.width;
 			_buttonShare.y=iconLike.y;		
 			addChild(_buttonShare);
 		}

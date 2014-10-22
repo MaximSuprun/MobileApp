@@ -32,6 +32,7 @@ package feathers.worksMobileTheme.source.feathers.themes
 	import com.socialApplication.view.createScreen.common.footer.MyFooter;
 	import com.socialApplication.view.explore.ViewExplore;
 	import com.socialApplication.view.explore.common.PopUpShare;
+	import com.socialApplication.view.explore.common.PopUpWebView;
 	import com.socialApplication.view.introductionPanel.ViewIntroduction;
 	import com.socialApplication.view.login.ViewLogin;
 	import com.socialApplication.view.menu.ViewMenu;
@@ -910,6 +911,7 @@ package feathers.worksMobileTheme.source.feathers.themes
 			this.setInitializerForClass(ViewProfile, ViewProfileInitializer);
 			this.setInitializerForClass(ViewSettings, ViewSettingsInitializer);
 			this.setInitializerForClass(PopUpChangeUserData, popUpInitializer);
+			this.setInitializerForClass(PopUpWebView, PopUpWebViewInitializer);
 			this.setInitializerForClass(CreatePopUp, CreatePopUpInitializer);
 			this.setInitializerForClass(PopUpShare, PopUpShareInitializer);
 			this.setInitializerForClass(ViewExplore, ViewExploreInitializer);
@@ -2357,6 +2359,9 @@ package feathers.worksMobileTheme.source.feathers.themes
 			
 			pViewExplore.rendererText=labelViewShare;
 
+		}
+		protected function PopUpWebViewInitializer(pPopUp:PopUpWebView):void{
+			pPopUp.scale=scale;
 		}
 		protected function popUpInitializer(pPopUp:PopUpChangeUserData):void{
 			pPopUp.scale=scale;

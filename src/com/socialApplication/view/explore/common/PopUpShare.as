@@ -101,14 +101,14 @@ package com.socialApplication.view.explore.common{
 			
 			
 			_list.width=Starling.current.nativeStage.stageWidth;
-			_list.height=450*scale;
+			_list.height=650*scale;
 			_list.x=(Starling.current.nativeStage.stageWidth-_list.width)/2;
-			_list.y=150*scale;
+			_list.y=85*scale;
 			
 			_buttonCancel.width=150;
 			_buttonCancel.height=50;
 			_buttonCancel.x=(Starling.current.nativeStage.stageWidth-_buttonCancel.width)/2;
-			_buttonCancel.y=650*scale;
+			_buttonCancel.y=800*scale;
 
 		}
 		

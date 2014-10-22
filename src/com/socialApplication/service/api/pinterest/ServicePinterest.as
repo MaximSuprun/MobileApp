@@ -1,9 +1,26 @@
 package com.socialApplication.service.api.pinterest{
+	import com.adobe.protocols.oauth2.OAuth2;
+	import com.adobe.protocols.oauth2.event.GetAccessTokenEvent;
+	import com.adobe.protocols.oauth2.grant.AuthorizationCodeGrant;
+	import com.adobe.protocols.oauth2.grant.IGrantType;
+	import com.adobe.protocols.oauth2.grant.ImplicitGrant;
+	import com.google.ads.studio.innovation.placer.pinterest.proxy.PinterestButton;
+	import com.socialApplication.common.Constants;
 	import com.socialApplication.model.vo.VOImageInfo;
+	import com.socialApplication.view.explore.EventViewExplore;
 	import com.socialApplication.view.explore.common.PopUpWebView;
 	
+	import feathers.core.PopUpManager;
 	
-	public class ServicePinterest implements IServicePinterestPostImage{
+	import flash.display.Sprite;
+	import flash.events.Event;
+	import flash.net.URLLoader;
+	import flash.net.URLRequest;
+	
+	import org.as3commons.logging.setup.LogSetupLevel;
+	
+	
+	public class ServicePinterest extends Sprite implements IServicePinterestPostImage{
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  PUBLIC & INTERNAL VARIABLES 
@@ -18,6 +35,12 @@ package com.socialApplication.service.api.pinterest{
 		//---------------------------------------------------------------------------------------------------------
 		private var _imageInfo:VOImageInfo;
 		private var _popUpWebView:PopUpWebView;
+		private var _query:String;
+		private var _urlLoader:URLLoader;
+		private var _urlRequest:URLRequest;
+		private var _userId:String;
+		private var _accessToken:String;
+		
 		
 		//--------------------------------------------------------------------------------------------------------- 
 		//
@@ -53,38 +76,20 @@ package com.socialApplication.service.api.pinterest{
 		//
 		//---------------------------------------------------------------------------------------------------------
 		private function _init():void{
-			
+			_popUpWebView=new PopUpWebView();
+			PopUpManager.addPopUp(_popUpWebView,true,false);
+			_popUpWebView.loadUrl="http://www.pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.flickr.com%2Fphotos%2Fkentbrew%2F6851755809%2F&media="+_imageInfo.url+"&description="+_imageInfo.title;
 		}
 		
-		/*public function doPost(token:OAuthToken,screenName:String, txt:String):void{
-			var paramsO:Object = new Object();
-			paramsO['type'] = 'photo';
-			paramsO['source'] = _imageInfo.url;
-			
-			var oauthRequest:OAuthRequest = new OAuthRequest( "POST", "http://api.tumblr.com/v2/blog/"+screenName+".tumblr.com/post", paramsO, consumer, token );
-			
-			var request:URLRequest = new URLRequest( oauthRequest.buildRequest( signature, OAuthRequest.RESULT_TYPE_URL_STRING ) );
-			request.contentType = "application/x-www-form-urlencoded";
-			request.method = "POST";
-			
-			var variables:URLVariables = new URLVariables();
-			variables.type = 'photo';
-			variables.source = _imageInfo.url;
-			
-			request.data = variables;
-			var loader:URLLoader = new URLLoader();
-			
-			loader.addEventListener( Event.COMPLETE, postHandler);
-			loader.addEventListener( IOErrorEvent.IO_ERROR, postError);
-			loader.load(request);*/
+		
 				
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  EVENT HANDLERS  
 		// 
 		//---------------------------------------------------------------------------------------------------------
-
-		
+	
+			
 	
 		//--------------------------------------------------------------------------------------------------------- 
 		// 

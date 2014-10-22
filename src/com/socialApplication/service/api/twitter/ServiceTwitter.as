@@ -1,10 +1,13 @@
 package com.socialApplication.service.api.twitter{
+	import com.adobe.serialization.json.JSONEncoder;
 	import com.socialApplication.common.Constants;
 	import com.socialApplication.model.vo.VOImageInfo;
 	import com.socialApplication.view.explore.EventViewExplore;
 	import com.socialApplication.view.explore.common.PopUpWebView;
 	
 	import feathers.core.PopUpManager;
+	
+	import flash.utils.ByteArray;
 	
 	import isle.susisu.twitter.Twitter;
 	import isle.susisu.twitter.TwitterRequest;
@@ -95,15 +98,13 @@ package com.socialApplication.service.api.twitter{
 		}
 		
 		private function _handlerAccessToken(event:TwitterRequestEvent):void{
-		/*	var pMedia:Array=[{"source":_imageInfo.url}];
-					
+			var mediaUrl:Object={"media_url":_imageInfo.url,"type":"photo"};
+			var data : Object = {"media":[mediaUrl]};
 			
-			var pByteArray:ByteArray=new ByteArray();
-			pByteArray.writeObject(pMedia);
-			pByteArray.position=0;
-			pByteArray.compress();*/
+			var string:String=JSON.stringify(data);
 			
 			var pRequest:TwitterRequest = _twitter.statuses_update(_imageInfo.url);			
+			
 			pRequest.addEventListener(TwitterErrorEvent.SERVER_ERROR,function(event:TwitterErrorEvent):void{trace(event.type);});
 			pRequest.addEventListener(TwitterErrorEvent.CLIENT_ERROR,function(event:TwitterErrorEvent):void{trace(event.type);});
 		}

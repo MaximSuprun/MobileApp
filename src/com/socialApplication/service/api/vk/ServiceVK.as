@@ -79,7 +79,7 @@ package com.socialApplication.service.api.vk{
 			_popUpWebView=new PopUpWebView();
 			PopUpManager.addPopUp(_popUpWebView,true,false);
 			var pOauth:OAuth2=new OAuth2("https://oauth.vk.com/authorize","https://oauth.vk.com/blank",LogSetupLevel.ALL);
-			var pGrant:IGrantType = new ImplicitGrant(_popUpWebView.stageWebView,Constants.VK_ID,"https://oauth.vk.com/blank","wall");
+			var pGrant:IGrantType = new ImplicitGrant(_popUpWebView.stageWebView,Constants.VK_ID,"https://oauth.vk.com/blank","wall,photo");
 			pOauth.addEventListener(GetAccessTokenEvent.TYPE, onGetAccessToken);
 			pOauth.getAccessToken(pGrant);
 		}
