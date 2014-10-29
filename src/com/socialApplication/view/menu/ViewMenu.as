@@ -80,8 +80,8 @@ package com.socialApplication.view.menu{
 			_list.setSize(this.width,Starling.current.nativeStage.stageHeight-_logo.height);
 				
 			
-			var listLayout:VerticalLayout = new VerticalLayout();
-			_list.layout = listLayout;
+			var pListLayout:VerticalLayout = new VerticalLayout();
+			_list.layout = pListLayout;
 			_list.addEventListener(Event.CHANGE,_handlerChange);
 			_list.itemRendererType=ItemRendererMenuList;
 			

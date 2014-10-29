@@ -42,6 +42,9 @@ package com.socialApplication.service.api.mailRu{
 		private var _vid:String;
 		private var _accessToken:String;
 		
+		private static const URL_AUTHORIZATION:String = "https://connect.mail.ru/oauth/authorize";
+		private static const URL_SUCCESS:String = "https://connect.mail.ru/oauth/succes";
+		
 		//--------------------------------------------------------------------------------------------------------- 
 		//
 		//  CONSTRUCTOR 
@@ -78,8 +81,8 @@ package com.socialApplication.service.api.mailRu{
 		private function _init():void{
 			_popUpWebView=new PopUpWebView();
 			PopUpManager.addPopUp(_popUpWebView,true,false);
-			var pOauth:OAuth2=new OAuth2("https://connect.mail.ru/oauth/authorize","https://connect.mail.ru/oauth/succes",LogSetupLevel.ALL);
-			var pGrant:IGrantType = new ImplicitGrant(_popUpWebView.stageWebView,Constants.MAILRU_ID.toString(),"https://connect.mail.ru/oauth/success","photos");
+			var pOauth:OAuth2=new OAuth2(URL_AUTHORIZATION,URL_SUCCESS,LogSetupLevel.ALL);
+			var pGrant:IGrantType = new ImplicitGrant(_popUpWebView.stageWebView,Constants.MAILRU_ID.toString(),URL_SUCCESS,"photos");
 			pOauth.addEventListener(GetAccessTokenEvent.TYPE, onGetAccessToken);
 			pOauth.getAccessToken(pGrant);
 		}

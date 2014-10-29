@@ -218,10 +218,7 @@ package com.socialApplication.view.profile{
 			removeChild(background);
 			
 			header.nameList.add(Constants.HEADER_PROFILE);
-			addChild(header);			
-			
-			
-			
+			addChild(header);				
 		}
 		
 		
@@ -295,11 +292,11 @@ package com.socialApplication.view.profile{
 			
 			_list.layout=pTileLayout;
 			_list.itemRendererFactory = function():IListItemRenderer{
-				var renderer:ItemRendererProfileList = new ItemRendererProfileList();
+				var pRenderer:ItemRendererProfileList = new ItemRendererProfileList();
 				var pSize : Number = Starling.current.nativeStage.stageWidth/3-20*scale;
 				
-				renderer.setSize(pSize,pSize);
-				return renderer;
+				pRenderer.setSize(pSize,pSize);
+				return pRenderer;
 			};
 		}
 		
@@ -316,10 +313,10 @@ package com.socialApplication.view.profile{
 			
 			_list.layout=pVerticalLayout;
 			_list.itemRendererFactory = function():IListItemRenderer{
-				var renderer:ItemRendererProfileList = new ItemRendererProfileList();
-				renderer.setSize(500*scale,500*scale);
-				renderer.isBigFontSize=true;
-				return renderer;
+				var pRenderer:ItemRendererProfileList = new ItemRendererProfileList();
+				pRenderer.setSize(500*scale,500*scale);
+				pRenderer.isBigFontSize=true;
+				return pRenderer;
 			};
 		}
 		

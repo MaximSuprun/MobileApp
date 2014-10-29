@@ -103,6 +103,9 @@ package com.socialApplication.common{
 		public static const TUMBLR_KEY :String = "GGMZBkyxedvk3U6sceVHi9pMqE0rvnMULv6aBKJhHFXBU6I5Gb";
 		public static const TUMBLR_SECRET_KEY :String = "M1Tq1hkW0HV6IwkzXtojJS2Q8UUfCsjqnSmgOvmw4GP6s2Ywev";
 		
+		public static const METHOD_POST:String = "POST";
+		public static const METHOD_GET:String = "GET";
+		
 		
 		
 		//--------------------------------------------------------------------------------------------------------- 

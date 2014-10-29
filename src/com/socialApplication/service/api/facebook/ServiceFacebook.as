@@ -8,7 +8,8 @@ package com.socialApplication.service.api.facebook{
 	
 	import feathers.core.PopUpManager;
 	
-	import starling.core.Starling;
+	import starling.core.Starling;	
+	
 	
 	public class ServiceFacebook extends ServiceAbstract implements IServiceFacebookPostImage{
 		//--------------------------------------------------------------------------------------------------------- 
@@ -24,9 +25,10 @@ package com.socialApplication.service.api.facebook{
 		//
 		//---------------------------------------------------------------------------------------------------------
 		private var _popUpWebView:PopUpWebView;
-		private var _accessToken:String=""
+		private var _accessToken:String = "";
 		private var _imageInfo:VOImageInfo;
 		
+		private static const FB_WALL:String = "/me/feed";
 		//--------------------------------------------------------------------------------------------------------- 
 		//
 		//  CONSTRUCTOR 
@@ -96,7 +98,7 @@ package com.socialApplication.service.api.facebook{
 			pParamsToFacebook.picture = _imageInfo.url;		
 			pParamsToFacebook.access_token = _accessToken;
 			
-			FacebookMobile.api("/me/feed", _postCallback, pParamsToFacebook, "POST");
+			FacebookMobile.api(FB_WALL, _postCallback, pParamsToFacebook,Constants.METHOD_POST );
 		}
 		
 		private function _postCallback(success:Object, fail:Object):void{

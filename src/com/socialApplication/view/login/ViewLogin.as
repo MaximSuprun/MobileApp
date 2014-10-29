@@ -133,14 +133,7 @@ package com.socialApplication.view.login{
 		
 		}
 
-		
-		//--------------------------------------------------------------------------------------------------------- 
-		// 
-		//  EVENT HANDLERS  
-		// 
-		//---------------------------------------------------------------------------------------------------------
-		
-		private function _handlerLoginButtonClick(event:Event):void{
+		private function _outhorizationChek():void{
 			if(_labelErrorMessage){
 				removeChild(_labelErrorMessage);
 			}
@@ -159,6 +152,15 @@ package com.socialApplication.view.login{
 				
 				dispatchEvent(new EventViewLogin(EventViewLogin.LOGIN,loginData));					
 			}
+		}
+		//--------------------------------------------------------------------------------------------------------- 
+		// 
+		//  EVENT HANDLERS  
+		// 
+		//---------------------------------------------------------------------------------------------------------
+		
+		private function _handlerLoginButtonClick(event:Event):void{
+			_outhorizationChek()
 		}
 		
 		private function _handlerTextFocus(event:Event):void{

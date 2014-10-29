@@ -41,6 +41,8 @@ package com.socialApplication.service.api.vk{
 		private var _userId:String;
 		private var _accessToken:String;
 		
+		private static const VK_URL_AUTHORIZATION:String = "https://oauth.vk.com/authorize";
+		private static const VK_URL_CALLBACK:String = "https://oauth.vk.com/blank";
 		//--------------------------------------------------------------------------------------------------------- 
 		//
 		//  CONSTRUCTOR 
@@ -77,8 +79,8 @@ package com.socialApplication.service.api.vk{
 		private function _init():void{
 			_popUpWebView=new PopUpWebView();
 			PopUpManager.addPopUp(_popUpWebView,true,false);
-			var pOauth:OAuth2=new OAuth2("https://oauth.vk.com/authorize","https://oauth.vk.com/blank",LogSetupLevel.ALL);
-			var pGrant:IGrantType = new ImplicitGrant(_popUpWebView.stageWebView,Constants.VK_ID,"https://oauth.vk.com/blank","wall,photo");
+			var pOauth:OAuth2=new OAuth2(VK_URL_AUTHORIZATION,VK_URL_CALLBACK,LogSetupLevel.ALL);
+			var pGrant:IGrantType = new ImplicitGrant(_popUpWebView.stageWebView,Constants.VK_ID,VK_URL_CALLBACK,"wall,photo");
 			pOauth.addEventListener(GetAccessTokenEvent.TYPE, onGetAccessToken);
 			pOauth.getAccessToken(pGrant);
 		}
@@ -96,8 +98,6 @@ package com.socialApplication.service.api.vk{
 			_removePopUp();
 			
 			if (getAccessTokenEvent.errorCode == null && getAccessTokenEvent.errorMessage == null){
-				
-				trace("Your access token value is: " + getAccessTokenEvent.accessToken);
 				_userId=getAccessTokenEvent.response.user_id;
 				_accessToken = getAccessTokenEvent.accessToken;
 				_postToVk();

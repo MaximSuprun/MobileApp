@@ -53,15 +53,15 @@ package com.socialApplication.view.settings{
 			_list.addEventListener(Event.CHANGE,_handlerChange);
 			_list.width=400*scale;
 			_list.dataProvider=new ListCollection([	{label:Constants.LABEL_CHANGE_USER_LOGIN,position:Constants.TOP_POSITION_IN_LIST},
-				{label:Constants.LABEL_CHANGE_USER_PASSWORD,position:Constants.DEFAULT_POSITION_IN_LIST},
-				{label:Constants.LABEL_LOG_OUT,position:Constants.BOTTOM_POSITION_IN_LIST}]);
+													{label:Constants.LABEL_CHANGE_USER_PASSWORD,position:Constants.DEFAULT_POSITION_IN_LIST},
+													{label:Constants.LABEL_LOG_OUT,position:Constants.BOTTOM_POSITION_IN_LIST}]);
 			_list.y=175*scale;			
 			_list.x=(Starling.current.nativeStage.stageWidth-_list.width)/2;
 			_list.itemRendererType = ItemRendererSettingsList;
 			
 			
-			var listLayout:VerticalLayout = new VerticalLayout();
-			_list.layout = listLayout;
+			var pListLayout:VerticalLayout = new VerticalLayout();
+			_list.layout = pListLayout;
 			
 			content.addChild(_list);	
 			_logoListName.x=_list.x;

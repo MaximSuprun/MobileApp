@@ -160,10 +160,7 @@ package com.socialApplication.view.explore{
 			_buttonBack.scaleX=scale;
 			_buttonBack.scaleY=scale;
 			_buttonBack.addEventListener(Event.TRIGGERED,_handlerButtonClick);
-			header.leftItems = new <DisplayObject>[ _buttonBack ];
-		
-			
-			
+			header.leftItems = new <DisplayObject>[ _buttonBack ];			
 		}
 		
 		override protected function draw():void{

@@ -69,10 +69,10 @@ package com.socialApplication.view.createScreen.common.footer{
 			_list.horizontalScrollPolicy = List.SCROLL_POLICY_ON;
 			_list.itemRendererType=ItemRendererFooterCreate;
 						
-			var listLayout:HorizontalLayout = new HorizontalLayout();
-			listLayout.gap = 5*scale;
+			var pListLayout:HorizontalLayout = new HorizontalLayout();
+			pListLayout.gap = 5*scale;
 			
-			_list.layout = listLayout;
+			_list.layout = pListLayout;
 			
 			_list.selectedIndex=-1;
 			_list.addEventListener(Event.CHANGE,_handlerChangeList);

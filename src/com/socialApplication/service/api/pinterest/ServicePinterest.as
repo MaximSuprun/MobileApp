@@ -30,7 +30,9 @@ package com.socialApplication.service.api.pinterest{
 		private var _urlRequest:URLRequest;
 		private var _userId:String;
 		private var _accessToken:String;
-		
+	
+		private static const PINTEREST_MEDIA_URL:String = "http://www.pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.flickr.com%2Fphotos%2Fkentbrew%2F6851755809%2F&media=";
+		private static const GET_DESCRIPTION:String = "&description=";
 		
 		//--------------------------------------------------------------------------------------------------------- 
 		//
@@ -66,9 +68,9 @@ package com.socialApplication.service.api.pinterest{
 		//
 		//---------------------------------------------------------------------------------------------------------
 		private function _init():void{
-			_popUpWebView=new PopUpWebView();
+			_popUpWebView = new PopUpWebView();
 			PopUpManager.addPopUp(_popUpWebView,true,false);
-			_popUpWebView.loadUrl="http://www.pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.flickr.com%2Fphotos%2Fkentbrew%2F6851755809%2F&media="+_imageInfo.url+"&description="+_imageInfo.title;
+			_popUpWebView.loadUrl = PINTEREST_MEDIA_URL + _imageInfo.url + GET_DESCRIPTION + _imageInfo.title;
 		}
 		
 		

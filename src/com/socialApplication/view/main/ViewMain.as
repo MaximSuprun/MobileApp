@@ -67,11 +67,11 @@ package com.socialApplication.view.main{
 			if(_drawers.leftDrawer){
 			   _drawers.leftDrawer=null;
 			}
-			_screenNavigator.showScreen(Constants.ID_VIEW_LOGIN);
+			_showScreen(Constants.ID_VIEW_LOGIN);
 		}
 		
 		public function loginSuccess(pUserData:VOUserData):void{
-			_screenNavigator.showScreen(Constants.ID_VIEW_PROFILE);
+			_showScreen(Constants.ID_VIEW_PROFILE);
 			
 			var pLeftDrawer:ViewMenu = new ViewMenu();
 			_drawers.leftDrawer = pLeftDrawer;	
@@ -90,15 +90,15 @@ package com.socialApplication.view.main{
 				
 			showMenu();
 			_transitionManager.clearStack();
-			_screenNavigator.showScreen(pScreen);
+			_showScreen(pScreen);
 		}
 		
 		public function addExploreView(pScreen:String,pImageInfo:VOImageInfo):void{
-			_screenNavigator.showScreen(pScreen);
+			_showScreen(pScreen);
 			dispatchEvent(new EventViewMain(EventViewMain.GET_IMAGE_INFO,pImageInfo));
 		}
 		public function addProfileView():void{
-			_screenNavigator.showScreen(Constants.ID_VIEW_PROFILE);
+			_showScreen(Constants.ID_VIEW_PROFILE);
 		}
 	
 		
@@ -144,9 +144,12 @@ package com.socialApplication.view.main{
 		}
 		
 		private function introAdd():void{
-			_screenNavigator.showScreen(Constants.ID_VIEW_INTRODUCTION);
+			_showScreen(Constants.ID_VIEW_INTRODUCTION);
 		}
 		
+		private function _showScreen(pScreen:String):void{
+			_screenNavigator.showScreen(pScreen)
+		}
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  EVENT HANDLERS  

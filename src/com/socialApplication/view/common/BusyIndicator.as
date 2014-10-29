@@ -19,7 +19,7 @@ package com.socialApplication.view.common{
 		// PRIVATE & PROTECTED VARIABLES
 		//
 		//---------------------------------------------------------------------------------------------------------
-		private var _movieClip:MovieClip;
+		private var _bussyIndicator:MovieClip;
 		//--------------------------------------------------------------------------------------------------------- 
 		//
 		//  CONSTRUCTOR 
@@ -37,11 +37,11 @@ package com.socialApplication.view.common{
 		// 
 		//---------------------------------------------------------------------------------------------------------
 		public function createBusyIndicator(pTextureAtlas:TextureAtlas,pTextureName:String):void{
-			_movieClip=new MovieClip(pTextureAtlas.getTextures(pTextureName));
-			_movieClip.loop = true; 
-			addChild(_movieClip);
+			_bussyIndicator=new MovieClip(pTextureAtlas.getTextures(pTextureName));
+			_bussyIndicator.loop = true; 
+			addChild(_bussyIndicator);
 			
-			Starling.juggler.add(_movieClip);
+			Starling.juggler.add(_bussyIndicator);
 		}
 		
 		//--------------------------------------------------------------------------------------------------------- 

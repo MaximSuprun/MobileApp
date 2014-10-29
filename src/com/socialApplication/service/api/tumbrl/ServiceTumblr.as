@@ -44,6 +44,11 @@ package com.socialApplication.service.api.tumbrl{
 		private var _oauth:IOAuth;
 		private var _userBlogName:String;
 		
+		private static const URL_AUTHORIZATION:String = "https://www.tumblr.com/oauth/authorize";
+		private static const URL_REQUEST_TOKEN:String = "https://www.tumblr.com/oauth/request_token";
+		private static const URL_ACCESS_TOKEN:String = "https://www.tumblr.com/oauth/access_token";
+		private static const USER_INFO:String = "https://api.tumblr.com/v2/user/info";
+		
 		//--------------------------------------------------------------------------------------------------------- 
 		//
 		//  CONSTRUCTOR 
@@ -80,7 +85,7 @@ package com.socialApplication.service.api.tumbrl{
 		private function _init():void{			
 			_oauth = new OAuth(Constants.TUMBLR_KEY, Constants.TUMBLR_SECRET_KEY);
 			// get request token
-			var pLoader:URLLoader = _oauth.getRequestToken("https://www.tumblr.com/oauth/request_token");
+			var pLoader:URLLoader = _oauth.getRequestToken(URL_REQUEST_TOKEN);
 			pLoader.addEventListener(Event.COMPLETE, _handlerRequestToken);			
 		}
 		
@@ -93,7 +98,7 @@ package com.socialApplication.service.api.tumbrl{
 		}
 			
 		private function _getUserInfo():void{
-			var pOAuthRequest:OAuthRequest = new OAuthRequest("GET","https://api.tumblr.com/v2/user/info",null,new OAuthConsumer(Constants.TUMBLR_KEY,Constants.TUMBLR_SECRET_KEY),_accessToken);			
+			var pOAuthRequest:OAuthRequest = new OAuthRequest(Constants.METHOD_GET,USER_INFO,null,new OAuthConsumer(Constants.TUMBLR_KEY,Constants.TUMBLR_SECRET_KEY),_accessToken);			
 			var pLoader:URLLoader=new URLLoader();
 			
 			pLoader.addEventListener(Event.COMPLETE,_handlerCompleteLoadedUserInfo);
@@ -104,7 +109,7 @@ package com.socialApplication.service.api.tumbrl{
 		}
 		
 		private function _getAccesToken():void{
-			var pUrlLoader:URLLoader = _oauth.getAccessToken("https://www.tumblr.com/oauth/access_token",_requestToken,{"oauth_verifier":_oauth_verifier,"oauth_callback_confirmed":true});
+			var pUrlLoader:URLLoader = _oauth.getAccessToken(URL_ACCESS_TOKEN,_requestToken,{"oauth_verifier":_oauth_verifier,"oauth_callback_confirmed":true});
 			pUrlLoader.addEventListener(Event.COMPLETE, _handlerAccessToken);
 		}
 		
@@ -113,11 +118,11 @@ package com.socialApplication.service.api.tumbrl{
 			pParams.type= 'photo';
 			pParams.source = _imageInfo.url;
 			
-			var pOauthRequest:OAuthRequest = new OAuthRequest( "POST", "http://api.tumblr.com/v2/blog/"+_userBlogName+".tumblr.com/post", pParams, new OAuthConsumer(Constants.TUMBLR_KEY,Constants.TUMBLR_SECRET_KEY),_accessToken);
+			var pOauthRequest:OAuthRequest = new OAuthRequest( Constants.METHOD_POST, "http://api.tumblr.com/v2/blog/"+_userBlogName+".tumblr.com/post", pParams, new OAuthConsumer(Constants.TUMBLR_KEY,Constants.TUMBLR_SECRET_KEY),_accessToken);
 			
 			var pRequest:URLRequest = new URLRequest( pOauthRequest.buildRequest(new OAuthSignatureMethod_HMAC_SHA1()));
 			pRequest.contentType = "application/x-www-form-urlencoded";
-			pRequest.method = "POST";
+			pRequest.method = Constants.METHOD_POST;
 			
 			var pUrlVariables:URLVariables = new URLVariables();
 			pUrlVariables.type = 'photo';
@@ -138,7 +143,7 @@ package com.socialApplication.service.api.tumbrl{
 		private function _handlerRequestToken(event:Event):void{	
 			
 			_requestToken = OAuthUtil.getTokenFromResponse(event.currentTarget.data as String);
-			var request:URLRequest = _oauth.getAuthorizeRequest("https://www.tumblr.com/oauth/authorize", _requestToken.key);
+			var request:URLRequest = _oauth.getAuthorizeRequest(URL_AUTHORIZATION, _requestToken.key);
 			
 			_popUpWebView=new PopUpWebView();
 			_popUpWebView.addEventListener(EventViewExplore.STAGE_WEB_VIEW_COMPLETE, _handlerCompleteLoad);
