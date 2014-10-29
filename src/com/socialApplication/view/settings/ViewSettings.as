@@ -46,7 +46,28 @@ package com.socialApplication.view.settings{
 			
 		}
 		
-		
+		override public function activateContent():void{
+			super.activateContent();
+			
+			_list=new List();
+			_list.addEventListener(Event.CHANGE,_handlerChange);
+			_list.width=400*scale;
+			_list.dataProvider=new ListCollection([	{label:Constants.LABEL_CHANGE_USER_LOGIN,position:Constants.TOP_POSITION_IN_LIST},
+				{label:Constants.LABEL_CHANGE_USER_PASSWORD,position:Constants.DEFAULT_POSITION_IN_LIST},
+				{label:Constants.LABEL_LOG_OUT,position:Constants.BOTTOM_POSITION_IN_LIST}]);
+			_list.y=175*scale;			
+			_list.x=(Starling.current.nativeStage.stageWidth-_list.width)/2;
+			_list.itemRendererType = ItemRendererSettingsList;
+			
+			
+			var listLayout:VerticalLayout = new VerticalLayout();
+			_list.layout = listLayout;
+			
+			content.addChild(_list);	
+			_logoListName.x=_list.x;
+			
+			contentShow(1);
+		}
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  PUBLIC & INTERNAL METHODS 
@@ -61,14 +82,13 @@ package com.socialApplication.view.settings{
 			if(pLogo && _logoListName != pLogo){
 				_logoListName = pLogo;
 				_logoListName.y=125*scale;
-				addChild(_logoListName);
+				content.addChild(_logoListName);
 			}
 		}
 		
 		public function messageSuccess():void{
 			_removePopUp();			
 		}
-
 		
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
@@ -94,28 +114,12 @@ package com.socialApplication.view.settings{
 			_buttonMenu.scaleY=scale;
 			_buttonMenu.addEventListener(Event.TRIGGERED,_handlerButtonMenuClick);
 			header.leftItems = new <DisplayObject>[ _buttonMenu ];
-			
-			_list=new List();
-			_list.addEventListener(Event.CHANGE,_handlerChange);
-			_list.width=400*scale;
-			_list.dataProvider=new ListCollection([	{label:Constants.LABEL_CHANGE_USER_LOGIN,position:Constants.TOP_POSITION_IN_LIST},
-													{label:Constants.LABEL_CHANGE_USER_PASSWORD,position:Constants.DEFAULT_POSITION_IN_LIST},
-													{label:Constants.LABEL_LOG_OUT,position:Constants.BOTTOM_POSITION_IN_LIST}]);
-			_list.y=175*scale;			
-			_list.x=(Starling.current.nativeStage.stageWidth-_list.width)/2;
-			_list.itemRendererType = ItemRendererSettingsList;
-			
-			
-			var listLayout:VerticalLayout = new VerticalLayout();
-			_list.layout = listLayout;
-			
-			addChild(_list);			
+				
 			
 		}
 		
 		override protected function draw():void{
 			super.draw();		
-			_logoListName.x=_list.x;
 		}
 		
 		private function _handlerButtonMenuClick(event:Event):void{

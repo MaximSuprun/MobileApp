@@ -1,26 +1,16 @@
 package com.socialApplication.service.api.pinterest{
-	import com.adobe.protocols.oauth2.OAuth2;
-	import com.adobe.protocols.oauth2.event.GetAccessTokenEvent;
-	import com.adobe.protocols.oauth2.grant.AuthorizationCodeGrant;
-	import com.adobe.protocols.oauth2.grant.IGrantType;
-	import com.adobe.protocols.oauth2.grant.ImplicitGrant;
-	import com.google.ads.studio.innovation.placer.pinterest.proxy.PinterestButton;
-	import com.socialApplication.common.Constants;
+	import com.razzmatazz.robotlegs.services.ServiceAbstract;
 	import com.socialApplication.model.vo.VOImageInfo;
-	import com.socialApplication.view.explore.EventViewExplore;
 	import com.socialApplication.view.explore.common.PopUpWebView;
 	
 	import feathers.core.PopUpManager;
 	
 	import flash.display.Sprite;
-	import flash.events.Event;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	
-	import org.as3commons.logging.setup.LogSetupLevel;
 	
-	
-	public class ServicePinterest extends Sprite implements IServicePinterestPostImage{
+	public class ServicePinterest extends ServiceAbstract implements IServicePinterestPostImage{
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  PUBLIC & INTERNAL VARIABLES 

@@ -2,7 +2,6 @@ package com.socialApplication.controller{
 	
 	import com.socialApplication.model.vo.VOImageInfo;
 	import com.socialApplication.service.api.tumbrl.IServiceTumblrPostImage;
-	import com.socialApplication.service.api.twitter.IServiceTwitterPostImage;
 	import com.socialApplication.view.explore.EventViewExplore;
 	
 	import org.robotlegs.starling.mvcs.Command;

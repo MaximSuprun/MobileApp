@@ -16,16 +16,12 @@ package com.socialApplication.view.profile{
 	import feathers.controls.renderers.IListItemRenderer;
 	import feathers.core.PopUpManager;
 	import feathers.data.ListCollection;
-	import feathers.events.FeathersEventType;
 	import feathers.layout.TiledRowsLayout;
 	import feathers.layout.VerticalLayout;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
 	import starling.events.Event;
-	import starling.events.Touch;
-	import starling.events.TouchEvent;
-	import starling.events.TouchPhase;
 	
 	public class ViewProfile extends ViewAbstract{
 		//--------------------------------------------------------------------------------------------------------- 
@@ -35,7 +31,7 @@ package com.socialApplication.view.profile{
 		//---------------------------------------------------------------------------------------------------------
 		
 		
-	
+		
 		//--------------------------------------------------------------------------------------------------------- 
 		//
 		// PRIVATE & PROTECTED VARIABLES
@@ -61,6 +57,9 @@ package com.socialApplication.view.profile{
 		private var _containerPopUp:BusyIndicator;
 		private var isLoaded:Boolean=false;
 		private var _touchID:int=-1;
+		private var _userDataLoaded:Boolean=false;
+		private var _imageListCollectionsLoaded:Boolean=false;
+		private var _dataProvider:ListCollection=new ListCollection();
 		//--------------------------------------------------------------------------------------------------------- 
 		//
 		//  CONSTRUCTOR 
@@ -80,108 +79,17 @@ package com.socialApplication.view.profile{
 			
 		}
 		
-		public function removePreloader():void{
-			
-		}
-
-
-		
-		//--------------------------------------------------------------------------------------------------------- 
-		// 
-		//  GETTERS & SETTERS   
-		// 
-		//---------------------------------------------------------------------------------------------------------
-		public function get imageListCollection():ListCollection{	return _imageListCollections;}
-		public function set imageListCollection(value:ListCollection):void{
-			_imageListCollections=value;
-			var pLengthList:int=_imageListCollections.length;
-			for(var i:int=0;i<pLengthList;i++){
-				_imageListCollections.data[i].userName=_userData.description;
-			}
-			_list.dataProvider.addAllAt(_imageListCollections,_list.dataProvider.length);
-			_popUpDelete();
-			
-			if(!_list.hasEventListener(Event.SCROLL)){
-				_list.addEventListener(Event.SCROLL,_handlerContainerList);	
-			}
-			
-			if(!_viewContainer.hasEventListener(Event.SCROLL)){
-				_viewContainer.addEventListener(Event.SCROLL,_handlerContainerScroll);				
-			}
-			
-			if(pLengthList<Constants.COUNT_IMAGE){
-				isLoaded=true;
-				return;
-			}
-		}
-		public function set photoBorder(pPhotoBorder:DisplayObject):void{
-			if(pPhotoBorder){
-				_photoBorder=pPhotoBorder;
-			}			
-		}
-		public function get photoBorder():DisplayObject{return	_photoBorder;}
-		public function set avatar(pPhoto:DisplayObject):void{
-			if(pPhoto){
-				_photo=pPhoto;
-				_photo.scaleX=scale;
-				_photo.scaleY=scale;	
-				if(_photo.width>145*scale){
-					_photo.width=145*scale;
-				}
-				if(_photo.height>145*scale){
-					_photo.width=145*scale;
-				}
-				_photo.x=photoBorder.x+(photoBorder.width-_photo.width)/2;
-				_photo.y=photoBorder.y+(photoBorder.height-_photo.height)/2;
-				_viewContainer.addChild(_photo);
-				
-				if(_viewContainer.getChildIndex(_photo)>_viewContainer.getChildIndex(photoBorder)){
-					_viewContainer.swapChildren(_photo,photoBorder)
-				}
-			}			
-		}
-		public function set userData(pUserData:VOUserData):void{
-			if(pUserData){
-				_userData = pUserData;
-				_commitData();
-			}			
-		}
-		
-		public function set rendererText(pRendererText:Function):void{
-			_rendererText=pRendererText;}
-		
-		public function set rendererTextStatus(pRendererText:Function):void{
-			_rendererTextStatus=pRendererText;}
-		
-		public function popUpCreate():void{
-			_containerPopUp=new BusyIndicator();
-			PopUpManager.addPopUp(_containerPopUp);
-		}
-		//--------------------------------------------------------------------------------------------------------- 
-		//
-		// PRIVATE & PROTECTED METHODS 
-		//
-		//---------------------------------------------------------------------------------------------------------
-	
-
-		override protected function initialize():void{
-			
-			super.initialize();
-			this.setSize(Constants.WIDTH*scale,Constants.HEIGHT*scale);
-			removeChild(background);
-			
-			header.nameList.add(Constants.HEADER_PROFILE);
-			addChild(header);			
+		override public function activateContent():void{
+			super.activateContent();
 			
 			_viewContainer=new ScrollContainer();			
 			_viewContainer.setSize(Starling.current.nativeStage.stageWidth,Starling.current.nativeStage.stageHeight-header.height);
 			_viewContainer.horizontalScrollPolicy=Scroller.SCROLL_POLICY_OFF;
 			_viewContainer.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_NONE;
-			addChild(_viewContainer);						
-
+			content.addChild(_viewContainer);						
+			
 			_list=new List();
-			_list.height=Starling.current.nativeStage.stageHeight-header.height;
-			_list.dataProvider=new ListCollection();
+			_list.dataProvider=_dataProvider;
 			_list.addEventListener(Event.CHANGE,_handlerSelectImage);
 			_list.snapScrollPositionsToPixels=true;
 			_list.scrollBarDisplayMode = Scroller.SCROLL_BAR_DISPLAY_MODE_NONE;
@@ -206,7 +114,7 @@ package com.socialApplication.view.profile{
 			_toggleButtonGrid.isToggle=true;
 			_toggleButtonGrid.isSelected=true;
 			_viewContainer.addChild(_toggleButtonGrid);
-		
+			
 			_toggleButtonList=new Button();
 			_toggleButtonList.nameList.add(Constants.TOGGLE_BUTTON_LIST);
 			_toggleButtonList.addEventListener(Event.TRIGGERED,_handlerChangeListLayout);
@@ -238,16 +146,91 @@ package com.socialApplication.view.profile{
 			_labelStatus.textRendererFactory=_rendererTextStatus;
 			_labelStatus.setSize(Starling.current.nativeStage.stageWidth-350*scale,200*scale);
 			_viewContainer.addChild(_labelStatus);
-				
+			
+			if(_userDataLoaded){
+				_commitData();
+			}
+			if(_imageListCollectionsLoaded){
+				_serverToDataProviderAdd();
+			}
+			
+			_layout();
+		}
+
+		//--------------------------------------------------------------------------------------------------------- 
+		// 
+		//  GETTERS & SETTERS   
+		// 
+		//---------------------------------------------------------------------------------------------------------
+		public function get imageListCollection():ListCollection{	return _imageListCollections;}
+		public function set imageListCollection(value:ListCollection):void{			
+			_imageListCollections=value;
+			_imageListCollectionsLoaded = true;
+			if(isActivated){
+				_serverToDataProviderAdd();
+			}
+		}
+		public function set photoBorder(pPhotoBorder:DisplayObject):void{
+			if(pPhotoBorder){
+				_photoBorder=pPhotoBorder;
+			}			
+		}
+		public function get photoBorder():DisplayObject{return	_photoBorder;}
+		public function set avatar(pPhoto:DisplayObject):void{
+			if(pPhoto){
+				_photo=pPhoto;
+				_avatarLayout();
+			}			
+		}
+		public function set userData(pUserData:VOUserData):void{
+			if(pUserData){
+				_userData = pUserData;
+				_userDataLoaded = true;
+				if(isActivated){
+					_commitData();
+				}
+			}			
 		}
 		
+		public function set rendererText(pRendererText:Function):void{
+			_rendererText=pRendererText;}
+		
+		public function set rendererTextStatus(pRendererText:Function):void{
+			_rendererTextStatus=pRendererText;}
+		
+		public function popUpCreate():void{
+			_containerPopUp=new BusyIndicator();
+			PopUpManager.addPopUp(_containerPopUp);
+		}
+		
+		
+		//--------------------------------------------------------------------------------------------------------- 
+		//
+		// PRIVATE & PROTECTED METHODS 
+		//
+		//---------------------------------------------------------------------------------------------------------
+		
+		
+		override protected function initialize():void{
 			
+			super.initialize();
+			this.setSize(Constants.WIDTH*scale,Constants.HEIGHT*scale);
+			removeChild(background);
+			
+			header.nameList.add(Constants.HEADER_PROFILE);
+			addChild(header);			
+			
+			
+			
+		}
+		
+		
 		override protected function draw():void{
 			super.draw();
-			_layout();
 		}
 		
 		private function _commitData():void{
+			
 			_labelName.text	= _userData.description;	
 			_labelStatus.text = _userData.status;
 			_labelCountLike.text = _userData.countOfLikes;
@@ -264,7 +247,7 @@ package com.socialApplication.view.profile{
 		
 		private function _layout():void{
 			_viewContainer.y=header.height;
-	
+			
 			
 			background.width=Starling.current.nativeStage.stageWidth;
 			background.x=Starling.current.nativeStage.stageWidth/2-background.width/2;
@@ -292,9 +275,11 @@ package com.socialApplication.view.profile{
 			_labelCountComments.x=Starling.current.nativeStage.stageWidth-65*scale;
 			_labelCountComments.y=155*scale;
 			
+			_list.height=Starling.current.nativeStage.stageHeight-header.height;
 			_list.width=Starling.current.nativeStage.stageWidth;
 			_list.y=Starling.current.nativeStage.stageHeight/2-135*scale;
 			_listLayoutGrid();
+			contentShow(1);
 			
 		}
 		
@@ -344,37 +329,78 @@ package com.socialApplication.view.profile{
 				_viewContainer.verticalScrollPosition=0;	
 				_viewContainer.stopScrolling();
 			}
-						
+			
 			if(_viewContainer.verticalScrollPosition>_list.y){
 				_list.verticalScrollPolicy = Scroller.SCROLL_POLICY_ON;
 			}
 		}
 		
 		private function _scrollListPositionSearch():void{
-				
+			
 			if(_list.minVerticalScrollPosition > _list.verticalScrollPosition){
 				_viewContainer.verticalScrollPosition+=_list.verticalScrollPosition;					
 				_list.verticalScrollPolicy = Scroller.SCROLL_POLICY_OFF;
 			}				
-				
+			
 			if(!isLoaded){
-					
+				
 				if (_list.verticalScrollPosition > _list.maxVerticalScrollPosition){	
 					_list.removeEventListener(Event.SCROLL,_handlerContainerList);
 					_imageInfoForLoad.start+=Constants.COUNT_IMAGE;	
 					dispatchEvent(new  EventViewProfile(EventViewProfile.IMAGE_LOAD,_imageInfoForLoad));
 				}
 			}		
-				
+			
 			if(_viewContainer.verticalScrollPosition<=0){	
-					
-					_viewContainer.verticalScrollPosition+=_list.verticalScrollPosition;
-						
-					if(_list.verticalScrollPosition>_list.minVerticalScrollPosition||_list.verticalScrollPosition<_list.minVerticalScrollPosition){
-						_list.verticalScrollPosition=_list.minVerticalScrollPosition;
-						_list.stopScrolling();
-					}
+				
+				_viewContainer.verticalScrollPosition+=_list.verticalScrollPosition;
+				
+				if(_list.verticalScrollPosition>_list.minVerticalScrollPosition||_list.verticalScrollPosition<_list.minVerticalScrollPosition){
+					_list.verticalScrollPosition=_list.minVerticalScrollPosition;
+					_list.stopScrolling();
+				}
 			}				
+		}
+		private function _avatarLayout():void{
+			_photo.scaleX=scale;
+			_photo.scaleY=scale;	
+			if(_photo.width>145*scale){
+				_photo.width=145*scale;
+			}
+			if(_photo.height>145*scale){
+				_photo.width=145*scale;
+			}
+			_photo.x=photoBorder.x+(photoBorder.width-_photo.width)/2;
+			_photo.y=photoBorder.y+(photoBorder.height-_photo.height)/2;
+			_viewContainer.addChild(_photo);
+			
+			if(_viewContainer.getChildIndex(_photo)>_viewContainer.getChildIndex(photoBorder)){
+				_viewContainer.swapChildren(_photo,photoBorder)
+			}
+		}
+		
+		
+		private function _serverToDataProviderAdd():void{
+			
+			var pLengthList:int=_imageListCollections.length;
+			for(var i:int=0;i<pLengthList;i++){
+				_dataProvider.push(_imageListCollections.data[i]);
+			}
+			//_list.dataProvider.addAllAt(_imageListCollections,_list.dataProvider.length);
+			_popUpDelete();
+			
+			if(!_list.hasEventListener(Event.SCROLL)){
+				_list.addEventListener(Event.SCROLL,_handlerContainerList);	
+			}
+			
+			if(!_viewContainer.hasEventListener(Event.SCROLL)){
+				_viewContainer.addEventListener(Event.SCROLL,_handlerContainerScroll);				
+			}
+			
+			if(pLengthList<Constants.COUNT_IMAGE){
+				isLoaded=true;
+				return;
+			}
 		}
 		
 		private function _buttonStateChange():void{
@@ -384,6 +410,7 @@ package com.socialApplication.view.profile{
 		
 		private function _popUpDelete():void{
 			PopUpManager.removePopUp(_containerPopUp);
+			
 		}
 		
 		
@@ -399,13 +426,13 @@ package com.socialApplication.view.profile{
 		private function _handlerChangeListLayout(event:Event):void{
 			switch(event.currentTarget){
 				case _toggleButtonGrid:
-						if(_toggleButtonGrid.isSelected){
-							_toggleButtonGrid.isSelected=false;
-							return;
-						}else{
-							_buttonStateChange();
-							_listLayoutGrid();
-						}
+					if(_toggleButtonGrid.isSelected){
+						_toggleButtonGrid.isSelected=false;
+						return;
+					}else{
+						_buttonStateChange();
+						_listLayoutGrid();
+					}
 					break;
 				
 				case _toggleButtonList:

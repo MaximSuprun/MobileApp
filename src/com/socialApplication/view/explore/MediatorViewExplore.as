@@ -1,8 +1,7 @@
 package com.socialApplication.view.explore{
 	
 	import com.socialApplication.model.vo.VOImageInfo;
-	import com.socialApplication.service.replaceAutorizationData.EventServiceReplaceData;
-	import com.socialApplication.view.createScreen.EventViewCreateScreen;
+	import com.socialApplication.service.api.EventServiceAPI;
 	import com.socialApplication.view.main.EventViewMain;
 	
 	import org.robotlegs.starling.mvcs.Mediator;
@@ -49,6 +48,7 @@ package com.socialApplication.view.explore{
 			addViewListener(EventViewExplore.SHARE_TO_PINTEREST,_handlerPublish)
 			addViewListener(EventViewExplore.SHARE_TO_MAILRU,_handlerPublish)
 			addViewListener(EventViewExplore.SHARE_TO_VK,_handlerPublish)
+			addContextListener(EventServiceAPI.PUBLISH_COMPLETE,_handlerPublishComplete);
 		}
 
 		override public function onRemove():void {
@@ -105,7 +105,10 @@ package com.socialApplication.view.explore{
 					break;
 			}
 		}
-			
+		
+		private function _handlerPublishComplete(event:EventServiceAPI):void{
+			_view.popUpComletePostingAdd();
+		}
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  HELPERS  

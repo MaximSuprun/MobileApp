@@ -69,7 +69,6 @@ package com.socialApplication.view.menu{
 			dispatch(new EventViewMenu(EventViewMenu.CHANGE_SCREEN,event.payload));
 		}
 		
-		
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  HELPERS  

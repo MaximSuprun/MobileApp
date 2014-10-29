@@ -11,8 +11,40 @@ package{
 	
 	import starling.core.Starling;
 
+	
+	
 	[SWF(width='640',height="960",frameRate='60')]
 	public class MobileApp extends Sprite{
+		
+		[Embed(source="/./feathers/worksMobileTheme/assets/icons/16.png")]
+		protected static const ICON_16:Class;		
+		
+		[Embed(source="/./feathers/worksMobileTheme/assets/icons/29.png")]
+		protected static const ICON_29:Class;	
+		
+		[Embed(source="/./feathers/worksMobileTheme/assets/icons/32.png")]
+		protected static const ICON_32:Class;	
+		
+		[Embed(source="/./feathers/worksMobileTheme/assets/icons/36.png")]
+		protected static const ICON_36:Class;	
+		
+		[Embed(source="/./feathers/worksMobileTheme/assets/icons/48.png")]
+		protected static const ICON_48:Class;	
+		
+		[Embed(source="/./feathers/worksMobileTheme/assets/icons/57.png")]
+		protected static const ICON_57:Class;	
+		
+		[Embed(source="/./feathers/worksMobileTheme/assets/icons/72.png")]
+		protected static const ICON_72:Class;	
+		
+		[Embed(source="/./feathers/worksMobileTheme/assets/icons/114.png")]
+		protected static const ICON_114:Class;
+		
+		[Embed(source="/./feathers/worksMobileTheme/assets/icons/128.png")]
+		protected static const ICON_128:Class;	
+		
+		[Embed(source="/./feathers/worksMobileTheme/assets/icons/512.png")]
+		protected static const ICON_512:Class;	
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  PUBLIC & INTERNAL VARIABLES 

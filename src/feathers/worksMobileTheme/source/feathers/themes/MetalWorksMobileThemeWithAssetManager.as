@@ -31,6 +31,7 @@ package feathers.worksMobileTheme.source.feathers.themes
 	import com.socialApplication.view.createScreen.common.footer.ItemRendererFooterCreate;
 	import com.socialApplication.view.createScreen.common.footer.MyFooter;
 	import com.socialApplication.view.explore.ViewExplore;
+	import com.socialApplication.view.explore.common.PopUpPublishComplite;
 	import com.socialApplication.view.explore.common.PopUpShare;
 	import com.socialApplication.view.explore.common.PopUpWebView;
 	import com.socialApplication.view.introductionPanel.ViewIntroduction;
@@ -911,6 +912,7 @@ package feathers.worksMobileTheme.source.feathers.themes
 			this.setInitializerForClass(ViewProfile, ViewProfileInitializer);
 			this.setInitializerForClass(ViewSettings, ViewSettingsInitializer);
 			this.setInitializerForClass(PopUpChangeUserData, popUpInitializer);
+			this.setInitializerForClass(PopUpPublishComplite, popUpPublisCompleteInitializer);
 			this.setInitializerForClass(PopUpWebView, PopUpWebViewInitializer);
 			this.setInitializerForClass(CreatePopUp, CreatePopUpInitializer);
 			this.setInitializerForClass(PopUpShare, PopUpShareInitializer);
@@ -2362,6 +2364,12 @@ package feathers.worksMobileTheme.source.feathers.themes
 		}
 		protected function PopUpWebViewInitializer(pPopUp:PopUpWebView):void{
 			pPopUp.scale=scale;
+		}
+		protected function popUpPublisCompleteInitializer(pPopUp:PopUpPublishComplite):void{
+			pPopUp.scale=scale;
+			var pBackground:Quad=new Quad(400*scale,300*scale,0x838383);
+			pPopUp.background=pBackground;
+			
 		}
 		protected function popUpInitializer(pPopUp:PopUpChangeUserData):void{
 			pPopUp.scale=scale;

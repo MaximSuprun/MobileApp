@@ -44,7 +44,6 @@ package com.socialApplication.view.createScreen{
 			addViewListener(EventViewCreateScreen.TAKE_PHOTO_CLICK,_handlerTakePhotoClick);
 			addViewListener(EventViewCreateScreen.ADD_FROM_DEVICE,_handlerAddFromDeviceClick);
 			addContextListener(EventServiceLoadImage.CAMERA_OR_DEVICE_IMAGE_LOADED,_handlerImageLoaded);
-			
 		}
 
 		override public function onRemove():void {
@@ -76,7 +75,6 @@ package com.socialApplication.view.createScreen{
 		private function _handlerImageLoaded(event:EventServiceLoadImage):void{
 			_view.imageLoadedAdd(Texture(event.payload));
 		}
-		
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  EVENT HANDLERS  

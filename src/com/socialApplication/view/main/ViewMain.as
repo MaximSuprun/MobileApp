@@ -4,6 +4,7 @@ package com.socialApplication.view.main{
 	import com.socialApplication.common.Constants;
 	import com.socialApplication.model.vo.VOImageInfo;
 	import com.socialApplication.model.vo.VOUserData;
+	import com.socialApplication.view.abstract.ViewAbstract;
 	import com.socialApplication.view.createScreen.ViewCreateScreen;
 	import com.socialApplication.view.explore.ViewExplore;
 	import com.socialApplication.view.introductionPanel.ViewIntroduction;
@@ -15,6 +16,7 @@ package com.socialApplication.view.main{
 	import feathers.controls.Drawers;
 	import feathers.controls.ScreenNavigator;
 	import feathers.controls.ScreenNavigatorItem;
+	import feathers.events.FeathersEventType;
 	import feathers.motion.transitions.ScreenSlidingStackTransitionManager;
 	import feathers.worksMobileTheme.source.feathers.themes.MetalWorksMobileTheme;
 	
@@ -63,7 +65,7 @@ package com.socialApplication.view.main{
     
 		public function viewLoginAdd():void{
 			if(_drawers.leftDrawer){
-				_drawers.leftDrawer=null;
+			   _drawers.leftDrawer=null;
 			}
 			_screenNavigator.showScreen(Constants.ID_VIEW_LOGIN);
 		}
@@ -76,7 +78,8 @@ package com.socialApplication.view.main{
 		}
 
 		public function showMenu():void{
-			_drawers.toggleLeftDrawer(0.4);
+			_drawers.toggleLeftDrawer(0.5);
+			
 		}
 		
 		public function showScreen(pScreen:String):void{
@@ -86,9 +89,10 @@ package com.socialApplication.view.main{
 			}
 				
 			showMenu();
-			_screenNavigator.clearScreen();
+			_transitionManager.clearStack();
 			_screenNavigator.showScreen(pScreen);
 		}
+		
 		public function addExploreView(pScreen:String,pImageInfo:VOImageInfo):void{
 			_screenNavigator.showScreen(pScreen);
 			dispatchEvent(new EventViewMain(EventViewMain.GET_IMAGE_INFO,pImageInfo));
@@ -117,19 +121,21 @@ package com.socialApplication.view.main{
 			//this.x=-(_themeApp.difference/2);
 			
 			_screenNavigator=new ScreenNavigator();
+			_screenNavigator.addEventListener(FeathersEventType.TRANSITION_COMPLETE, _handlerTransitionComplete);
 			
 			_screenNavigator.addScreen(Constants.ID_VIEW_INTRODUCTION,new ScreenNavigatorItem(ViewIntroduction));
 			_screenNavigator.addScreen(Constants.ID_VIEW_LOGIN,new ScreenNavigatorItem(ViewLogin));
 			_screenNavigator.addScreen(Constants.ID_VIEW_CREATE,new ScreenNavigatorItem(ViewCreateScreen));		
 			_screenNavigator.addScreen(Constants.ID_VIEW_PROFILE,new ScreenNavigatorItem(ViewProfile));		
 			_screenNavigator.addScreen(Constants.ID_VIEW_SETTINGS,new ScreenNavigatorItem(ViewSettings));		
-			_screenNavigator.addScreen(Constants.ID_VIEW_EXPLORE,new ScreenNavigatorItem(ViewExplore));		
+			_screenNavigator.addScreen(Constants.ID_VIEW_EXPLORE,new ScreenNavigatorItem(ViewExplore));	
 			
-			_transitionManager=new ScreenSlidingStackTransitionManager(_screenNavigator);
-			_transitionManager.duration=0.4;
+			_transitionManager =new ScreenSlidingStackTransitionManager(_screenNavigator);			
+			_transitionManager.duration=0.5;
 			addChild(_screenNavigator);
-			
+						
 			_drawers=new Drawers();
+		
 			_drawers.content = _screenNavigator;
 				
 			addChild(_drawers);
@@ -137,6 +143,9 @@ package com.socialApplication.view.main{
 			introAdd();
 		}
 		
+		private function introAdd():void{
+			_screenNavigator.showScreen(Constants.ID_VIEW_INTRODUCTION);
+		}
 		
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
@@ -147,9 +156,13 @@ package com.socialApplication.view.main{
 			_init();
 		}
 		
-		private function introAdd():void{
-			_screenNavigator.showScreen(Constants.ID_VIEW_INTRODUCTION);
+		private function _handlerTransitionComplete(event:Event):void{
+			if(_screenNavigator.activeScreen!=null){
+				
+				ViewAbstract(_screenNavigator.activeScreen).activateContent();
+			}
 		}
+		
 		
 		
 		//--------------------------------------------------------------------------------------------------------- 

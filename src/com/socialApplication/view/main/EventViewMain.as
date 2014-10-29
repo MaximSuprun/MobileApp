@@ -7,6 +7,7 @@ package com.socialApplication.view.main{
 		public static const CHANGE_SCREEN:String="CHANGE_SCREEN";
 		public static const SHOW_SELECTED_SCREEN:String="SHOW_SELECTED_SCREEN";
 		public static const GET_IMAGE_INFO:String="GET_IMAGE_INFO";
+		public static const TRANSITION_COMPLETE:String="TRANSITION_COMPLETE";
 		
 		private var _payload:Object;
 		public function get payload():Object {

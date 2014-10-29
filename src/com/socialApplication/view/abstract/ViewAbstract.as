@@ -1,10 +1,14 @@
 package com.socialApplication.view.abstract{
 	
+	import com.greensock.TweenMax;
+	import com.greensock.easing.Cubic;
+	
 	import feathers.controls.Header;
 	import feathers.core.FeathersControl;
 	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
+	import starling.display.Sprite;
 	
 	public class ViewAbstract extends FeathersControl{
 		//--------------------------------------------------------------------------------------------------------- 
@@ -21,9 +25,11 @@ package com.socialApplication.view.abstract{
 		//---------------------------------------------------------------------------------------------------------
 		protected var header:Header;
 		protected var footer:ViewAbstract;
+		protected var isActivated:Boolean = false;
 		private var _scale:Number=1;
 		private var _background:DisplayObject;
 		private var _backgroundSkin:DisplayObject;
+		private var _content:Sprite=new Sprite();
 		
 		//--------------------------------------------------------------------------------------------------------- 
 		//
@@ -32,7 +38,9 @@ package com.socialApplication.view.abstract{
 		//---------------------------------------------------------------------------------------------------------
 		
 		public function ViewAbstract(){
-
+			content.width=Starling.current.nativeStage.stageWidth;
+			content.height=Starling.current.nativeStage.stageHeight;
+			content.alpha=0;
 		}
 		
 		//--------------------------------------------------------------------------------------------------------- 
@@ -41,6 +49,10 @@ package com.socialApplication.view.abstract{
 		// 
 		//---------------------------------------------------------------------------------------------------------
 		
+		public function contentShow (pDuration:Number,pDelay:Number=0,pCompleteFunction:Function=null):void {			
+			
+			TweenMax.to(_content,pDuration,{alpha:1,delay:pDelay,  ease:Cubic.easeInOut, onComplete:pCompleteFunction});
+		}
 		
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
@@ -56,6 +68,10 @@ package com.socialApplication.view.abstract{
 				_scale = pScale;
 			}			
 		}		
+		
+		public function get content():Sprite{
+			return _content;
+		}
 		
 		public function set backgroundSkin(pBackgroundSkin:DisplayObject):void{
 			if(pBackgroundSkin && pBackgroundSkin != _backgroundSkin){
@@ -81,7 +97,9 @@ package com.socialApplication.view.abstract{
 		}
 
 		
-		
+		public function activateContent():void{
+			isActivated = true;
+		}
 		//--------------------------------------------------------------------------------------------------------- 
 		//
 		// PRIVATE & PROTECTED METHODS 
@@ -90,10 +108,10 @@ package com.socialApplication.view.abstract{
 		override protected function initialize():void{
 			super.initialize();
 			
+			addChild(content);
+			
 			header=new Header();
-			header.setSize(Starling.current.nativeStage.stageWidth,85*scale)
-			
-			
+			header.setSize(Starling.current.nativeStage.stageWidth,85*scale)			
 		}
 		
 		

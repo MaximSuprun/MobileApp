@@ -1,13 +1,12 @@
 package com.socialApplication.service.api.twitter{
-	import com.adobe.serialization.json.JSONEncoder;
+	import com.razzmatazz.robotlegs.services.ServiceAbstract;
 	import com.socialApplication.common.Constants;
 	import com.socialApplication.model.vo.VOImageInfo;
+	import com.socialApplication.service.api.EventServiceAPI;
 	import com.socialApplication.view.explore.EventViewExplore;
 	import com.socialApplication.view.explore.common.PopUpWebView;
 	
 	import feathers.core.PopUpManager;
-	
-	import flash.utils.ByteArray;
 	
 	import isle.susisu.twitter.Twitter;
 	import isle.susisu.twitter.TwitterRequest;
@@ -15,7 +14,7 @@ package com.socialApplication.service.api.twitter{
 	import isle.susisu.twitter.events.TwitterRequestEvent;
 	
 	
-	public class ServiceTwitter implements IServiceTwitterPostImage{
+	public class ServiceTwitter extends ServiceAbstract implements IServiceTwitterPostImage{
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  PUBLIC & INTERNAL VARIABLES 
@@ -107,6 +106,10 @@ package com.socialApplication.service.api.twitter{
 			
 			pRequest.addEventListener(TwitterErrorEvent.SERVER_ERROR,function(event:TwitterErrorEvent):void{trace(event.type);});
 			pRequest.addEventListener(TwitterErrorEvent.CLIENT_ERROR,function(event:TwitterErrorEvent):void{trace(event.type);});
+			pRequest.addEventListener(TwitterRequestEvent.COMPLETE,_handlerCompletePostToTwitter);
+		}
+		private function _handlerCompletePostToTwitter(event:TwitterRequestEvent):void{
+			dispatch(new EventServiceAPI(EventServiceAPI.PUBLISH_COMPLETE));
 		}
 		
 		private function _handlerOkButton(event:EventViewExplore):void{

@@ -112,8 +112,6 @@ package com.socialApplication.view.main{
 			var pVOImageInfo:VOImageInfo=VOImageInfo(event.payload);
 			dispatch(new EventViewMain(EventViewMain.GET_IMAGE_INFO,pVOImageInfo));
 		}
-		
-		
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  HELPERS  

@@ -1,12 +1,12 @@
 package com.socialApplication.view.profile.common{
 	
+	import com.socialApplication.view.abstract.ViewAbstract;
+	
 	import feathers.controls.ImageLoader;
 	import feathers.controls.Label;
 	import feathers.controls.List;
 	import feathers.controls.renderers.IListItemRenderer;
-	import feathers.core.FeathersControl;
 	
-	import flash.display.Loader;
 	import flash.geom.Point;
 	
 	import starling.display.DisplayObject;
@@ -15,7 +15,7 @@ package com.socialApplication.view.profile.common{
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	
-	public class ItemRendererProfileList extends FeathersControl implements IListItemRenderer{
+	public class ItemRendererProfileList extends ViewAbstract implements IListItemRenderer{
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  PUBLIC & INTERNAL VARIABLES 
@@ -44,6 +44,7 @@ package com.socialApplication.view.profile.common{
 		private var _rendererText:Function;
 		private var _imageLoader:ImageLoader;
 		private var _isBigFontSize:Boolean=false;
+		
 
 		//--------------------------------------------------------------------------------------------------------- 
 		//
@@ -67,11 +68,7 @@ package com.socialApplication.view.profile.common{
 		//  GETTERS & SETTERS   
 		// 
 		//---------------------------------------------------------------------------------------------------------
-		public function get scale():Number{return _scale;}		
-		public function set scale(pScale:Number):void{
-			_scale = pScale;
-		}
-		
+				
 		public function set isBigFontSize(pValue:Boolean):void{
 			_isBigFontSize=pValue;
 		}
@@ -90,7 +87,7 @@ package com.socialApplication.view.profile.common{
 		
 		public function get owner():List{return this._owner;}		
 		public function set owner(value:List):void{
-			if(this._owner == value){return;}
+			//if(this._owner == value){return;}
 			this._owner = value;
 			this.invalidate(INVALIDATION_FLAG_DATA);
 		}
@@ -182,14 +179,12 @@ package com.socialApplication.view.profile.common{
 				_imageUrl = _data.url;
 				
 				if(!_imageLoader){
-					_imageLoader=new ImageLoader();
-					_imageLoader.addEventListener(Event.COMPLETE,_handlerItemImageLoadeded);
-					_imageLoader.source=_imageUrl;
-					_imageLoader.width=this.width;
-					_imageLoader.height=this.height;
-					addChildAt(_imageLoader,0);
+					_imageLoaderCreate()
 				} else {
-					return;
+					_imageLoader.dispose();
+					removeChild(_imageLoader);
+					_imageLoader=null;
+					_imageLoaderCreate()					
 				}		
 				
 			}else{
@@ -218,7 +213,14 @@ package com.socialApplication.view.profile.common{
 				_labelNumberOfComments.y+=10*scale;
 			}
 		}
-		
+		private function _imageLoaderCreate():void{
+			_imageLoader=new ImageLoader();
+			_imageLoader.addEventListener(Event.COMPLETE,_handlerItemImageLoadeded);
+			_imageLoader.source=_imageUrl;
+			_imageLoader.width=this.width;
+			_imageLoader.height=this.height;
+			content.addChild(_imageLoader);
+		}
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  EVENT HANDLERS  
@@ -265,10 +267,11 @@ package com.socialApplication.view.profile.common{
 			_touchID = -1;
 		}
 		private function _handlerItemImageLoadeded( event:starling.events.Event):void{
-			addChild(_backgroundInfoPanel);
-			this.addChild(_labelNumberOfLikes);
-			this.addChild(_labelNumberOfComments);
-			
+			content.addChild(_backgroundInfoPanel);			
+			content.addChild(_labelNumberOfLikes);
+			content.addChild(_labelNumberOfComments);
+			isInvalid(INVALIDATION_FLAG_DATA);
+			contentShow(1);
 		}
 				
 		//--------------------------------------------------------------------------------------------------------- 

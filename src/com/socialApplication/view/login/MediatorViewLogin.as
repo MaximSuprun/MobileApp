@@ -1,7 +1,6 @@
 package com.socialApplication.view.login{
 	
 	import com.razzmatazz.robotlegs.events.EventError;
-	import com.socialApplication.service.singin.EventServiceSingin;
 	
 	import org.robotlegs.starling.mvcs.Mediator;
 	

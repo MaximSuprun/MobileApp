@@ -83,6 +83,7 @@ package com.socialApplication.common{
 		public static const TOP_POSITION_IN_LIST :String = "top";
 		public static const DEFAULT_POSITION_IN_LIST :String = "default";
 		public static const BOTTOM_POSITION_IN_LIST :String = "bottom";
+		public static const PUBLISH_COMPLETE:String="PUBLISH COMPLETE";
 		
 		public static const TWITTER :String = "Twitter";
 		public static const TWITTER_API_KEY :String = "XV35pfnUcRAbzkA3JjsTPcvsS";

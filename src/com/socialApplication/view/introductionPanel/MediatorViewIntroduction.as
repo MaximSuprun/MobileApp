@@ -66,8 +66,8 @@ package com.socialApplication.view.introductionPanel{
 		//---------------------------------------------------------------------------------------------------------
 		private function _handlerGetStarted(event:EventViewIntroduction):void{
 				dispatch(new EventViewIntroduction(EventViewIntroduction.GET_STARTED));
-				
 		}
+		
 		
 		//--------------------------------------------------------------------------------------------------------- 
 		// 

@@ -1,28 +1,28 @@
 package com.socialApplication.service.api.tumbrl{
-	import com.razzmatazz.robotlegs.events.EventError;
+	import com.razzmatazz.robotlegs.services.ServiceAbstract;
 	import com.socialApplication.common.Constants;
 	import com.socialApplication.model.vo.VOImageInfo;
+	import com.socialApplication.service.api.EventServiceAPI;
 	import com.socialApplication.view.explore.EventViewExplore;
 	import com.socialApplication.view.explore.common.PopUpWebView;
 	
 	import feathers.core.PopUpManager;
 	
-	import flash.errors.IOError;
-	import flash.events.ErrorEvent;
 	import flash.events.Event;
 	import flash.events.IOErrorEvent;
-	import flash.events.SecurityErrorEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
-	import flash.net.URLRequestMethod;
+	import flash.net.URLVariables;
 	
 	import org.flaircode.oauth.IOAuth;
 	import org.flaircode.oauth.OAuth;
+	import org.iotashan.oauth.OAuthConsumer;
 	import org.iotashan.oauth.OAuthRequest;
+	import org.iotashan.oauth.OAuthSignatureMethod_HMAC_SHA1;
 	import org.iotashan.oauth.OAuthToken;
 	import org.iotashan.utils.OAuthUtil;
 	
-	public class ServiceTumblr implements IServiceTumblrPostImage{
+	public class ServiceTumblr extends ServiceAbstract implements IServiceTumblrPostImage{
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  PUBLIC & INTERNAL VARIABLES 
@@ -40,7 +40,9 @@ package com.socialApplication.service.api.tumbrl{
 		private var _aPhotoUploader:URLLoader;
 		private var _requestToken:OAuthToken;
 		private var _accessToken:OAuthToken;
+		private var _oauth_verifier:String;
 		private var _oauth:IOAuth;
+		private var _userBlogName:String;
 		
 		//--------------------------------------------------------------------------------------------------------- 
 		//
@@ -78,9 +80,8 @@ package com.socialApplication.service.api.tumbrl{
 		private function _init():void{			
 			_oauth = new OAuth(Constants.TUMBLR_KEY, Constants.TUMBLR_SECRET_KEY);
 			// get request token
-			var loader:URLLoader = _oauth.getRequestToken("https://www.tumblr.com/oauth/request_token");
-			loader.addEventListener(Event.COMPLETE, _handlerRequestToken);
-			
+			var pLoader:URLLoader = _oauth.getRequestToken("https://www.tumblr.com/oauth/request_token");
+			pLoader.addEventListener(Event.COMPLETE, _handlerRequestToken);			
 		}
 		
 		private function _removePopUp():void{
@@ -92,15 +93,41 @@ package com.socialApplication.service.api.tumbrl{
 		}
 			
 		private function _getUserInfo():void{
+			var pOAuthRequest:OAuthRequest = new OAuthRequest("GET","https://api.tumblr.com/v2/user/info",null,new OAuthConsumer(Constants.TUMBLR_KEY,Constants.TUMBLR_SECRET_KEY),_accessToken);			
 			var pLoader:URLLoader=new URLLoader();
-			var pRequest:URLRequest=_oauth.buildRequest(OAuthRequest.HTTP_MEHTOD_GET,"http://api.tumblr.com/v2/user/info",_requestToken);
-			pRequest.method=URLRequestMethod.POST;
-			pLoader.load(pRequest);
-			trace(pRequest.url);
+			
 			pLoader.addEventListener(Event.COMPLETE,_handlerCompleteLoadedUserInfo);
-			pLoader.addEventListener(EventError.ERROR,_handlerErrorLoadedUserInfo);
-			pLoader.addEventListener(IOErrorEvent.IO_ERROR,_handlerErrorIOLoadedUserInfo);
-			pLoader.addEventListener(SecurityErrorEvent.SECURITY_ERROR,_handlerErrorSecurityLoadedUserInfo);
+			pLoader.addEventListener(IOErrorEvent.IO_ERROR,_handlerErrorIO);
+			
+			var requestURL:String = pOAuthRequest.buildRequest(new OAuthSignatureMethod_HMAC_SHA1());			
+			pLoader.load(new URLRequest(requestURL));
+		}
+		
+		private function _getAccesToken():void{
+			var pUrlLoader:URLLoader = _oauth.getAccessToken("https://www.tumblr.com/oauth/access_token",_requestToken,{"oauth_verifier":_oauth_verifier,"oauth_callback_confirmed":true});
+			pUrlLoader.addEventListener(Event.COMPLETE, _handlerAccessToken);
+		}
+		
+		private function _doPost():void{
+			var pParams:Object = {};
+			pParams.type= 'photo';
+			pParams.source = _imageInfo.url;
+			
+			var pOauthRequest:OAuthRequest = new OAuthRequest( "POST", "http://api.tumblr.com/v2/blog/"+_userBlogName+".tumblr.com/post", pParams, new OAuthConsumer(Constants.TUMBLR_KEY,Constants.TUMBLR_SECRET_KEY),_accessToken);
+			
+			var pRequest:URLRequest = new URLRequest( pOauthRequest.buildRequest(new OAuthSignatureMethod_HMAC_SHA1()));
+			pRequest.contentType = "application/x-www-form-urlencoded";
+			pRequest.method = "POST";
+			
+			var pUrlVariables:URLVariables = new URLVariables();
+			pUrlVariables.type = 'photo';
+			pUrlVariables.source = _imageInfo.url;
+			
+			pRequest.data = pUrlVariables;
+			var pLoader:URLLoader = new URLLoader();
+			pLoader.addEventListener( Event.COMPLETE, _handlerCompletePost);
+			pLoader.addEventListener( IOErrorEvent.IO_ERROR, _handlerErrorIO);
+			pLoader.load(pRequest);
 		}
 
 		//--------------------------------------------------------------------------------------------------------- 
@@ -108,30 +135,32 @@ package com.socialApplication.service.api.tumbrl{
 		//  EVENT HANDLERS  
 		// 
 		//---------------------------------------------------------------------------------------------------------
-		private function _handlerRequestToken(e:Event):void{					
-			_requestToken = OAuthUtil.getTokenFromResponse(e.currentTarget.data as String);
+		private function _handlerRequestToken(event:Event):void{	
+			
+			_requestToken = OAuthUtil.getTokenFromResponse(event.currentTarget.data as String);
 			var request:URLRequest = _oauth.getAuthorizeRequest("https://www.tumblr.com/oauth/authorize", _requestToken.key);
 			
 			_popUpWebView=new PopUpWebView();
 			_popUpWebView.addEventListener(EventViewExplore.STAGE_WEB_VIEW_COMPLETE, _handlerCompleteLoad);
 			_popUpWebView.addEventListener(EventViewExplore.STAGE_WEB_VIEW_ERROR, _handlerloadError);
 			_popUpWebView.addEventListener(EventViewExplore.STAGE_WEB_VIEW_LOCATION_CHANGE,_handlerLocationChange );
-			_popUpWebView.addEventListener(EventViewExplore.STAGE_WEB_VIEW_LOCATION_CHANGING,_handlerLocationChanging );
-			PopUpManager.addPopUp(_popUpWebView,true,false);3
+			PopUpManager.addPopUp(_popUpWebView,true,false);
 			_popUpWebView.loadUrl=request.url;
 		}
+		private function _handlerAccessToken(event:Event):void{					
+			_accessToken = OAuthUtil.getTokenFromResponse(event.currentTarget.data as String);
+			_getUserInfo();
+		}
 				
+		
 		private function _handlerCompleteLoadedUserInfo(event:Event):void{
-			trace("complete");
+			var pResponseJSON:Object = JSON.parse(event.currentTarget.data.toString());
+			_userBlogName = pResponseJSON.response.user.name;
+			_doPost();
 		}
-		private function _handlerErrorLoadedUserInfo(event:EventError):void{
-			trace("error");
-		}
-		private function _handlerErrorIOLoadedUserInfo(event:IOErrorEvent):void{
-			trace("error");
-		}
-		private function _handlerErrorSecurityLoadedUserInfo(event:SecurityErrorEvent):void{
-			trace("error");
+		
+		private function _handlerErrorIO(event:IOErrorEvent):void{
+			trace("errorIO");
 		}
 				
 		private function _handlerCompleteLoad(event:EventViewExplore):void{
@@ -140,17 +169,24 @@ package com.socialApplication.service.api.tumbrl{
 		private function _handlerloadError(event:EventViewExplore):void{
 			trace("errorWebView");
 		}
-		private function _handlerLocationChanging(event:EventViewExplore):void{
-			trace("location change:" + event.payload.location);
-		}
-		private function _handlerLocationChange(event:EventViewExplore):void{
-			trace("location changing: " + event.payload.location);
-			if(String(event.payload.location).search("oauth_verifier")!=-1){
-				_removePopUp();
-				_getUserInfo();
-			}
-		}		
 	
+		private function _handlerLocationChange(event:EventViewExplore):void{
+			
+			var pResponseData:String=String(event.payload.location);
+			
+			if(pResponseData.search("oauth_verifier")!=-1){
+				_oauth_verifier=pResponseData.substring(pResponseData.search("oauth_verifier=")+"oauth_verifier=".length,pResponseData.search("#"));
+				_removePopUp();
+				_getAccesToken();
+			}
+		}	
+		
+		private function _handlerCompletePost(event:Event):void{
+			trace("Posting tu Tumblr complete");
+			dispatch(new EventServiceAPI(EventServiceAPI.PUBLISH_COMPLETE));
+		}
+		
+		
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  HELPERS  

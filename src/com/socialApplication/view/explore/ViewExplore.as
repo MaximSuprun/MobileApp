@@ -4,19 +4,16 @@ package com.socialApplication.view.explore{
 	import com.socialApplication.common.Constants;
 	import com.socialApplication.model.vo.VOImageInfo;
 	import com.socialApplication.view.abstract.ViewAbstract;
+	import com.socialApplication.view.explore.common.PopUpPublishComplite;
 	import com.socialApplication.view.explore.common.PopUpShare;
-	import com.socialApplication.view.explore.common.PopUpWebView;
 	
 	import feathers.controls.Button;
 	import feathers.controls.ImageLoader;
 	import feathers.controls.Label;
 	import feathers.core.PopUpManager;
 	
-	import flash.sampler.NewObjectSample;
-	
 	import starling.core.Starling;
 	import starling.display.DisplayObject;
-	import starling.display.Quad;
 	import starling.events.Event;
 	
 	public class ViewExplore extends ViewAbstract{
@@ -49,6 +46,8 @@ package com.socialApplication.view.explore{
 		private var _imageInfo:VOImageInfo;
 		private var _rendererText:Function;
 		private var _popUpShare:PopUpShare;
+		
+		private var _imageInfoLoaded:Boolean = false;
 		//--------------------------------------------------------------------------------------------------------- 
 		//
 		//  CONSTRUCTOR 
@@ -75,7 +74,7 @@ package com.socialApplication.view.explore{
 		public function set image(pImage:DisplayObject):void{
 			if(pImage && pImage!=_image){
 				_image=pImage;
-				addChild(_image);
+				content.addChild(_image);
 			}
 		}
 		public function get image():DisplayObject{return _image};
@@ -83,7 +82,11 @@ package com.socialApplication.view.explore{
 		public function set imageInfo(pImageInfo:VOImageInfo):void{
 			if(pImageInfo){
 				_imageInfo=pImageInfo;
-				_setData();
+				
+				_imageInfoLoaded = true;
+				if(isActivated){
+					_setData();
+				}
 			}
 		}		
 		public function get imageInfo():VOImageInfo{return _imageInfo};
@@ -109,25 +112,13 @@ package com.socialApplication.view.explore{
 		public function get rendererText():Function{
 			return _rendererText;
 		}
+		public function popUpComletePostingAdd():void{
+			PopUpManager.addPopUp(new PopUpPublishComplite(),true,false);
+		}
 		
-		//--------------------------------------------------------------------------------------------------------- 
-		//
-		// PRIVATE & PROTECTED METHODS 
-		//
-		//---------------------------------------------------------------------------------------------------------
-		override protected function initialize():void{
-			super.initialize();
+		override public function activateContent():void{
+			super.activateContent();
 			
-			header.nameList.add(Constants.HEADER_EXPLORE);
-			addChild(header);
-			
-			_buttonBack=new Button();
-			_buttonBack.nameList.add(Constants.BUTTON_BACK);
-			_buttonBack.scaleX=scale;
-			_buttonBack.scaleY=scale;
-			_buttonBack.addEventListener(Event.TRIGGERED,_handlerButtonClick);
-			header.leftItems = new <DisplayObject>[ _buttonBack ];
-		
 			_buttonShare=new Button();
 			_buttonShare.nameList.add(Constants.BUTTON_SHARE);
 			_buttonShare.scaleX=scale;
@@ -148,11 +139,37 @@ package com.socialApplication.view.explore{
 				_labelTime.textRendererFactory=rendererText;
 			}
 			
+			if(_imageInfoLoaded){
+				_setData();
+			}
+		}
+		
+		//--------------------------------------------------------------------------------------------------------- 
+		//
+		// PRIVATE & PROTECTED METHODS 
+		//
+		//---------------------------------------------------------------------------------------------------------
+		override protected function initialize():void{
+			super.initialize();
+			
+			header.nameList.add(Constants.HEADER_EXPLORE);
+			addChild(header);
+			
+			_buttonBack=new Button();
+			_buttonBack.nameList.add(Constants.BUTTON_BACK);
+			_buttonBack.scaleX=scale;
+			_buttonBack.scaleY=scale;
+			_buttonBack.addEventListener(Event.TRIGGERED,_handlerButtonClick);
+			header.leftItems = new <DisplayObject>[ _buttonBack ];
+		
+			
+			
 		}
 		
 		override protected function draw():void{
 			super.draw();					
-								
+			removeChild(background);		
+			content.addChild(background);
 		}
 		
 		private function _setData():void{
@@ -180,34 +197,36 @@ package com.socialApplication.view.explore{
 			
 			iconLike.x=image.x+iconLike.width/2;
 			iconLike.y=image.y+image.height+5*scale;
-			addChild(iconLike);
+			content.addChild(iconLike);
 			_labelNumberOfLike.x=iconLike.x+iconLike.width+5*scale;
 			_labelNumberOfLike.y=iconLike.y;
-			addChild(_labelNumberOfLike);
+			content.addChild(_labelNumberOfLike);
 			
 			_labelName.x=iconLike.x;
 			_labelName.y=200*scale;
-			addChild(_labelName);
+			content.addChild(_labelName);
 			
 			_labelTime.x=pPadigRight - _labelTime.width -30;
 			_labelTime.y=_labelName.y	
-			addChild(_labelTime);
+			content.addChild(_labelTime);
 			
 			iconClock.x=_labelTime.x-iconClock.width;
 			iconClock.y=_labelName.y;
-			addChild(iconClock);
+			content.addChild(iconClock);
 			
 			_buttonShare.width=50*scale;		
 			_buttonShare.height=25*scale;		
 			_buttonShare.x=pPadigRight-_buttonShare.width;
 			_buttonShare.y=iconLike.y;		
-			addChild(_buttonShare);
+			content.addChild(_buttonShare);
+			
+			contentShow(1);
 		}
 		private function _popUpCreate():void{
 			PopUpManager.addPopUp(_popUpShare,true,false);
 		}
 		
-		private function _removePopUp():void{
+		private function _removePopUpShare():void{
 			PopUpManager.removePopUp(_popUpShare);		
 		}
 		
@@ -250,14 +269,14 @@ package com.socialApplication.view.explore{
 					dispatchEvent(new EventViewExplore(EventViewExplore.SHARE_TO_VK,imageInfo));
 					break;
 			}
-			_removePopUp();
+			_removePopUpShare();
 		}
 		
 		private function _handlerImageLoadCompete(event:Event):void{
 			_layout();
 		}
 		private function _handlerClickPopUpCancel(event:EventViewExplore):void{
-			_removePopUp();
+			_removePopUpShare();
 		}
 				
 		//--------------------------------------------------------------------------------------------------------- 

@@ -9,7 +9,6 @@ package com.socialApplication.view.createScreen{
 	import feathers.controls.Button;
 	import feathers.controls.Label;
 	import feathers.controls.List;
-	import feathers.controls.ScrollText;
 	import feathers.core.PopUpManager;
 	
 	import starling.core.Starling;
@@ -61,6 +60,13 @@ package com.socialApplication.view.createScreen{
 			_itemFieldCreate(pTexture);
 		}
 		
+		override public function activateContent():void{			
+			footer=new MyFooter();
+			footer.y=Starling.current.nativeStage.stageHeight-210*scale;
+			footer.addEventListener(EventViewCreateScreen.CHANGE_NEW_IMAGES,_handlerChangeListItem);
+			content.addChild(footer);
+			contentShow(1);
+		}
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  GETTERS & SETTERS   
@@ -82,10 +88,11 @@ package com.socialApplication.view.createScreen{
 			super.initialize();		
 			
 			background.y=200*scale;
-							
+			removeChild(background);
+			content.addChild(background);
+			
 			header.nameList.add(Constants.HEADER_CREATE_PANEL);
 			addChild(header);
-			
 			
 			_buttonMenu=new Button();
 			_buttonMenu.nameList.add(Constants.BUTTON_MENU);
@@ -102,34 +109,31 @@ package com.socialApplication.view.createScreen{
 			header.rightItems = new <DisplayObject>[ _buttonCreate ];
 			
 			
-			footer=new MyFooter();
-			footer.y=Starling.current.nativeStage.stageHeight-210*scale;
-			footer.addEventListener(EventViewCreateScreen.CHANGE_NEW_IMAGES,_handlerChangeListItem);
-			addChild(footer);
-			
 		}
 				
 		override protected function draw():void{
-			super.draw();			
+			super.draw();		
+			
 		}
+		
 		
 		private function _itemFieldCreate(pTexture:Texture,pText:String=""):void{
 			
 			if(contains(background)){
-				removeChild(background);
+				content.removeChild(background);
 			}
 			if(contains(_selectedItemImage)){
 				if(_selectedItemImage.texture == pTexture){
 					return;
 				}else{
-					removeChild(_selectedItemImage);
+					content.removeChild(_selectedItemImage);
 				}
 			}
 			if (contains(_textSelectedItem)){
 				if(_textSelectedItem.text == pText){
 					return;
 				}else{
-					removeChild(_textSelectedItem);
+					content.removeChild(_textSelectedItem);
 				}
 			}
 			
@@ -138,7 +142,7 @@ package com.socialApplication.view.createScreen{
 			_selectedItemImage.height=512*scale;
 			_selectedItemImage.x=Starling.current.nativeStage.stageWidth/2-_selectedItemImage.width/2;
 			_selectedItemImage.y=125*scale;
-			addChild(_selectedItemImage);
+			content.addChild(_selectedItemImage);
 			
 			if(pText != ""){
 				_textSelectedItem=new Label();
@@ -149,9 +153,8 @@ package com.socialApplication.view.createScreen{
 				_textSelectedItem.x=_selectedItemImage.x+pPading;
 				_textSelectedItem.y=_selectedItemImage.y+pPading;
 				_textSelectedItem.text=pText;
-				addChild(_textSelectedItem);
-			}
-			
+				content.addChild(_textSelectedItem);
+			}			
 		}
 		
 		private function _containerPopUpAdd():CreatePopUp{		

@@ -3,8 +3,10 @@ package com.socialApplication.service.api.mailRu{
 	import com.adobe.protocols.oauth2.event.GetAccessTokenEvent;
 	import com.adobe.protocols.oauth2.grant.IGrantType;
 	import com.adobe.protocols.oauth2.grant.ImplicitGrant;
+	import com.razzmatazz.robotlegs.services.ServiceAbstract;
 	import com.socialApplication.common.Constants;
 	import com.socialApplication.model.vo.VOImageInfo;
+	import com.socialApplication.service.api.EventServiceAPI;
 	import com.socialApplication.service.api.mailRu.my.MyApiNode;
 	import com.socialApplication.view.explore.common.PopUpWebView;
 	
@@ -18,7 +20,7 @@ package com.socialApplication.service.api.mailRu{
 	
 	
 	
-	public class ServiceMail implements IServiceMailPostImage{
+	public class ServiceMail extends ServiceAbstract implements IServiceMailPostImage{
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  PUBLIC & INTERNAL VARIABLES 
@@ -101,7 +103,6 @@ package com.socialApplication.service.api.mailRu{
 				_accessToken = getAccessTokenEvent.accessToken;
 				_postToMail();
 			}else{
-				// fail :(
 				trace("looser ");
 			}
 		} 
@@ -112,11 +113,13 @@ package com.socialApplication.service.api.mailRu{
 			_urlRequest=new URLRequest(_query);
 			_urlLoader=new URLLoader  ;
 			_urlLoader.addEventListener(Event.COMPLETE,_handlerCompleteUploaded);
+
 			_urlLoader.load(_urlRequest);
 		}
 		
 		private function _handlerCompleteUploaded(event:Event):void{
 			trace("complete upload to Mail.ru");
+			dispatch(new EventServiceAPI(EventServiceAPI.PUBLISH_COMPLETE));
 		}
 		
 		//--------------------------------------------------------------------------------------------------------- 

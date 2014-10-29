@@ -3,17 +3,16 @@ package com.socialApplication.service.api.vk{
 	import com.adobe.protocols.oauth2.event.GetAccessTokenEvent;
 	import com.adobe.protocols.oauth2.grant.IGrantType;
 	import com.adobe.protocols.oauth2.grant.ImplicitGrant;
-	import com.razzmatazz.robotlegs.events.EventError;
+	import com.razzmatazz.robotlegs.services.ServiceAbstract;
 	import com.socialApplication.common.Constants;
 	import com.socialApplication.model.vo.VOImageInfo;
-	import com.socialApplication.service.api.mailRu.my.MyApiNode;
+	import com.socialApplication.service.api.EventServiceAPI;
 	import com.socialApplication.view.explore.common.PopUpWebView;
 	
 	import feathers.core.PopUpManager;
 	
 	import flash.events.ErrorEvent;
 	import flash.events.Event;
-	import flash.events.IOErrorEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	
@@ -21,7 +20,7 @@ package com.socialApplication.service.api.vk{
 	
 	
 	
-	public class ServiceVK implements IServiceVKPostImage{
+	public class ServiceVK extends ServiceAbstract implements IServiceVKPostImage{
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  PUBLIC & INTERNAL VARIABLES 
@@ -97,13 +96,12 @@ package com.socialApplication.service.api.vk{
 			_removePopUp();
 			
 			if (getAccessTokenEvent.errorCode == null && getAccessTokenEvent.errorMessage == null){
-				// success!
+				
 				trace("Your access token value is: " + getAccessTokenEvent.accessToken);
 				_userId=getAccessTokenEvent.response.user_id;
 				_accessToken = getAccessTokenEvent.accessToken;
 				_postToVk();
 			}else{
-				// fail :(
 				trace("looser ");
 			}
 		} 
@@ -120,6 +118,7 @@ package com.socialApplication.service.api.vk{
 		
 		private function _handlerCompleteUploaded(event:Event):void{			
 			trace("complete upload to Vk.com");
+			dispatch(new EventServiceAPI(EventServiceAPI.PUBLISH_COMPLETE));
 		}
 		private function _handlerErrorUploaded(event:ErrorEvent):void{			
 			trace("Error Upload");

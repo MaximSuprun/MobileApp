@@ -1,14 +1,16 @@
 package com.socialApplication.service.api.facebook{
 	import com.facebook.graph.FacebookMobile;
+	import com.razzmatazz.robotlegs.services.ServiceAbstract;
 	import com.socialApplication.common.Constants;
 	import com.socialApplication.model.vo.VOImageInfo;
+	import com.socialApplication.service.api.EventServiceAPI;
 	import com.socialApplication.view.explore.common.PopUpWebView;
 	
 	import feathers.core.PopUpManager;
 	
 	import starling.core.Starling;
 	
-	public class ServiceFacebook implements IServiceFacebookPostImage{
+	public class ServiceFacebook extends ServiceAbstract implements IServiceFacebookPostImage{
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  PUBLIC & INTERNAL VARIABLES 
@@ -88,18 +90,18 @@ package com.socialApplication.service.api.facebook{
 		}
 		
 		private function _postToWall():void{
-			var params:Object = {};
+			var pParamsToFacebook:Object = {};
 			
-			params.message = _imageInfo.title;		
-			params.picture = _imageInfo.url;		
-			params.access_token = _accessToken;
+			pParamsToFacebook.message = _imageInfo.title;		
+			pParamsToFacebook.picture = _imageInfo.url;		
+			pParamsToFacebook.access_token = _accessToken;
 			
-			FacebookMobile.api("/me/feed", _postCallback, params, "POST");
+			FacebookMobile.api("/me/feed", _postCallback, pParamsToFacebook, "POST");
 		}
 		
 		private function _postCallback(success:Object, fail:Object):void{
 			if (success){
-				trace("post succes");
+				dispatch(new EventServiceAPI(EventServiceAPI.PUBLISH_COMPLETE));
 			}else{
 				trace("post Failed");
 			}
