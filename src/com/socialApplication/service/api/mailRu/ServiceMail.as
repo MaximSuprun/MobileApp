@@ -8,7 +8,7 @@ package com.socialApplication.service.api.mailRu{
 	import com.socialApplication.model.vo.VOImageInfo;
 	import com.socialApplication.service.api.EventServiceAPI;
 	import com.socialApplication.service.api.mailRu.my.MyApiNode;
-	import com.socialApplication.view.explore.common.PopUpWebView;
+	import com.socialApplication.view.components.popUps.PopUpWebView;
 	
 	import feathers.core.PopUpManager;
 	

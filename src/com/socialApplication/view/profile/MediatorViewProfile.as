@@ -58,6 +58,12 @@ package com.socialApplication.view.profile{
 		}
 		override public function onRemove():void {
 			super.onRemove();		
+			removeViewListener(EventViewCreateScreen.MENU_CLICK,_handlerMenuClick);
+			removeViewListener(EventViewProfile.AVATAR_LOAD,_handlerAvatarLoad);
+			removeViewListener(EventViewProfile.IMAGE_LOAD,_handlerImageLoad);
+			removeViewListener(EventViewProfile.IMAGE_SELECTED,_handlerImageSelected);
+			removeContextListener(EventServiceLoadImage.AVATAR_IMAGE_LOADED,_handlerAvatarLoaded);
+			removeContextListener(EventServiceGetImageInfo.RESULT,_handlerImageInfoLoaded);
 		}	
 		
 		//--------------------------------------------------------------------------------------------------------- 

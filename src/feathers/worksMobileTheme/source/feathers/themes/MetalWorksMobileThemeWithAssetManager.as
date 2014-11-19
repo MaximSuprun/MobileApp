@@ -25,24 +25,24 @@
 package feathers.worksMobileTheme.source.feathers.themes
 {
 	import com.socialApplication.common.Constants;
-	import com.socialApplication.view.common.BusyIndicator;
+	import com.socialApplication.view.components.busyIndicator.BusyIndicator;
 	import com.socialApplication.view.createScreen.ViewCreateScreen;
-	import com.socialApplication.view.createScreen.common.CreatePopUp;
-	import com.socialApplication.view.createScreen.common.footer.ItemRendererFooterCreate;
-	import com.socialApplication.view.createScreen.common.footer.MyFooter;
+	import com.socialApplication.view.components.popUps.CreatePopUp;
+	import com.socialApplication.view.components.itemRenderers.ItemRendererFooterCreate;
+	import com.socialApplication.view.createScreen.FooterViewCreate;
 	import com.socialApplication.view.explore.ViewExplore;
-	import com.socialApplication.view.explore.common.PopUpPublishComplite;
-	import com.socialApplication.view.explore.common.PopUpShare;
-	import com.socialApplication.view.explore.common.PopUpWebView;
+	import com.socialApplication.view.components.popUps.PopUpPublishComplite;
+	import com.socialApplication.view.components.popUps.PopUpShare;
+	import com.socialApplication.view.components.popUps.PopUpWebView;
 	import com.socialApplication.view.introductionPanel.ViewIntroduction;
 	import com.socialApplication.view.login.ViewLogin;
 	import com.socialApplication.view.menu.ViewMenu;
-	import com.socialApplication.view.menu.common.ItemRendererMenuList;
+	import com.socialApplication.view.components.itemRenderers.ItemRendererMenuList;
 	import com.socialApplication.view.profile.ViewProfile;
-	import com.socialApplication.view.profile.common.ItemRendererProfileList;
+	import com.socialApplication.view.components.itemRenderers.ItemRendererProfileList;
 	import com.socialApplication.view.settings.ViewSettings;
-	import com.socialApplication.view.settings.common.ItemRendererSettingsList;
-	import com.socialApplication.view.settings.common.PopUpChangeUserData;
+	import com.socialApplication.view.components.itemRenderers.ItemRendererSettingsList;
+	import com.socialApplication.view.components.popUps.PopUpChangeUserData;
 	
 	import feathers.controls.Alert;
 	import feathers.controls.Button;
@@ -907,7 +907,7 @@ package feathers.worksMobileTheme.source.feathers.themes
 			this.setInitializerForClass(ViewIntroduction, ViewIntroductionInitializer);
 			this.setInitializerForClass(ViewLogin, ViewRegistrationInitializer);
 			this.setInitializerForClass(ViewCreateScreen, ViewCreateInitializer);
-			this.setInitializerForClass(MyFooter, myFooterInitializer);
+			this.setInitializerForClass(FooterViewCreate, myFooterInitializer);
 			this.setInitializerForClass(ViewMenu, ViewLeftDrawerInitializer);
 			this.setInitializerForClass(ViewProfile, ViewProfileInitializer);
 			this.setInitializerForClass(ViewSettings, ViewSettingsInitializer);
@@ -2303,7 +2303,7 @@ package feathers.worksMobileTheme.source.feathers.themes
 			pViewCreate.rendererText = labelHTML;
 						
 		}
-		protected function myFooterInitializer(pFooter:MyFooter):void{			
+		protected function myFooterInitializer(pFooter:FooterViewCreate):void{			
 			pFooter.scale=scale;
 			
 			var pBackgroundImage:Image=new Image(atlas.getTexture("footer_background"));

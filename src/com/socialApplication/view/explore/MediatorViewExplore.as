@@ -53,6 +53,15 @@ package com.socialApplication.view.explore{
 
 		override public function onRemove():void {
 			super.onRemove();		
+			removeViewListener(EventViewExplore.BACK_BUTTON_CLICK,_handlerBackButtonClick);
+			removeContextListener(EventViewMain.GET_IMAGE_INFO,_handlerGetImageInfo);
+			removeViewListener(EventViewExplore.SHARE_TO_FACEBOOK,_handlerPublish)
+			removeViewListener(EventViewExplore.SHARE_TO_TWITTER,_handlerPublish)
+			removeViewListener(EventViewExplore.SHARE_TO_TUMBLR,_handlerPublish)
+			removeViewListener(EventViewExplore.SHARE_TO_PINTEREST,_handlerPublish)
+			removeViewListener(EventViewExplore.SHARE_TO_MAILRU,_handlerPublish)
+			removeViewListener(EventViewExplore.SHARE_TO_VK,_handlerPublish)
+			removeContextListener(EventServiceAPI.PUBLISH_COMPLETE,_handlerPublishComplete);
 		}	
 		
 		//--------------------------------------------------------------------------------------------------------- 

@@ -1,7 +1,7 @@
 package com.socialApplication.controller{
 	
 	import com.socialApplication.model.EventModel;
-	import com.socialApplication.model.vo.VOLocalLoginData;
+	import com.socialApplication.model.vo.VOAuthorizationData;
 	import com.socialApplication.service.singin.IServiceSingin;
 	
 	import org.robotlegs.starling.mvcs.Command;
@@ -42,7 +42,7 @@ package com.socialApplication.controller{
 		// 
 		//---------------------------------------------------------------------------------------------------------
 		override public function execute():void{
-			var pVO:VOLocalLoginData = VOLocalLoginData(event.payload);			
+			var pVO:VOAuthorizationData = VOAuthorizationData(event.payload);			
 			service.load(pVO);
 		}
 		

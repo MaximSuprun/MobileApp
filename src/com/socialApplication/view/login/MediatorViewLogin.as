@@ -45,6 +45,8 @@ package com.socialApplication.view.login{
 
 		override public function onRemove():void {
 			super.onRemove();		
+			removeViewListener(EventViewLogin.LOGIN,_handlerLogin);
+			removeContextListener(EventError.ERROR,_handlerErrorLogin);
 		}	
 		
 		//--------------------------------------------------------------------------------------------------------- 

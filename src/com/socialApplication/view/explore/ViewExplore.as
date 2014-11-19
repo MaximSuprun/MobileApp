@@ -4,8 +4,8 @@ package com.socialApplication.view.explore{
 	import com.socialApplication.common.Constants;
 	import com.socialApplication.model.vo.VOImageInfo;
 	import com.socialApplication.view.abstract.ViewAbstract;
-	import com.socialApplication.view.explore.common.PopUpPublishComplite;
-	import com.socialApplication.view.explore.common.PopUpShare;
+	import com.socialApplication.view.components.popUps.PopUpPublishComplite;
+	import com.socialApplication.view.components.popUps.PopUpShare;
 	
 	import feathers.controls.Button;
 	import feathers.controls.ImageLoader;

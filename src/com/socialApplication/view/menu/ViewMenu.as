@@ -2,7 +2,7 @@ package com.socialApplication.view.menu{
 	
 	import com.socialApplication.common.Constants;
 	import com.socialApplication.view.abstract.ViewAbstract;
-	import com.socialApplication.view.menu.common.ItemRendererMenuList;
+	import com.socialApplication.view.components.itemRenderers.ItemRendererMenuList;
 	
 	import feathers.controls.List;
 	import feathers.data.ListCollection;

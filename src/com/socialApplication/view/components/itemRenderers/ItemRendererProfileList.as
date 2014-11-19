@@ -1,4 +1,4 @@
-package com.socialApplication.view.profile.common{
+package com.socialApplication.view.components.itemRenderers{
 	
 	import com.socialApplication.view.abstract.ViewAbstract;
 	

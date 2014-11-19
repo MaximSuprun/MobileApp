@@ -6,7 +6,7 @@ package com.socialApplication.model{
 		
 		public static const LOGIN_SUCCES :String = "LOGIN_SUCCES";
 		public static const LOGIN_ERROR :String = "LOGIN_ERROR";
-		public static const DATA_INPUTED :String = "DATA_INPUTED";
+		public static const AUTHORIZATION_DATA_INPUTED :String = "AUTHORIZATION_DATA_INPUTED";
 		public static const REPLACE_LOGIN :String = "REPLACE_LOGIN";
 		public static const REPLACE_PASSWORD :String = "REPLACE_PASSWORD";
 		

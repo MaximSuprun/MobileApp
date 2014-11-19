@@ -1,4 +1,4 @@
-package com.socialApplication.view.createScreen.common.footer{
+package com.socialApplication.view.components.itemRenderers{
 	
 	import feathers.controls.Label;
 	import feathers.controls.List;

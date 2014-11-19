@@ -1,4 +1,4 @@
-package com.socialApplication.view.explore.common{
+package com.socialApplication.view.components.popUps{
 	
 	import com.adobe.protocols.dict.events.ErrorEvent;
 	import com.socialApplication.common.Constants;

@@ -59,7 +59,7 @@ package com.socialApplication.view.login{
 			_inputFieldLogin.addEventListener(FocusEvent.FOCUS_OUT,_handlerTextFocusOut);
 			_inputFieldLogin.nameList.add(Constants.INPUT_FIELD_REGISTER);
 			_inputFieldLogin.prompt=Constants.PROMPT_INPUT_LOGIN;			
-			_inputFieldLogin.setSize(300*scale,75*scale);		
+			_inputFieldLogin.setSize(int(300*scale),int(75*scale));		
 			_inputFieldLogin.x= Starling.current.nativeStage.stageWidth/2- _inputFieldLogin.width/2; 
 			_inputFieldLogin.y=450*scale;
 			content.addChild(_inputFieldLogin);
@@ -70,7 +70,7 @@ package com.socialApplication.view.login{
 			_inputFieldPassword.nameList.add(Constants.INPUT_FIELD_REGISTER);
 			_inputFieldPassword.prompt=Constants.PROMPT_INPUT_PASSWORD;
 			_inputFieldPassword.displayAsPassword=true;
-			_inputFieldPassword.setSize(300*scale,75*scale);
+			_inputFieldPassword.setSize(int(300*scale),int(75*scale));
 			_inputFieldPassword.x= Starling.current.nativeStage.stageWidth/2-_inputFieldPassword.width/2;
 			_inputFieldPassword.y=540*scale;
 			content.addChild(_inputFieldPassword);
@@ -78,7 +78,7 @@ package com.socialApplication.view.login{
 			_buttonLogin=new Button();
 			_buttonLogin.addEventListener(Event.TRIGGERED,_handlerLoginButtonClick)
 			_buttonLogin.nameList.add(Constants.BUTTON_LOGIN);
-			_buttonLogin.setSize(300*scale,75*scale);
+			_buttonLogin.setSize(int(300*scale),int(75*scale));
 			_buttonLogin.x= Starling.current.nativeStage.stageWidth/2 - _buttonLogin.width/2;
 			_buttonLogin.y=650*scale;
 			_buttonLogin.label=Constants.PROMPT_INPUT_LOGIN;

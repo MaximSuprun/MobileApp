@@ -6,7 +6,7 @@ package com.socialApplication.service.singin{
 	import com.razzmatazz.valueObjects.error.VOError;
 	import com.razzmatazz.valueObjects.log.VOLogMessage;
 	import com.socialApplication.common.Constants;
-	import com.socialApplication.model.vo.VOLocalLoginData;
+	import com.socialApplication.model.vo.VOAuthorizationData;
 	import com.socialApplication.model.vo.VOUserData;
 	
 	import flash.net.URLRequest;
@@ -43,7 +43,7 @@ package com.socialApplication.service.singin{
 		//  PUBLIC & INTERNAL METHODS 
 		// 
 		//---------------------------------------------------------------------------------------------------------
-		public function load(pData:VOLocalLoginData):void{
+		public function load(pData:VOAuthorizationData):void{
 			
 			this._dataSignIn.linkSocial = false;	
 			this._dataSignIn.remember = false;	

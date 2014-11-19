@@ -16,7 +16,6 @@ package com{
 	import com.socialApplication.controller.CommandReplaceAutorizationData;
 	import com.socialApplication.controller.CommandSetAutorizationData;
 	import com.socialApplication.controller.CommandSetUserData;
-	import com.socialApplication.controller.CommandStartup;
 	import com.socialApplication.controller.CommandUserDataLoaded;
 	import com.socialApplication.model.EventModel;
 	import com.socialApplication.model.IModel;
@@ -68,7 +67,6 @@ package com{
 	import com.socialApplication.view.settings.MediatorViewSettings;
 	import com.socialApplication.view.settings.ViewSettings;
 	
-	import org.robotlegs.starling.base.ContextEventType;
 	import org.robotlegs.starling.mvcs.Context;
 	
 	import starling.display.DisplayObjectContainer;
@@ -122,9 +120,7 @@ package com{
 			mediatorMap.mapView(ViewExplore, MediatorViewExplore);
 						
 			// Command
-			commandMap.mapEvent(ContextEventType.STARTUP_COMPLETE,CommandStartup);
-						
-			commandMap.mapEvent(EventModel.DATA_INPUTED,CommandChekInputedData,EventModel);
+			commandMap.mapEvent(EventModel.AUTHORIZATION_DATA_INPUTED,CommandChekInputedData,EventModel);
 			commandMap.mapEvent(EventModel.REPLACE_LOGIN,CommandReplaceAutorizationData,EventModel);
 			commandMap.mapEvent(EventModel.REPLACE_PASSWORD,CommandReplaceAutorizationData,EventModel);
 			

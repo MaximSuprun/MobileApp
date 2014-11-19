@@ -42,6 +42,7 @@ package com.socialApplication.view.menu{
 
 		override public function onRemove():void {
 			super.onRemove();		
+			removeViewListener(EventViewMenu.CHANGE_SELECTED_ITEM,_handlerChangeScreen);
 		}	
 		
 		//--------------------------------------------------------------------------------------------------------- 

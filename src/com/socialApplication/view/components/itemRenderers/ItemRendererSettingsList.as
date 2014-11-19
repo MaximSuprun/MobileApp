@@ -1,4 +1,6 @@
-package com.socialApplication.view.menu.common{
+package com.socialApplication.view.components.itemRenderers{
+	
+	import com.socialApplication.common.Constants;
 	
 	import feathers.controls.Label;
 	import feathers.controls.List;
@@ -7,13 +9,13 @@ package com.socialApplication.view.menu.common{
 	
 	import flash.geom.Point;
 	
-	import starling.display.Image;
+	import starling.display.DisplayObject;
 	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
 	
-	public class ItemRendererMenuList extends FeathersControl implements IListItemRenderer{
+	public class ItemRendererSettingsList extends FeathersControl implements IListItemRenderer{
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  PUBLIC & INTERNAL VARIABLES 
@@ -34,9 +36,10 @@ package com.socialApplication.view.menu.common{
 		protected var _isSelected:Boolean;
 	
 		private static const HELPER_POINT:Point = new Point();
-		private var _iconArrow:Image;
-		private var _darkBackground:Image;
-		private var _lightBackground:Image;
+		private var _topBackground:DisplayObject;
+		private var _defaultBackground:DisplayObject;
+		private var _bottomBackground:DisplayObject;
+		private var _background:DisplayObject;
 		private var _touchID:int=-1;
 		private var _scale:Number;
 		private var _rendererText:Function;
@@ -46,7 +49,7 @@ package com.socialApplication.view.menu.common{
 		// 
 		//---------------------------------------------------------------------------------------------------------
 		
-		public function ItemRendererMenuList(){
+		public function ItemRendererSettingsList(){
 			
 		}
 		
@@ -55,30 +58,45 @@ package com.socialApplication.view.menu.common{
 		//  PUBLIC & INTERNAL METHODS 
 		// 
 		//---------------------------------------------------------------------------------------------------------
+		public function get topBackground():DisplayObject{
+			return _topBackground;
+		}
+		
+		public function set topBackground(pBackground:DisplayObject):void{
+			_topBackground = pBackground;
+		}
+		
+		public function get background():DisplayObject{
+			return _background;
+		}
+		
+		public function set background(pBackground:DisplayObject):void{	
+			_background = pBackground;
+			addChildAt(_background,0);			
+		}
+		
+		public function get defaultBackground():DisplayObject{
+			return _defaultBackground;
+		}
+		
+		public function set defaultBackground(pBackground:DisplayObject):void{
+			_defaultBackground = pBackground;
+		}
+		public function get bottomBackground():DisplayObject{
+			return _bottomBackground;
+		}
+		
+		public function set bottomBackground(pBackground:DisplayObject):void{
+			_bottomBackground = pBackground;
+		}
+		
+		
 		public function get scale():Number{
 			return _scale;
 		}
 		
 		public function set scale(pScale:Number):void{
 			_scale = pScale;
-		}
-		
-		public function set darkBackground(value:Image):void{
-			if(value){
-				_darkBackground = value;
-			}
-		}
-		
-		public function set lightBackground(value:Image):void{
-			if(value){
-				_lightBackground = value;
-			}
-		}
-		
-		public function set icon(value:Image):void{
-			if(value){
-				_iconArrow = value;
-			}
 		}
 		
 		
@@ -182,13 +200,17 @@ package com.socialApplication.view.menu.common{
 		override protected function draw():void	{
 			super.draw();
 			const dataInvalid:Boolean = this.isInvalid(INVALIDATION_FLAG_DATA);
-			
+			const dataInvalidSelected:Boolean = this.isInvalid(INVALIDATION_FLAG_SELECTED);
+						
 			if(dataInvalid){
 				this.commitData();
 			}
 			
+			
 			this.autoSizeIfNeeded();
 			this.layoutChildren();
+			
+			this.width=400*scale;			
 		}
 		
 		protected function autoSizeIfNeeded():Boolean{
@@ -218,13 +240,18 @@ package com.socialApplication.view.menu.common{
 		protected function commitData():void{
 			if(this._data){
 				this._label.text = this._data.label;
-				if(_data.isDarkBackground){
-					
-					addChildAt(_darkBackground,0);
-				} else {
-					
-					addChildAt(_lightBackground,0);
+				switch (_data.position){
+					case Constants.TOP_POSITION_IN_LIST:
+						background=topBackground;
+						break;
+					case Constants.DEFAULT_POSITION_IN_LIST:
+						background=defaultBackground;
+						break;
+					case Constants.BOTTOM_POSITION_IN_LIST:
+						background=bottomBackground;
+						break;
 				}
+				
 			}else{
 				this._label.text = null;
 			}
@@ -236,10 +263,8 @@ package com.socialApplication.view.menu.common{
 			this._label.width = this.actualWidth - 2 * this._padding;
 			this._label.height = this.actualHeight - 2 * this._padding;
 			
-			
-			_iconArrow.x = this.parent.parent.width-_iconArrow.width-25*scale;
-			_iconArrow.y = 25*scale;
-			addChild(_iconArrow);
+			background.width=this.width;
+			background.height=this.height;			
 		}
 			
 		

@@ -1,4 +1,4 @@
-package com.socialApplication.view.settings.common{
+package com.socialApplication.view.components.popUps{
 	
 	import com.socialApplication.common.Constants;
 	import com.socialApplication.view.abstract.ViewAbstract;

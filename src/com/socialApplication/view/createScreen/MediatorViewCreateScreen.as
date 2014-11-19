@@ -48,6 +48,10 @@ package com.socialApplication.view.createScreen{
 
 		override public function onRemove():void {
 			super.onRemove();		
+			removeViewListener(EventViewCreateScreen.MENU_CLICK,_handlerMenuClick);
+			removeViewListener(EventViewCreateScreen.TAKE_PHOTO_CLICK,_handlerTakePhotoClick);
+			removeViewListener(EventViewCreateScreen.ADD_FROM_DEVICE,_handlerAddFromDeviceClick);
+			removeContextListener(EventServiceLoadImage.CAMERA_OR_DEVICE_IMAGE_LOADED,_handlerImageLoaded);
 		}	
 		
 		//--------------------------------------------------------------------------------------------------------- 

@@ -1,12 +1,16 @@
-package com.socialApplication.view.common{
+package com.socialApplication.view.createScreen{
 	
-	import feathers.core.FeathersControl;
+	import com.socialApplication.common.Constants;
+	import com.socialApplication.view.abstract.ViewAbstract;
+	
+	import feathers.controls.List;
+	import feathers.layout.HorizontalLayout;
 	
 	import starling.core.Starling;
-	import starling.display.MovieClip;
-	import starling.textures.TextureAtlas;
+	import starling.events.Event;
+	import com.socialApplication.view.components.itemRenderers.ItemRendererFooterCreate;
 	
-	public class BusyIndicator extends FeathersControl{
+	public class FooterViewCreate extends ViewAbstract{
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  PUBLIC & INTERNAL VARIABLES 
@@ -19,14 +23,14 @@ package com.socialApplication.view.common{
 		// PRIVATE & PROTECTED VARIABLES
 		//
 		//---------------------------------------------------------------------------------------------------------
-		private var _bussyIndicator:MovieClip;
+		private var _list:List;
 		//--------------------------------------------------------------------------------------------------------- 
 		//
 		//  CONSTRUCTOR 
 		// 
 		//---------------------------------------------------------------------------------------------------------
 		
-		public function BusyIndicator()
+		public function FooterViewCreate()
 		{
 			super();
 		}
@@ -36,13 +40,6 @@ package com.socialApplication.view.common{
 		//  PUBLIC & INTERNAL METHODS 
 		// 
 		//---------------------------------------------------------------------------------------------------------
-		public function createBusyIndicator(pTextureAtlas:TextureAtlas,pTextureName:String):void{
-			_bussyIndicator=new MovieClip(pTextureAtlas.getTextures(pTextureName));
-			_bussyIndicator.loop = true; 
-			addChild(_bussyIndicator);
-			
-			Starling.juggler.add(_bussyIndicator);
-		}
 		
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
@@ -57,13 +54,49 @@ package com.socialApplication.view.common{
 		//
 		//---------------------------------------------------------------------------------------------------------
 		
+
+		override protected function initialize():void{
+			super.initialize();
+			
+			_list=new List();
+			
+			_list.x=20*scale;
+			_list.y=50*scale;
+			
+			_list.nameList.add(Constants.LIST_SWIPE);
+			_list.scrollBarDisplayMode = List.SCROLL_BAR_DISPLAY_MODE_NONE;
+			_list.snapScrollPositionsToPixels=true;
+			_list.horizontalScrollPolicy = List.SCROLL_POLICY_ON;
+			_list.itemRendererType=ItemRendererFooterCreate;
+						
+			var pListLayout:HorizontalLayout = new HorizontalLayout();
+			pListLayout.gap = 5*scale;
+			
+			_list.layout = pListLayout;
+			
+			_list.selectedIndex=-1;
+			_list.addEventListener(Event.CHANGE,_handlerChangeList);
+			
+			addChild(_list);
+			
+		}
+		override protected function draw():void{
+			super.draw();
+			
+			backgroundSkin.width = Starling.current.nativeStage.stageWidth;
+			backgroundSkin.x=Starling.current.nativeStage.stageWidth/2-backgroundSkin.width/2;
+			
+			_list.setSize(Starling.current.nativeStage.stageWidth-40*scale,220*scale);
+		}
 		
 		//--------------------------------------------------------------------------------------------------------- 
 		// 
 		//  EVENT HANDLERS  
 		// 
 		//---------------------------------------------------------------------------------------------------------
-		
+		private function _handlerChangeList(event:Event):void{
+			dispatchEvent(new EventViewCreateScreen(EventViewCreateScreen.CHANGE_NEW_IMAGES,_list.selectedItem));
+		}
 		
 		//--------------------------------------------------------------------------------------------------------- 
 		// 

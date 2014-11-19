@@ -42,6 +42,7 @@ package com.socialApplication.view.introductionPanel{
 
 		override public function onRemove():void {
 			super.onRemove();		
+			removeViewListener(EventViewIntroduction.CLICK_GET_STARTED,_handlerGetStarted);
 		}	
 		
 		//--------------------------------------------------------------------------------------------------------- 

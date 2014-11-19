@@ -7,7 +7,7 @@ package com.socialApplication.service.api.vk{
 	import com.socialApplication.common.Constants;
 	import com.socialApplication.model.vo.VOImageInfo;
 	import com.socialApplication.service.api.EventServiceAPI;
-	import com.socialApplication.view.explore.common.PopUpWebView;
+	import com.socialApplication.view.components.popUps.PopUpWebView;
 	
 	import feathers.core.PopUpManager;
 	

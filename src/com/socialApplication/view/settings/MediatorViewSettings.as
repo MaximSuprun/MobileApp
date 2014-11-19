@@ -49,6 +49,11 @@ package com.socialApplication.view.settings{
 
 		override public function onRemove():void {
 			super.onRemove();		
+			removeViewListener(EventViewCreateScreen.MENU_CLICK,_handlerMenuClick);
+			removeViewListener(EventViewSettings.LOG_OUT_ITEM,_handlerChangeScreen);
+			removeViewListener(EventViewSettings.CHANGE_DATA_LOGIN,_handlerChangeLogin);
+			removeViewListener(EventViewSettings.CHANGE_DATA_PASSWORD,_handlerChangePassword);
+			removeContextListener(EventServiceReplaceData.DATA_REPLACE,_handlerReplaceData);
 		}	
 		
 		//--------------------------------------------------------------------------------------------------------- 

@@ -4,8 +4,8 @@ package com.socialApplication.view.settings{
 	import com.socialApplication.common.Constants;
 	import com.socialApplication.view.abstract.ViewAbstract;
 	import com.socialApplication.view.createScreen.EventViewCreateScreen;
-	import com.socialApplication.view.settings.common.ItemRendererSettingsList;
-	import com.socialApplication.view.settings.common.PopUpChangeUserData;
+	import com.socialApplication.view.components.itemRenderers.ItemRendererSettingsList;
+	import com.socialApplication.view.components.popUps.PopUpChangeUserData;
 	
 	import feathers.controls.Button;
 	import feathers.controls.List;

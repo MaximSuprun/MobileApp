@@ -4,9 +4,9 @@ package com.socialApplication.view.profile{
 	import com.socialApplication.common.Constants;
 	import com.socialApplication.model.vo.VOUserData;
 	import com.socialApplication.view.abstract.ViewAbstract;
-	import com.socialApplication.view.common.BusyIndicator;
+	import com.socialApplication.view.components.busyIndicator.BusyIndicator;
 	import com.socialApplication.view.createScreen.EventViewCreateScreen;
-	import com.socialApplication.view.profile.common.ItemRendererProfileList;
+	import com.socialApplication.view.components.itemRenderers.ItemRendererProfileList;
 	
 	import feathers.controls.Button;
 	import feathers.controls.Label;

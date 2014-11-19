@@ -1,5 +1,5 @@
 package com.socialApplication.model{
-	import com.socialApplication.model.vo.VOLocalLoginData;
+	import com.socialApplication.model.vo.VOAuthorizationData;
 	import com.socialApplication.model.vo.VOUserData;
 	
 	import org.robotlegs.starling.mvcs.Actor;
@@ -17,7 +17,7 @@ package com.socialApplication.model{
 		// PRIVATE & PROTECTED VARIABLES
 		//
 		//---------------------------------------------------------------------------------------------------------
-		private var _voLoginData:VOLocalLoginData;
+		private var _voAuthorizationData:VOAuthorizationData;
 		private var _voUserData:VOUserData;
 		
 		//--------------------------------------------------------------------------------------------------------- 
@@ -45,10 +45,10 @@ package com.socialApplication.model{
 		
 		public function set inputedData(pValue:Object):void{
 			if(pValue){
-				_voLoginData=new VOLocalLoginData();
-				_voLoginData.login=pValue.login;	
-				_voLoginData.password=pValue.password;	
-				dispatch(new EventModel(EventModel.DATA_INPUTED,_voLoginData));
+				_voAuthorizationData=new VOAuthorizationData();
+				_voAuthorizationData.login=pValue.login;	
+				_voAuthorizationData.password=pValue.password;	
+				dispatch(new EventModel(EventModel.AUTHORIZATION_DATA_INPUTED,_voAuthorizationData));
 			}
 		}
 	
@@ -64,16 +64,16 @@ package com.socialApplication.model{
 		}
 		
 		public function set newDataLogin(pValue:String):void{
-			if(_voLoginData.login != pValue && pValue != ""){
-			_voLoginData.login=pValue;
-			dispatch(new EventModel(EventModel.REPLACE_LOGIN,_voLoginData.login));
+			if(_voAuthorizationData.login != pValue && pValue != ""){
+			_voAuthorizationData.login=pValue;
+			dispatch(new EventModel(EventModel.REPLACE_LOGIN,_voAuthorizationData.login));
 			}
 		}
 		
 		public function set newDataPassword(pValue:String):void{
-			if(_voLoginData.password != pValue && pValue != ""){
-				_voLoginData.password=pValue;
-				dispatch(new EventModel(EventModel.REPLACE_PASSWORD,_voLoginData.password));
+			if(_voAuthorizationData.password != pValue && pValue != ""){
+				_voAuthorizationData.password=pValue;
+				dispatch(new EventModel(EventModel.REPLACE_PASSWORD,_voAuthorizationData.password));
 			}
 		}
 			

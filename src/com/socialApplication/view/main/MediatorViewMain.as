@@ -60,6 +60,14 @@ package com.socialApplication.view.main{
 
 		override public function onRemove():void {
 			super.onRemove();		
+			removeContextListener(EventViewIntroduction.GET_STARTED,_handlerGetStarted);
+			removeContextListener(EventModel.LOGIN_SUCCES,_handlerLoginSucces)
+			removeContextListener(EventViewCreateScreen.MENU_SHOW,_handlerShowMenu);
+			removeContextListener(EventViewMenu.CHANGE_SCREEN,_handlerChangeScreen);
+			removeContextListener(EventViewSettings.LOG_OUT,_handlerLogOut);
+			removeContextListener(EventViewExplore.BACK_BUTTON_CLICK,_handlerExploreBackButton);
+			removeContextListener(EventViewProfile.IMAGE_SELECTED,_handlerImageSelected);
+			removeViewListener(EventViewMain.GET_IMAGE_INFO,_handlerGetImageInfo);
 		}	
 		
 		//--------------------------------------------------------------------------------------------------------- 

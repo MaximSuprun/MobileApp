@@ -3,8 +3,7 @@ package com.socialApplication.view.createScreen{
 	
 	import com.socialApplication.common.Constants;
 	import com.socialApplication.view.abstract.ViewAbstract;
-	import com.socialApplication.view.createScreen.common.CreatePopUp;
-	import com.socialApplication.view.createScreen.common.footer.MyFooter;
+	import com.socialApplication.view.components.popUps.CreatePopUp;
 	
 	import feathers.controls.Button;
 	import feathers.controls.Label;
@@ -61,7 +60,7 @@ package com.socialApplication.view.createScreen{
 		}
 		
 		override public function activateContent():void{			
-			footer=new MyFooter();
+			footer=new FooterViewCreate();
 			footer.y=Starling.current.nativeStage.stageHeight-210*scale;
 			footer.addEventListener(EventViewCreateScreen.CHANGE_NEW_IMAGES,_handlerChangeListItem);
 			content.addChild(footer);
